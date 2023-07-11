@@ -18,7 +18,7 @@ watch(current, () => {
   current.value <= 0
     ? prev.value = true
     : prev.value = false
-  current.value >= totalSlides
+  current.value >= totalSlides - 1
     ? next.value = true
     : next.value = false
 })
@@ -46,7 +46,6 @@ watch(current, () => {
         </svg>
       </button>
       <div class="content-box">
-        <SideBar title="Introduction to Financials"></SideBar>
         <component :is="slidesComp[current]"></component>
       </div>
       <button class="nav-btn" id="next" @click="goNext" :disabled="next">
@@ -103,4 +102,3 @@ main {
   }
 }
 </style>
-@/stores/test

@@ -3,7 +3,7 @@ import ContentContainer from './components/ContentContainer.vue'
 import TitlePage from './components/TitlePage.vue';
 import { Initialize, doExit, SetIncomplete } from './assets/scormJS.js'
 import { storeDataValue } from  './assets/APIWrapper.js'
-import { onMounted } from 'vue'
+import { onMounted, shallowRef } from 'vue'
 
 onMounted(() => {
   Initialize();
@@ -18,9 +18,8 @@ onMounted(() => {
         doExit();
       });
 })
-import { ref } from 'vue';
 
-const current = ref(TitlePage);
+const current = shallowRef(TitlePage);
 </script>
 
 <template>

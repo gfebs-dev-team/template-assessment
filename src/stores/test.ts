@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import questions from '../assets/questions.json'
+import views from "../views";
+//import questions from '../assets/questions.json'
+import { SetComplete, SetIncomplete } from '../assets/scormJS.js'
+import { retrieveDataValue, storeDataValue } from '../assets/APIWrapper.js'
 
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
-  const totalSlides = questions.length
-  const questionList = ref(questions)
-  const checkpoint = ref(totalSlides + 1)
+  const questionList = ref<Question[]>(new Array<Question>)
+  const slidesComp = Object.keys(views).map((key) => {
+    return views[key]
+  });
+  const totalSlides = slidesComp.length;
+
+  // This method only adds questions to scorm once they're loaded to the user. This reduces the amount of times we need to store the question data but may lead to problems in testing.
+  
   const next = ref(false)
   const prev = ref(true)
 
@@ -34,36 +42,45 @@ export const useTestStore = defineStore('test', () => {
     prev.value = false
   }
 
-  /**function setTrue() {
-    questionList.value[current.value].viewed = true
-    //console.log(slidesList.value[current.value]);
-  }
-  function setFalse() {
-    questionList.value[current.value].viewed = false
-    //console.log(slidesList.value[current.value].viewed);
+  function addQuestion(q: string, t: string, o: string[], a: string[], v: boolean) {
+    questionList.value.push({
+      "question": q,
+      "type": t,
+      "options": o,
+      "answer": a,
+      "viewed": v
+    });
   }
 
-  function setCheckpoint() {
-    for (let i = 0; i < totalSlides; i++) {
-      if (questionList.value[i].type === 'question' && questionList.value[i].viewed === false) {
-        checkpoint.value = i
-        console.log(questionList.value[i].type)
-        console.log(questionList.value[i].viewed)
-        console.log('Checkpoint: ' + checkpoint.value)
-        return
-      }
-    }
-    checkpoint.value = totalSlides + 1
-    console.log('Checkpoint: ' + checkpoint.value)
-  }**/
+  function setInteractions(options: string[]) {
+    const id = current.value;
+    const questionStart = new Date()
+    console.log(options);
+    const timestamp =
+      questionStart.toISOString().slice(0, questionStart.toISOString().indexOf('.') + 2) + 'Z'
+    questionList.value[id].startTime = new Date(questionStart);
+    storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id)
+    storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp)
+    storeDataValue('cmi.interactions.' + id + '.type', questionList.value[id].type)
+    questionList.value[id].answer.forEach((answer, i) => {
+      storeDataValue('cmi.interactions.' + id + '.correct_responses.' + i + '.pattern', answer)
+    })
+  }
+
+  function updateAnswer() {
+    storeDataValue('cmi.interactions.'+ current.value +'.learner_response', questionList.value[current.value].user);
+    //console.log("updated: " + questionList.value[current.value].user);
+  }
 
   return {
     current,
     totalSlides,
     questionList,
-    checkpoint,
     next,
     prev,
+    updateAnswer,
+    addQuestion,
+    setInteractions,
     disableNext,
     disablePrev,
     enableNext,
@@ -72,3 +89,14 @@ export const useTestStore = defineStore('test', () => {
     goPrev
   }
 })
+
+export interface Question {
+  question: string
+  type: string
+  options: string[]
+  answer: string[]
+  user?: string
+  viewed?: boolean
+  startTime?: Date
+  endTime?: Date
+}
