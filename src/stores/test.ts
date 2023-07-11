@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import views from "../views";
 //import questions from '../assets/questions.json'
-import { storeDataValue } from '../assets/APIWrapper'
+import { storeDataValue } from '../assets/APIWrapper.js'
 
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
@@ -42,13 +42,13 @@ export const useTestStore = defineStore('test', () => {
   }
 
   function addQuestion(q: string, t: string, o: string[], a: string[], v: boolean) {
-    questionList.value.push({
+    questionList.value[current.value] = {
       "question": q,
       "type": t,
       "options": o,
       "answer": a,
       "viewed": v
-    });
+    };
   }
 
   function setInteractions() {
@@ -58,16 +58,16 @@ export const useTestStore = defineStore('test', () => {
       questionStart.toISOString().slice(0, questionStart.toISOString().indexOf('.') + 2) + 'Z'
     questionList.value[id].startTime = new Date(questionStart);
     storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id);
-    console.log("Id: question_" + id);
+    //console.log("\nId: question_" + id);
     storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp);
-    console.log("Timestamp: " + timestamp);
+    //console.log("Timestamp: " + timestamp);
     storeDataValue('cmi.interactions.' + id + '.type', questionList.value[id].type)
-    console.log("Type: " + questionList.value[id].type);
+    //console.log("Type: " + questionList.value[id].type);
     questionList.value[id].answer.forEach((answer, i) => {
       storeDataValue('cmi.interactions.' + id + '.correct_responses.' + i + '.pattern', answer)
-      console.log("     Answer: " + answer);
+      //console.log("     Answer: " + answer);
     })
-    console.log("Interactions Set");
+    //console.log("Interactions Set");
   }
 
   function updateAnswer() {

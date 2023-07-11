@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ContentContainer from './components/ContentContainer.vue'
 import TitlePage from './components/TitlePage.vue';
-import { storeDataValue, Initialize, doExit, SetIncomplete } from 'APIWrapper'
+import { storeDataValue, Initialize, doExit, SetIncomplete } from './assets/APIWrapper'
 import { onMounted, shallowRef } from 'vue'
 
 onMounted(() => {
@@ -29,6 +29,10 @@ const current = shallowRef(TitlePage);
 </template>
 
 <style scoped lang="scss">
+button#content-start{
+ width: fit-content;
+ align-self: center;
+}
  button#dev {
     position: absolute;
     width: 5em;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
-import { storeDataValue, Initialize, doExit, SetIncomplete } from  'APIWrapper'
+import { storeDataValue, Initialize, doExit, SetIncomplete } from  '../assets/APIWrapper'
 import { storeToRefs } from 'pinia'
 import { useTestStore } from '../stores/test'
 import ContentHeader from '../components/ContentHeader.vue'
@@ -116,4 +116,4 @@ main {
     }
   }
 }
-</style>
+</style>../assets/APIWrapper.cjs

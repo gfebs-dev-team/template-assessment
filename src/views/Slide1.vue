@@ -3,7 +3,7 @@ import SlideQuestion from '../components/SlideQuestion.vue'
 import { provide, ref} from 'vue';
 import { useTestStore } from '../stores/test'
 
-const answer = ref<string>("");
+const answer = ref<string>();
 provide("answer", answer);
 
 const question = "What is the answer to this question?";

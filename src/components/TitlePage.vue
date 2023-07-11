@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
@@ -6,9 +7,9 @@
     <div class="border">
       <button id="header-exit">X</button>
     </div>
-    <div class="test-heading">
-      <h1 id="heading-title">Financial Management School</h1>
-      <h2 id="heading-subtitle">
+    <div class="heading">
+      <h1>Financial Management School</h1>
+      <h2>
         GFEBS
         <!--COURSE TITLE HERE-->
         Assessment
@@ -39,6 +40,30 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
+  color: white;
+  text-align: center;
+   .heading {
+    padding: 3em;
+    h1 {
+      font-size: 2.6em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-size: 2em;
+      font-weight: bold;
+      color: #f5d755;
+    }
+   }
+   #test-content {
+    padding: 0em 3em;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+   }
 }
 .border {
   background-color: #1ea3de;

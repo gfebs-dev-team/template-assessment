@@ -42,6 +42,7 @@
 let apiHandle = null
 let findAPITries = 0
 let noAPIFound = 'false'
+let CurrentPage = 0
 
 // local variable used to keep from calling Terminate() more than once
 let terminated = 'false'
@@ -140,11 +141,12 @@ function getAPIHandle() {
 function initializeCommunication() {
   console.log('This function ran')
   const api = getAPIHandle()
+  let result;
 
   if (api == null) {
     return 'false'
   } else {
-    const result = api.Initialize('')
+    result = api.Initialize('')
 
     if (result != 'true') {
       const errCode = retrieveLastErrorCode()
@@ -430,10 +432,7 @@ function Initialize() {
     console.log(errorCode)
 
     //Save route and state for bookmark
-  } else {
-    CurrentPage = location
-    storeDataValue('cmi.location', CurrentPage)
-  }
+  } 
   // present page to learner
   console.log('Initialized')
 }
@@ -573,17 +572,15 @@ function ConvertMilliSecondsIntoSCORM2004Time(intTotalMilliseconds) {
   return ScormTime
 }
 
-declare module 'APIWrapper' {
-  export {
-    initializeCommunication,
-    terminateCommunication,
-    retrieveDataValue,
-    storeDataValue,
-    retrieveDiagnosticInfo,
-    retrieveErrorInfo,
-    retrieveLastErrorCode,
-    persistData,
-    displayErrorInfo,
-    Initialize, Terminate, doExit, SetComplete, SetIncomplete
-  }
+export {
+  initializeCommunication,
+  terminateCommunication,
+  retrieveDataValue,
+  storeDataValue,
+  retrieveDiagnosticInfo,
+  retrieveErrorInfo,
+  retrieveLastErrorCode,
+  persistData,
+  displayErrorInfo,
+  Initialize, Terminate, doExit, SetComplete, SetIncomplete
 }

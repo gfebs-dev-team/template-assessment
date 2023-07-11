@@ -17,6 +17,7 @@ defineProps<{
 const answer: Ref<string> = inject("answer")!
 
 onMounted(()=> {
+  console.log(questionList.value[current.value].user);
   if (currentQuestion.user != "") {
     answer.value = currentQuestion.user!;
   }

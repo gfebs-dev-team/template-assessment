@@ -12,5 +12,9 @@
     "src",
     "types"
 ],
-  "allowJs": true
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "noImplicitAny": false,
+  "suppressImplicitAnyIndexErrors": true,
 }

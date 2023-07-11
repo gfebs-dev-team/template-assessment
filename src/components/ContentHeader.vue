@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { useTestStore } from '../stores/test';
 import { storeToRefs } from 'pinia';
-import { doExit } from 'APIWrapper';
+import { doExit } from '../assets/APIWrapper';
 
 const test = useTestStore();
 const { current } = storeToRefs(test);
@@ -111,4 +111,4 @@ nav {
   }
 }
 </style>
-@/stores/test
+@/stores/test../assets/APIWrapper.cjs
