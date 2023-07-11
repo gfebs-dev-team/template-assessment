@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SlideQuestion from '@/components/SlideQuestion.vue'
+import SlideQuestion from '../components/SlideQuestion.vue'
 import { provide, ref} from 'vue';
-import { useTestStore } from '@/stores/test'
+import { useTestStore } from '../stores/test'
 
 const answer = ref<string>();
 provide("answer", answer);
@@ -11,7 +11,7 @@ const options = ["true", "false"];
 
 const test = useTestStore();
 test.addQuestion(question, "true-false", options, ["true"], false);
-test.setInteractions(options);
+test.setInteractions();
 
 </script>
 

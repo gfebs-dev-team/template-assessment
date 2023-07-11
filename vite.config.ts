@@ -10,6 +10,16 @@ export default defineConfig({
     vue(),
     vueJsx(),
   ],
+  build: {
+    rollupOptions: {
+      external: ['vue', 'APIWrapper'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

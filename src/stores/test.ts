@@ -2,8 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import views from "../views";
 //import questions from '../assets/questions.json'
-import { SetComplete, SetIncomplete } from '../assets/scormJS.js'
-import { retrieveDataValue, storeDataValue } from '../assets/APIWrapper.js'
+import { storeDataValue } from '../assets/APIWrapper'
 
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
@@ -52,7 +51,7 @@ export const useTestStore = defineStore('test', () => {
     });
   }
 
-  function setInteractions(options: string[]) {
+  function setInteractions() {
     const id = current.value;
     const questionStart = new Date()
     const timestamp =

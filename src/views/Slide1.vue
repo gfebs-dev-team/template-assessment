@@ -11,7 +11,7 @@ const options = ["true", "false"];
 
 const test = useTestStore();
 test.addQuestion(question, "true-false", options, ["true"], false);
-test.setInteractions(options);
+test.setInteractions();
 
 </script>
 

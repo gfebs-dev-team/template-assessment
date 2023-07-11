@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { useTestStore } from '../stores/test';
 import { storeToRefs } from 'pinia';
+import { doExit } from 'APIWrapper';
 
 const test = useTestStore();
 const { current } = storeToRefs(test);
@@ -14,7 +15,7 @@ watch (current, () => {
 });
 
 function windowClose() {
-  window.close();
+  doExit();
 }
 </script>
 

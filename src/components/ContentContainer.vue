@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, watch } from 'vue'
+import { storeDataValue, Initialize, doExit, SetIncomplete } from  'APIWrapper'
 import { storeToRefs } from 'pinia'
 import { useTestStore } from '../stores/test'
 import ContentHeader from '../components/ContentHeader.vue'
@@ -7,6 +8,20 @@ import views from '../views'
 
 var slidesComp = Object.keys(views).map((key) => {
   return views[key]
+})
+
+onMounted(() => {
+  Initialize();
+  console.log(`the component is now mounted.`)
+
+  const terminationEvent = "onpagehide" in self ? "pagehide" : "unload";
+
+      window.addEventListener(terminationEvent, () => {
+        SetIncomplete();
+        storeDataValue("cmi.success_status", "unknown");
+        storeDataValue("cmi.exit", "normal");
+        doExit();
+      });
 })
 
 const totalSlides = slidesComp.length
