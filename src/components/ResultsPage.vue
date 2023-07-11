@@ -13,7 +13,7 @@
         <!--COURSE TITLE HERE-->
         Assessment
       </h2>
-      <img id="heading-shield" src="/shield-01.png" />
+      <img id="heading-shield" src="../assets/shield-01.png" />
     </div>
     <section id="test-content">
       <p>

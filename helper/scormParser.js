@@ -1,21 +1,21 @@
 const scorm = require('./scorm.json');
 const fs = require('fs');
 const identifier = scorm.general.course_title.split(" ").map((n) => n[0]).join("");
-const manPath = './src/imsmanifest.xml';
+const manPath = './dist/imsmanifest.xml';
 const mdPath = scorm.general.course_code + '-metadata.xml';
 
 /**
  * A function that generates Army SCORM compliant manifest and metadata files
  */
 function generateManifest() {
-    fs.writeFile('./src/' + mdPath, generateCourseMetadata(), function (err) {
+    fs.writeFile('./dist/' + mdPath, generateCourseMetadata(), function (err) {
         if (err) throw err;
         console.log(err);
     });
 
     let resources = "";
 
-    let assets = fs.readdirSync('./src/assets');
+    let assets = fs.readdirSync('./dist/assets');
     assets.forEach((asset) => {
         resources += '\n\t\t<file href="assets/' + asset + '"/>';
     })

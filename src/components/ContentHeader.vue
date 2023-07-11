@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useTestStore } from '@/stores/test';
+import { useTestStore } from '../stores/test';
 import { storeToRefs } from 'pinia';
 
 const test = useTestStore();
@@ -30,7 +30,7 @@ function windowClose() {
         <slot></slot>
       </h2>
     </div>
-    <img id="heading-shield" src="/shield-01.png" />
+    <img id="heading-shield" src="../assets/shield-01.png" />
     <div class="progress-bar">
       <div id="progress" :style = "progress"></div>
     </div>

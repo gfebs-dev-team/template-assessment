@@ -55,16 +55,20 @@ export const useTestStore = defineStore('test', () => {
   function setInteractions(options: string[]) {
     const id = current.value;
     const questionStart = new Date()
-    console.log(options);
     const timestamp =
       questionStart.toISOString().slice(0, questionStart.toISOString().indexOf('.') + 2) + 'Z'
     questionList.value[id].startTime = new Date(questionStart);
-    storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id)
-    storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp)
+    storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id);
+    console.log("Id: question_" + id);
+    storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp);
+    console.log("Timestamp: " + timestamp);
     storeDataValue('cmi.interactions.' + id + '.type', questionList.value[id].type)
+    console.log("Type: " + questionList.value[id].type);
     questionList.value[id].answer.forEach((answer, i) => {
       storeDataValue('cmi.interactions.' + id + '.correct_responses.' + i + '.pattern', answer)
+      console.log("     Answer: " + answer);
     })
+    console.log("Interactions Set");
   }
 
   function updateAnswer() {

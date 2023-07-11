@@ -10,7 +10,7 @@ const question = "What is the answer to this question?";
 const options = ["true", "false"];
 
 const test = useTestStore();
-test.addQuestion(question, "true-false", options, ["true"]);
+test.addQuestion(question, "true-false", options, ["true"], false);
 test.setInteractions(options);
 
 </script>

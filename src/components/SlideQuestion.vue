@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTestStore } from '@/stores/test'
+import { useTestStore } from '../stores/test'
 import { ref, watch, onMounted, Ref} from 'vue'
 import { storeToRefs } from 'pinia'
 import { inject } from 'vue';
@@ -22,7 +22,7 @@ onMounted(()=> {
 })
 
 watch(answer, ()=> {
-  questionList.value[current.value].user = answer;
+  questionList.value[current.value].user = answer.value;
   test.updateAnswer();
 });
 

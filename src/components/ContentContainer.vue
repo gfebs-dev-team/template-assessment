@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useTestStore } from '@/stores/test'
+import { useTestStore } from '../stores/test'
 import ContentHeader from '../components/ContentHeader.vue'
 import views from '../views'
 
