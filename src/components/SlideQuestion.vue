@@ -1,6 +1,6 @@
 <script setup>
 import { useTestStore } from '../stores/test'
-import { ref, watch, onMounted} from 'vue'
+import { watch, onMounted} from 'vue'
 import { storeToRefs } from 'pinia'
 import { inject } from 'vue';
 
@@ -8,17 +8,14 @@ const test = useTestStore()
 const { current, questionList } = storeToRefs(test)
 const currentQuestion = questionList.value[current.value]
 
-defineProps<{
-  title?: string
-  unit?: string
-}>()
+defineProps(['title', 'unit'])
 
-const answer: Ref<string> = inject("answer")!
+const answer = inject("answer")
 
 onMounted(()=> {
   console.log(questionList.value[current.value].user);
   if (currentQuestion.user != "") {
-    answer.value = currentQuestion.user!;
+    answer.value = currentQuestion.user;
   }
 })
 

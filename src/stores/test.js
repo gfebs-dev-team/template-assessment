@@ -9,14 +9,16 @@ export const useTestStore = defineStore('test', () => {
   const slidesComp = Object.keys(views).map((key) => {
     return views[key]
   })
-  const totalSlides = slidesComp.length
-
-  // This method only adds questions to scorm once they're loaded to the user. This reduces the amount of times we need to store the question data but may lead to problems in testing.
-
+  
+  const total = slidesComp.length-1
+  const disclaimer = ref(false);
+  const complete = ref(false)
   const next = ref(false)
   const prev = ref(true)
 
   function goNext() {
+    //add check for if unanswered
+    //add check for complete
     current.value++
   }
 
@@ -38,6 +40,15 @@ export const useTestStore = defineStore('test', () => {
 
   function enablePrev() {
     prev.value = false
+  }
+
+  function getScore(){
+    let correct = 0;
+    let score = Math.round(correct/total)
+
+    //Check for unanswered question
+    //Add SCORM
+    return score;
   }
 
   function addQuestion(q, t, o, a, v) {
@@ -75,10 +86,13 @@ export const useTestStore = defineStore('test', () => {
 
   return {
     current,
-    totalSlides,
+    total,
     questionList,
     next,
     prev,
+    disclaimer,
+    complete,
+    getScore,
     updateAnswer,
     addQuestion,
     setInteractions,
