@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import views from "../views";
+import views from '../views'
 import { storeDataValue } from '../assets/APIWrapper.js'
 
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
-  const questionList = ref(new Array)
+  const questionList = ref(new Array())
   const slidesComp = Object.keys(views).map((key) => {
     return views[key]
-  });
-  const totalSlides = slidesComp.length;
+  })
+  const totalSlides = slidesComp.length
 
   // This method only adds questions to scorm once they're loaded to the user. This reduces the amount of times we need to store the question data but may lead to problems in testing.
-  
+
   const next = ref(false)
   const prev = ref(true)
 
@@ -40,24 +40,26 @@ export const useTestStore = defineStore('test', () => {
     prev.value = false
   }
 
-  function addQuestion(q, t, o , a, v) {
-    questionList.value[current.value] = {
-      "question": q,
-      "type": t,
-      "options": o,
-      "answer": a,
-      "viewed": v
-    };
+  function addQuestion(q, t, o, a, v) {
+    if (questionList.value[current.value] == null) {
+      questionList.value[current.value] = {
+        question: q,
+        type: t,
+        options: o,
+        answer: a,
+        viewed: v
+      }
+    }
   }
 
   function setInteractions() {
-    const id = current.value;
+    const id = current.value
     const questionStart = new Date()
     const timestamp =
       questionStart.toISOString().slice(0, questionStart.toISOString().indexOf('.') + 2) + 'Z'
-    questionList.value[id].startTime = new Date(questionStart);
-    storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id);
-    storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp);
+    questionList.value[id].startTime = new Date(questionStart)
+    storeDataValue('cmi.interactions.' + id + '.id', 'question_' + id)
+    storeDataValue('cmi.interactions.' + id + '.timestamp', timestamp)
     storeDataValue('cmi.interactions.' + id + '.type', questionList.value[id].type)
     questionList.value[id].answer.forEach((answer, i) => {
       storeDataValue('cmi.interactions.' + id + '.correct_responses.' + i + '.pattern', answer)
@@ -65,7 +67,10 @@ export const useTestStore = defineStore('test', () => {
   }
 
   function updateAnswer() {
-    storeDataValue('cmi.interactions.'+ current.value +'.learner_response', questionList.value[current.value].user);
+    storeDataValue(
+      'cmi.interactions.' + current.value + '.learner_response',
+      questionList.value[current.value].user
+    )
   }
 
   return {
