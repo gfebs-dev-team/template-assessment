@@ -1,42 +1,47 @@
-<script setup lang="ts">
-import ContentContainer from './components/ContentContainer.vue'
-import TitlePage from './components/TitlePage.vue';
-import { storeDataValue, Initialize, doExit, SetIncomplete } from './assets/APIWrapper'
-import { onMounted, shallowRef } from 'vue'
-
-onMounted(() => {
-  Initialize();
-  console.log(`the component is now mounted.`)
-
-  const terminationEvent = "onpagehide" in self ? "pagehide" : "unload";
-
-      window.addEventListener(terminationEvent, () => {
-        SetIncomplete();
-        storeDataValue("cmi.success_status", "unknown");
-        storeDataValue("cmi.exit", "normal");
-        doExit();
-      });
-})
-
-const current = shallowRef(TitlePage);
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-    <component :is="current">
-        <button id="content-start" class="btn-med" @click="current = ContentContainer">Start</button>
-    </component>
-    <button id="dev" @click="current=TitlePage">Dev Toggle</button>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
 </template>
 
-<style scoped lang="scss">
-button#content-start{
- width: fit-content;
- align-self: center;
+<style scoped>
+header {
+  line-height: 1.5;
 }
- button#dev {
-    position: absolute;
-    width: 5em;
-    height: 4em;
-    bottom: -6em;
- }
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
 </style>
