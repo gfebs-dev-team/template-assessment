@@ -1,8 +1,8 @@
 @import './base.css';
 
 #app {
-  width: 1024px;
-  height: 768px;
+  width: 960px;
+  height: 674px;
   background-color: rgb(45 76 83);
   display: flex;
   margin: auto;

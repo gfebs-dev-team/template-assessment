@@ -86,7 +86,7 @@ defineProps(['unit', 'courseCode', 'courseTitle'])
       </button>
     </div>
   </main>
-  <button id="dev" @click="current=total">Result Toggle</button>
+  <!--<button id="dev" @click="current=total">Result Toggle</button>-->
 </template>
 
 <style scoped lang="scss">

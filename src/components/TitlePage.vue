@@ -1,6 +1,6 @@
 <script setup>
-import { doExit } from '../assets/APIWrapper';
-defineProps(['courseTitle', 'courseCode']);
+import { doExit } from '../assets/APIWrapper'
+defineProps(['courseTitle', 'courseCode'])
 </script>
 
 <template>
@@ -10,16 +10,14 @@ defineProps(['courseTitle', 'courseCode']);
     </div>
     <div class="heading">
       <h1>Financial Management School</h1>
-      <h2>GFEBS {{ courseCode }} 
-        {{courseTitle}}
-      </h2>
+      <h2>GFEBS {{ courseCode }} {{ courseTitle }}</h2>
       <img id="heading-shield" src="../assets/shield-01.png" />
     </div>
     <section id="test-content">
       <p>
         Welcome to the post assessment for General Fund Enterprise Business System (GFEBS)
-        {{courseTitle}}. This assessment will determine your knowledge of the concepts
-        and procedures of GFEBS {{courseTitle}}
+        {{ courseTitle }}. This assessment will determine your knowledge of the concepts and
+        procedures of GFEBS {{ courseTitle }}
       </p>
       <strong>
         NOTE: You may not communicate with other students, give or receive assistance, make a
@@ -34,14 +32,13 @@ defineProps(['courseTitle', 'courseCode']);
 </template>
 
 <style scoped lang="scss">
-
 main {
   display: flex;
   flex-direction: column;
   height: 100%;
   color: white;
   text-align: center;
-   .heading {
+  .heading {
     padding: 3em;
     h1 {
       font-size: 2.6em;
@@ -55,22 +52,31 @@ main {
       font-weight: bold;
       color: #f5d755;
     }
-   }
-   #test-content {
+
+    img#heading-shield {
+      height: 200px;
+    }
+  }
+  #test-content {
     padding: 0em 3em;
     font-size: 1.1em;
     display: flex;
     flex-direction: column;
-    gap: .5em;
-   }
+    gap: 0.5em;
+    strong {
+      margin-top: 10px;
+      color: rgb(247 222 154);
+      font-weight: bold;
+      font-size: 13px;
+    }
+  }
 }
 .border {
   background-color: #1ea3de;
-  height: 10px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 2%;
 }
 
 #header-exit {

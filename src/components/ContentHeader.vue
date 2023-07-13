@@ -50,11 +50,10 @@ function windowClose() {
 <style scoped lang="scss">
 .border {
   background-color: #1ea3de;
-  height: 10px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 2%;
 }
 nav {
   color: white;

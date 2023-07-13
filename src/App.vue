@@ -30,7 +30,7 @@ const course = {
     <component :is="current" v-bind="course">
         <button id="content-start" class="btn-med" @click="current = ContentContainer">Start</button>
     </component>
-    <button id="dev" @click="current=TitlePage">Dev Toggle</button>
+    <!--<button id="dev" @click="current=TitlePage">Dev Toggle</button>-->
 </template>
 
 <style scoped lang="scss">
