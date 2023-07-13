@@ -45,6 +45,7 @@ function generateManifest() {
             <item identifier="${scorm.general.course_code + identifier}" identifierref="${identifier}_SCO" isvisible="true">
                 <title>${scorm.general.course_code + ': ' + scorm.general.course_title}</title>
                 <imsss:sequencing>
+                    <imsss:controlMode choiceExit="false"/>
                     <imsss:objectives>
                             <imsss:primaryObjective satisfiedByMeasure="true" objectiveID="${identifier}_EXAM">
                                 <imsss:minNormalizedMeasure>${scorm.assessment.passing_score}</imsss:minNormalizedMeasure>
@@ -53,6 +54,7 @@ function generateManifest() {
                 </imsss:sequencing>
             </item>
             <imsss:sequencing>
+                <imsss:controlMode choice="false" flow="true"/>
                 <imsss:rollupRules>
                     <imsss:rollupRule childActivitySet="all">
                         <imsss:rollupConditions conditionCombination="all">

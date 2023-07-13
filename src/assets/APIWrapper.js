@@ -42,7 +42,6 @@
 let apiHandle = null
 let findAPITries = 0
 let noAPIFound = 'false'
-let CurrentPage = 0
 
 // local variable used to keep from calling Terminate() more than once
 let terminated = 'false'
@@ -141,7 +140,7 @@ function getAPIHandle() {
 function initializeCommunication() {
   console.log('This function ran')
   const api = getAPIHandle()
-  let result;
+  let result
 
   if (api == null) {
     return 'false'
@@ -418,21 +417,19 @@ function Initialize() {
   const entryMode = retrieveDataValue('cmi.entry')
 
   // set a local variable to page 1
-  let location = 1
 
   startTime = new Date()
 
   // check whether resuming SCO
   if (entryMode == 'resume') {
     // check if a prior location was set
-    location = retrieveDataValue('cmi.location')
 
     // get the Error code from the last call
     const errorCode = retrieveLastErrorCode()
     console.log(errorCode)
 
     //Save route and state for bookmark
-  } 
+  }
   // present page to learner
   console.log('Initialized')
 }
@@ -582,5 +579,9 @@ export {
   retrieveLastErrorCode,
   persistData,
   displayErrorInfo,
-  Initialize, Terminate, doExit, SetComplete, SetIncomplete
+  Initialize,
+  Terminate,
+  doExit,
+  SetComplete,
+  SetIncomplete
 }

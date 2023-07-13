@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import ContentContainer from './components/ContentContainer.vue'
 import TitlePage from './components/TitlePage.vue';
 import { storeDataValue, Initialize, doExit, SetIncomplete } from './assets/APIWrapper'
@@ -19,13 +19,18 @@ onMounted(() => {
 })
 
 const current = shallowRef(TitlePage);
+const course = {
+  "unit": "Finance",
+  "courseCode": "L210E",
+  "courseTitle": "Financials Process Overview"
+}
 </script>
 
 <template>
-    <component :is="current">
+    <component :is="current" v-bind="course">
         <button id="content-start" class="btn-med" @click="current = ContentContainer">Start</button>
     </component>
-    <button id="dev" @click="current=TitlePage">Dev Toggle</button>
+    <!--<button id="dev" @click="current=TitlePage">Dev Toggle</button>-->
 </template>
 
 <style scoped lang="scss">

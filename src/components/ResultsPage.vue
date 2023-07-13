@@ -1,51 +1,59 @@
-<script setup lang="ts">
+<script setup>
+import { useTestStore } from '../stores/test'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue';
+import UnitHeader from '../components/UnitHeader.vue'
+
+const test = useTestStore()
+const { getScore } = test
+const { complete } = storeToRefs(test);
+onMounted(()=>{
+  complete.value = false;
+})
+defineProps(['unit'])
 </script>
 
 <template>
-  <main>
-    <div class="border">
-      <button id="header-exit">X</button>
-    </div>
-    <div class="test-heading">
-      <h1 id="heading-title">Financial Management School</h1>
-      <h2 id="heading-subtitle">
-        GFEBS
-        <!--COURSE TITLE HERE-->
-        Assessment
-      </h2>
-      <img id="heading-shield" src="../assets/shield-01.png" />
-    </div>
-    <section id="test-content">
-      <p>
-        Welcome to the post assessment for General Fund Enterprise Business System (GFEBS)
-        Finanicals Process Overview. This assessment will determine your knowledge of the concepts
-        and procedures of GFEBS Financials Process Overview
-      </p>
-      <strong>
-        NOTE: You may not communicate with other students, give or receive assistance, make a
-        personal record of your answers, and pass on information about the tests to other students.
-        Failure to follow these instructions will result in the appropriate disciplinary actions
-        being taken.
-      </strong>
-      <h3>Select the Start button to continue</h3>
-      <slot></slot>
-    </section>
-  </main>
+  <UnitHeader :unit="unit" />
+  <section id="test-content">
+    <h2>Assessment Results</h2>
+    <p>
+      You have completed the Financials Process Overview Course Assessment. Below is your assessment
+      score. Click the <strong>Exit</strong> button to complete the test.
+    </p>
+    <h3>Score: {{ getScore() * 100 }}%</h3>
+  </section>
 </template>
 
 <style scoped lang="scss">
-
-main {
+#test-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
-.border {
-  background-color: #1ea3de;
-  height: 10px;
-  display: flex;
+  box-sizing: content-box;
+  padding: 3em;
+  gap: 2em;
+  height:100%;
+  text-align: center;
+  align-content: center;
   align-items: center;
-  justify-content: flex-end;
-  padding: 2%;
+  justify-items: center;
+  justify-content: center;
+  h2 {
+    font-weight: bold;
+    font-size: 2em;
+    color: red;
+  }
+  p {
+    width: 40em;
+    font-size: 1.2em;
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 1.6em;
+  }
 }
 </style>

@@ -1,60 +1,43 @@
-<script setup lang="ts">
+<script setup>
+import UnitHeader from './UnitHeader.vue'
 import { useTestStore } from '../stores/test'
-import { ref, watch, onMounted} from 'vue'
-import type { Ref } from 'vue';
+import { watch, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { inject } from 'vue';
+import { inject } from 'vue'
 
 const test = useTestStore()
 const { current, questionList } = storeToRefs(test)
 const currentQuestion = questionList.value[current.value]
+const answer = inject('answer')
 
-defineProps<{
-  title?: string
-  unit?: string
-}>()
-
-const answer: Ref<string> = inject("answer")!
-
-onMounted(()=> {
-  console.log(questionList.value[current.value].user);
-  if (currentQuestion.user != "") {
-    answer.value = currentQuestion.user!;
+onMounted(() => {
+  //console.log(questionList.value[current.value].user);
+  if (currentQuestion.user != '') {
+    answer.value = currentQuestion.user
   }
 })
 
-watch(answer, ()=> {
-  questionList.value[current.value].user = answer.value;
-  test.updateAnswer();
-});
+watch(answer, () => {
+  questionList.value[current.value].user = answer.value
+  test.updateAnswer()
+})
 
+defineProps(['title', 'unit'])
 </script>
 
 <template>
-  <div class="unit-header">
-    <h1>{{ unit }}</h1>
-  </div>
+  <UnitHeader :unit="unit"></UnitHeader>
   <div class="slide">
     <h2 class="slide-header">{{ title }}</h2>
     <div class="content">
-        <ul class="options">
-          <slot name="options"></slot> 
-        </ul>
+      <ul class="options">
+        <slot name="options"></slot>
+      </ul>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.unit-header {
-  width: 100%;
-  background-color: #414141;
-  padding: 0.2em 2em;
-  h1 {
-    color: white;
-    text-align: right;
-    font-weight: 400;
-  }
-}
 .slide {
   display: flex;
   flex-direction: column;
@@ -72,11 +55,30 @@ watch(answer, ()=> {
     gap: 1em;
     font-size: 1.2em;
     .options {
+      display: flex;
+      gap: 0.5em;
+      flex-direction: column;
+      list-style-type: none;
+      margin-left: -1rem;
+      margin-right: 1rem;
+      :slotted(.choice) {
         display: flex;
-        flex-direction: column;
-        list-style-type: none;
-        margin-left: -1rem;
+        padding: 0.5em;
+        width: 100%;
+        gap: 1em;
+        input[type='radio']:checked + label {
+          color: rgba(11, 69, 194, 1);
+          font-weight: bold;
+        }
+        label {
+          width: 100%;
+          &:hover {
+            color: rgba(11, 69, 194, 1);
+            font-weight: bold;
+          }
+        }
       }
+    }
   }
 }
 </style>

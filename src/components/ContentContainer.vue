@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { onMounted, watch } from 'vue'
 import { storeDataValue, Initialize, doExit, SetIncomplete } from  '../assets/APIWrapper'
 import { storeToRefs } from 'pinia'
@@ -24,26 +24,29 @@ onMounted(() => {
       });
 })
 
-const totalSlides = slidesComp.length
 const test = useTestStore()
-const { current, next, prev} = storeToRefs(test)
-const { goPrev, goNext} = test
+const { current, next, prev, disclaimer} = storeToRefs(test)
+const { goPrev, goNext, total} = test
 
 watch(current, () => {
+  disclaimer.value = false;
   current.value <= 0
     ? prev.value = true
     : prev.value = false
-  current.value >= totalSlides - 1
+  current.value >= total - 1
     ? next.value = true
     : next.value = false
 })
+
+defineProps(['unit', 'courseCode', 'courseTitle'])
+
 </script>
 
 <template>
   <main>
-    <ContentHeader>GFEBS L210E Financials Process Overview</ContentHeader>
+    <ContentHeader>GFEBS {{ courseCode }} {{ courseTitle }}</ContentHeader>
     <div class="layout">
-      <button class="nav-btn" id="prev" @click="goPrev" :disabled="prev">
+      <button class="nav-btn" id="prev" @click="goPrev" :disabled="prev" v-if="current != total">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"
@@ -61,9 +64,10 @@ watch(current, () => {
         </svg>
       </button>
       <div class="content-box">
-        <component :is="slidesComp[current]"></component>
+        <component :is="slidesComp[current]" v-bind="{'unit' : unit }"></component>
+        <p id="disclaimer" v-if="disclaimer">Note: All questions must be answered to receive credit. Assessments with unanswered questions will be marked as a fail.</p>
       </div>
-      <button class="nav-btn" id="next" @click="goNext" :disabled="next">
+      <button class="nav-btn" id="next" @click="goNext" :disabled="next" v-if="current != total">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"
@@ -82,6 +86,7 @@ watch(current, () => {
       </button>
     </div>
   </main>
+  <!--<button id="dev" @click="current=total">Result Toggle</button>-->
 </template>
 
 <style scoped lang="scss">
@@ -104,6 +109,13 @@ main {
     width: 100%;
     height: 100%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    #disclaimer {
+      position: absolute;
+      bottom: 1em;
+      left: 2em;
+    }
   }
   button {
     font-weight: bold;
@@ -116,4 +128,11 @@ main {
     }
   }
 }
-</style>../assets/APIWrapper.cjs
+button#dev {
+    position: absolute;
+    width: 5em;
+    height: 4em;
+    left: 6em;
+    bottom: -6em;
+ }
+</style>

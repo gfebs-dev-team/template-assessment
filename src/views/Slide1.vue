@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import SlideQuestion from '../components/SlideQuestion.vue'
 import { provide, ref} from 'vue';
 import { useTestStore } from '../stores/test'
 
-const answer = ref<string>();
+const answer = ref();
 provide("answer", answer);
 
 const question = "What is the answer to this question?";
@@ -16,7 +16,7 @@ test.setInteractions();
 </script>
 
 <template>
-  <SlideQuestion :title=question unit="Introduction to Financials">
+  <SlideQuestion :title=question>
     <template #options>
       <li class="choice">
         <input id="true" value="true" v-model="answer" type="radio" />

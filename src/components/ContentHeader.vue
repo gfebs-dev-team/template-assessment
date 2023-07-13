@@ -1,21 +1,24 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useTestStore } from '../stores/test';
-import { storeToRefs } from 'pinia';
-import { doExit } from '../assets/APIWrapper';
+<script setup>
+import { watch } from 'vue'
+import { useTestStore } from '../stores/test'
+import { storeToRefs } from 'pinia'
+import { doExit } from '../assets/APIWrapper'
 
-const test = useTestStore();
-const { current } = storeToRefs(test);
-const { totalSlides } = test;
-let progress = `width: ${(current.value+1/totalSlides)*100}%`;
+const test = useTestStore()
+const { current, complete } = storeToRefs(test)
+const { total } = test
+let progress = `width: ${(current.value + 1 / total) * 100}%`
 
-watch (current, () => {
-  progress = `width: ${((current.value+1)/totalSlides)*100}%`;
-  document.getElementById("progress")?.setAttribute("style", `${progress}`);
-});
+watch(current, () => {
+  progress = `width: ${((current.value + 1) / total) * 100}%`
+  document.getElementById('progress')?.setAttribute('style', `${progress}`)
+  if (current.value == total-1) {
+    complete.value = true;
+  }
+})
 
 function windowClose() {
-  doExit();
+  doExit()
 }
 </script>
 
@@ -33,20 +36,24 @@ function windowClose() {
     </div>
     <img id="heading-shield" src="../assets/shield-01.png" />
     <div class="progress-bar">
-      <div id="progress" :style = "progress"></div>
+      <div id="progress" :style="progress"></div>
     </div>
-    <button id="heading-exit" class="btn-med" @click="windowClose()">X EXIT</button>
+    <div class="buttons">
+      <button id="heading-submit" class="btn-med" @click="current = total" v-if="complete">
+        SUBMIT
+      </button>
+      <button id="heading-exit" class="btn-med" @click="windowClose()">X EXIT</button>
+    </div>
   </nav>
 </template>
 
 <style scoped lang="scss">
 .border {
   background-color: #1ea3de;
-  height: 10px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 2%;
 }
 nav {
   color: white;
@@ -102,13 +109,18 @@ nav {
     margin-right: 1em;
   }
 
-  #heading-exit {
-    display: block;
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
     grid-area: f;
-    &:hover {
-      cursor: pointer;
+    width: 100%;
+    .btn-med {
+      width: 100%;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
 </style>
-@/stores/test../assets/APIWrapper.cjs
