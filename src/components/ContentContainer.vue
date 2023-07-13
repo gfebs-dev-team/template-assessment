@@ -38,13 +38,13 @@ watch(current, () => {
     : next.value = false
 })
 
-defineProps(['unit'])
+defineProps(['unit', 'courseCode', 'courseTitle'])
 
 </script>
 
 <template>
   <main>
-    <ContentHeader>GFEBS L210E Financials Process Overview</ContentHeader>
+    <ContentHeader>GFEBS {{ courseCode }} {{ courseTitle }}</ContentHeader>
     <div class="layout">
       <button class="nav-btn" id="prev" @click="goPrev" :disabled="prev" v-if="current != total">
         <svg

@@ -1,26 +1,25 @@
 <script setup>
-
+import { doExit } from '../assets/APIWrapper';
+defineProps(['courseTitle', 'courseCode']);
 </script>
 
 <template>
   <main>
     <div class="border">
-      <button id="header-exit">X</button>
+      <button id="header-exit" @click="doExit">X</button>
     </div>
     <div class="heading">
       <h1>Financial Management School</h1>
-      <h2>
-        GFEBS
-        <!--COURSE TITLE HERE-->
-        Assessment
+      <h2>GFEBS {{ courseCode }} 
+        {{courseTitle}}
       </h2>
       <img id="heading-shield" src="../assets/shield-01.png" />
     </div>
     <section id="test-content">
       <p>
         Welcome to the post assessment for General Fund Enterprise Business System (GFEBS)
-        Finanicals Process Overview. This assessment will determine your knowledge of the concepts
-        and procedures of GFEBS Financials Process Overview
+        {{courseTitle}}. This assessment will determine your knowledge of the concepts
+        and procedures of GFEBS {{courseTitle}}
       </p>
       <strong>
         NOTE: You may not communicate with other students, give or receive assistance, make a
@@ -72,5 +71,17 @@ main {
   align-items: center;
   justify-content: flex-end;
   padding: 2%;
+}
+
+#header-exit {
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0 solid #000;
+}
+
+#header-exit:hover {
+  cursor: pointer;
 }
 </style>

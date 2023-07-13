@@ -20,7 +20,9 @@ onMounted(() => {
 
 const current = shallowRef(TitlePage);
 const course = {
-  "unit": "Finance"
+  "unit": "Finance",
+  "courseCode": "L210E",
+  "courseTitle": "Financials Process Overview"
 }
 </script>
 
