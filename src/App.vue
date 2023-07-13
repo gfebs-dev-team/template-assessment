@@ -19,10 +19,13 @@ onMounted(() => {
 })
 
 const current = shallowRef(TitlePage);
+const course = {
+  "unit": "Finance"
+}
 </script>
 
 <template>
-    <component :is="current">
+    <component :is="current" v-bind="course">
         <button id="content-start" class="btn-med" @click="current = ContentContainer">Start</button>
     </component>
     <button id="dev" @click="current=TitlePage">Dev Toggle</button>

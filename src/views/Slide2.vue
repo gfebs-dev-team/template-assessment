@@ -12,11 +12,10 @@ const options = ["true", "false"];
 const test = useTestStore();
 test.addQuestion(question, "true-false", options, ["true"], false);
 test.setInteractions();
-
 </script>
 
 <template>
-  <SlideQuestion :title=question unit="Introduction to Financials">
+  <SlideQuestion :title=question>
     <template #options>
       <li class="choice">
         <input id="true" value="true" v-model="answer" type="radio" />

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import views from '../views'
-import { storeDataValue } from '../assets/APIWrapper.js'
+import { retrieveDataValue, storeDataValue, SetComplete, SetIncomplete } from '../assets/APIWrapper.js'
 
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
@@ -9,17 +9,20 @@ export const useTestStore = defineStore('test', () => {
   const slidesComp = Object.keys(views).map((key) => {
     return views[key]
   })
-  
-  const total = slidesComp.length-1
-  const disclaimer = ref(false);
+
+  const total = slidesComp.length - 1
+  const disclaimer = ref(false)
   const complete = ref(false)
+
   const next = ref(false)
   const prev = ref(true)
 
   function goNext() {
-    //add check for if unanswered
-    //add check for complete
-    current.value++
+    if (questionList.value[current.value].user == undefined && disclaimer.value == false) {
+      disclaimer.value = true;
+    } else {
+      current.value++
+    }
   }
 
   function goPrev() {
@@ -42,13 +45,30 @@ export const useTestStore = defineStore('test', () => {
     prev.value = false
   }
 
-  function getScore(){
-    let correct = 0;
-    let score = Math.round(correct/total)
-
-    //Check for unanswered question
-    //Add SCORM
-    return score;
+  function getScore() {
+    let correct =  0
+    questionList.value.forEach((question)=>{
+      if(question.user == null) {
+        correct = 0;
+        return
+      }
+      question.answer.forEach((answer)=>{
+        if(answer == question.user) {
+          correct++
+          return
+        }
+      })
+    })
+    let score = Math.round((correct / total)*100)/100
+    storeDataValue("cmi.score.scaled", score);
+    //console.log(retrieveDataValue("cmi.scaled_passing_score"));
+    if (score > retrieveDataValue("cmi.scaled_passing_score")) {
+        SetComplete();
+    } else {
+        SetIncomplete();
+    }
+  
+    return score
   }
 
   function addQuestion(q, t, o, a, v) {

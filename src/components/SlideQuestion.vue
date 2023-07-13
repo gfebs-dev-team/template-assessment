@@ -1,4 +1,5 @@
 <script setup>
+import UnitHeader from './UnitHeader.vue'
 import { useTestStore } from '../stores/test'
 import { watch, onMounted} from 'vue'
 import { storeToRefs } from 'pinia'
@@ -7,13 +8,10 @@ import { inject } from 'vue';
 const test = useTestStore()
 const { current, questionList } = storeToRefs(test)
 const currentQuestion = questionList.value[current.value]
-
-defineProps(['title', 'unit'])
-
 const answer = inject("answer")
 
 onMounted(()=> {
-  console.log(questionList.value[current.value].user);
+  //console.log(questionList.value[current.value].user);
   if (currentQuestion.user != "") {
     answer.value = currentQuestion.user;
   }
@@ -24,12 +22,11 @@ watch(answer, ()=> {
   test.updateAnswer();
 });
 
+defineProps(['title', 'unit'])
 </script>
 
 <template>
-  <div class="unit-header">
-    <h1>{{ unit }}</h1>
-  </div>
+  <UnitHeader :unit="unit"></UnitHeader>
   <div class="slide">
     <h2 class="slide-header">{{ title }}</h2>
     <div class="content">
@@ -41,16 +38,7 @@ watch(answer, ()=> {
 </template>
 
 <style scoped lang="scss">
-.unit-header {
-  width: 100%;
-  background-color: #414141;
-  padding: 0.2em 2em;
-  h1 {
-    color: white;
-    text-align: right;
-    font-weight: 400;
-  }
-}
+
 .slide {
   display: flex;
   flex-direction: column;
