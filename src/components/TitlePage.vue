@@ -85,6 +85,7 @@ main {
   color: white;
   background-color: rgba(0, 0, 0, 0);
   border: 0 solid #000;
+  padding-right: 20px;
 }
 
 #header-exit:hover {

@@ -46,7 +46,7 @@ defineProps(['title', 'unit'])
 
   h2 {
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.8em;
     color: red;
   }
   .content {
