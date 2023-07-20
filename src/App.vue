@@ -1,6 +1,6 @@
 <script setup>
 import ContentContainer from './components/ContentContainer.vue'
-import TitlePage from './components/TitlePage.vue';
+import PageTitle from './components/PageTitle.vue';
 import { storeDataValue, Initialize, doExit, SetIncomplete } from './assets/APIWrapper'
 import { onMounted, shallowRef } from 'vue'
 
@@ -18,7 +18,7 @@ onMounted(() => {
       });
 })
 
-const current = shallowRef(TitlePage);
+const current = shallowRef(PageTitle);
 const course = {
   "unit": "Finance",
   "courseCode": "L210E",

@@ -2,7 +2,7 @@
 import { useTestStore } from '../stores/test'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue';
-import UnitHeader from '../components/UnitHeader.vue'
+import SlideHeader from '../components/SlideHeader.vue'
 
 const test = useTestStore()
 const { getScore } = test
@@ -14,7 +14,7 @@ defineProps(['unit'])
 </script>
 
 <template>
-  <UnitHeader :unit="unit" />
+  <SlideHeader :unit="unit" />
   <section id="test-content">
     <h2>Assessment Results</h2>
     <p>

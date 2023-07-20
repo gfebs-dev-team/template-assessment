@@ -1,9 +1,9 @@
 import Slide1 from './Slide1.vue';
 import Slide2 from './Slide2.vue';
-import ResultsPage from '../components/ResultsPage.vue'
+import PageResults from '../components/PageResults.vue'
  
 export default{
     Slide1,
     Slide2,
-    ResultsPage
+    PageResults
 };

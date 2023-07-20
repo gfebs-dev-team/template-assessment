@@ -1,5 +1,5 @@
 <script setup>
-import UnitHeader from './UnitHeader.vue'
+import SlideHeader from './SlideHeader.vue'
 import { useTestStore } from '../stores/test'
 import { watch, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -26,7 +26,7 @@ defineProps(['title', 'unit'])
 </script>
 
 <template>
-  <UnitHeader :unit="unit"></UnitHeader>
+  <SlideHeader :unit="unit"></SlideHeader>
   <div class="slide">
     <h2 class="slide-header">{{ title }}</h2>
     <div class="content">
