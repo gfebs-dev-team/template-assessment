@@ -22,17 +22,17 @@ watch(answer, () => {
   test.updateAnswer()
 })
 
-defineProps(['title', 'unit'])
+defineProps(['title', 'topic'])
 </script>
 
 <template>
-  <SlideHeader :unit="unit"></SlideHeader>
+  <SlideHeader :topic="topic"></SlideHeader>
   <div class="slide">
     <h2 class="slide-header">{{ title }}</h2>
     <div class="content">
-      <ul class="options">
+      <div class="options">
         <slot name="options"></slot>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -59,21 +59,41 @@ defineProps(['title', 'unit'])
       gap: 0.5em;
       flex-direction: column;
       list-style-type: none;
-      margin-left: -1rem;
       margin-right: 1rem;
       :slotted(.choice) {
         display: flex;
-        padding: 0.5em;
         width: 100%;
         gap: 1em;
-        input[type='radio']:checked + label {
-          color: rgba(11, 69, 194, 1);
-          font-weight: bold;
+        border: 2px solid rgba(11, 69, 194, 0);
+        border-radius: 10px;
+        transition-duration: 0.2s;
+
+        input[type='radio'] {
+          margin-left: 0.5em;
         }
+
         label {
           width: 100%;
-          &:hover {
+          height: 100%;
+          padding: 0.5em;
+        }
+
+        &.checked {
+          background-color: rgba(11, 69, 194, 0.1);
+          border-radius: 10px;
+          transition-duration: 0.2s;
+          input[type='radio'] + label {
             color: rgba(11, 69, 194, 1);
+            padding: 0.5em;
+            font-weight: bold;
+          }
+        }
+
+        &:hover {
+          color: rgba(11, 69, 194, 1);
+          border: 2px solid rgb(93, 114, 160);
+          transition-duration: 0.2s;
+          label {
             font-weight: bold;
           }
         }

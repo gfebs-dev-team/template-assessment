@@ -6,7 +6,8 @@ import { retrieveDataValue, storeDataValue, SetComplete, SetIncomplete } from '.
 export const useTestStore = defineStore('test', () => {
   const current = ref(0)
   const questionList = ref(new Array())
-  const slidesComp = Object.keys(views).map((key) => {
+  
+  let slidesComp = Object.keys(views).map((key) => {
     return views[key]
   })
 
@@ -14,8 +15,8 @@ export const useTestStore = defineStore('test', () => {
   const disclaimer = ref(false)
   const complete = ref(false)
 
-  const next = ref(false)
-  const prev = ref(true)
+  const next = ref(true)
+  const prev = ref(false)
 
   function goNext() {
     if (questionList.value[current.value].user == undefined && disclaimer.value == false) {
@@ -30,19 +31,19 @@ export const useTestStore = defineStore('test', () => {
   }
 
   function disableNext() {
-    next.value = true
-  }
-
-  function enableNext() {
     next.value = false
   }
 
+  function enableNext() {
+    next.value = true
+  }
+
   function disablePrev() {
-    prev.value = true
+    prev.value = false
   }
 
   function enablePrev() {
-    prev.value = false
+    prev.value = true
   }
 
   function getScore() {

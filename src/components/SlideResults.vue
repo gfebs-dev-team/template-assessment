@@ -10,11 +10,11 @@ const { complete } = storeToRefs(test);
 onMounted(()=>{
   complete.value = false;
 })
-defineProps(['unit'])
+defineProps(['topic'])
 </script>
 
 <template>
-  <SlideHeader :unit="unit" />
+  <SlideHeader :topic="topic" />
   <section id="test-content">
     <h2>Assessment Results</h2>
     <p>

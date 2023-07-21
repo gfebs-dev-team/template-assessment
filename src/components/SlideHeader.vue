@@ -1,10 +1,10 @@
 <script setup>
-    defineProps(['unit'])
+    defineProps(['topic'])
 </script>
 
 <template>
   <div class="unit-header">
-    <h1>{{ unit }}</h1>
+    <h1>{{ topic }}</h1>
   </div>
 </template>
 

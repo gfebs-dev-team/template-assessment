@@ -73,7 +73,7 @@ main {
 }
 .border {
   background-color: #1ea3de;
-  height: 40px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-end;

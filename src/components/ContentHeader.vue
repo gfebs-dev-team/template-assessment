@@ -50,10 +50,8 @@ function windowClose() {
 <style scoped lang="scss">
 .border {
   background-color: #1ea3de;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  min-height: 40px;
+  box-sizing: border-box;
 }
 nav {
   color: white;
@@ -61,7 +59,7 @@ nav {
   grid-template-areas: 'a b d d' 'a b f f';
   grid-template-columns: 120px 1fr repeat(2, 0.3fr);
   justify-content: left;
-  margin: 2em 4em;
+  margin: 1em 4em;
 
   #heading-shield {
     grid-area: a;
