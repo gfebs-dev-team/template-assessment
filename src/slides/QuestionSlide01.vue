@@ -8,10 +8,9 @@ const checked_el= ref(0);
 provide("answer", answer);
 
 const question = "What is the answer to this question?";
-const options = ["true", "false"];
 
 const test = useTestStore();
-test.addQuestion(question, "true-false", options, ["true"], false);
+test.addQuestion(question, "true-false", ["true"], false);
 test.setInteractions();
 
 </script>

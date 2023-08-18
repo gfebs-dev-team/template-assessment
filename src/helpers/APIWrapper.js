@@ -382,15 +382,15 @@ function displayErrorInfo(errCode) {
 }
 
 // Track initialized status so it is only called once
-let AlreadyInitialized = false
+let alreadyInitialized = false
 
 let startTime
 let endTime
 
-function CallInitialize() {
-  if (!AlreadyInitialized) {
+function CallInitialize() { 
+  if (!alreadyInitialized) {
     initializeCommunication()
-    AlreadyInitialized = true
+    alreadyInitialized = true
   }
 }
 

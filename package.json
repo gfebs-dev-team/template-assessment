@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.3",
+    "pipwerks-scorm-api-wrapper": "^0.1.2",
     "sass": "^1.63.6",
     "vue": "^3.3.4"
   },

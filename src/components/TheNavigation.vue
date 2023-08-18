@@ -16,7 +16,7 @@ watch(current, () => {
 </script>
 
 <template>
-  <button class="nav-btn" id="prev" @click="goPrev" :disabled="(!prev)">
+  <button class="nav-btn" id="prev" @click="goPrev" :disabled="(!prev)" v-if="current != total">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="15"
@@ -34,7 +34,7 @@ watch(current, () => {
     </svg>
   </button>
   <slot></slot>
-  <button class="nav-btn" id="next" @click="goNext" :disabled="(!next)">
+  <button class="nav-btn" id="next" @click="goNext" :disabled="(!next)" v-if="current != total">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="15"

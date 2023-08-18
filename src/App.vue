@@ -1,24 +1,26 @@
 <script setup>
-import ContentContainer from './components/ContentContainer.vue'
-import PageTitle from './components/PageTitle.vue';
-import { storeDataValue, Initialize, doExit, SetIncomplete } from './assets/APIWrapper'
+import TheContainer from './components/TheContainer';
+import LandingPage from './pages/LandingPage'
 import { onMounted, shallowRef } from 'vue'
+import { SCORM } from 'pipwerks-scorm-api-wrapper';
 
 onMounted(() => {
-  Initialize();
-  console.log(`the component is now mounted.`)
+  SCORM.init();
 
+  console.log(`the component is now mounted.`);
+  
   const terminationEvent = "onpagehide" in self ? "pagehide" : "unload";
 
       window.addEventListener(terminationEvent, () => {
-        SetIncomplete();
-        storeDataValue("cmi.success_status", "unknown");
-        storeDataValue("cmi.exit", "normal");
-        doExit();
+        SCORM.set("cmi.completion_status", "incomplete");
+        SCORM.set("cmi.success_status", "unknown");
+        SCORM.set("cmi.exit", "normal");
+        SCORM.save();
+        SCORM.quit()
       });
 })
 
-const current = shallowRef(PageTitle);
+const current = shallowRef(LandingPage);
 const courseData = {
   "courseCode": "L210E",
   "courseTitle": "Financials Process Overview",
@@ -28,7 +30,7 @@ const courseData = {
 
 <template>
     <component :is="current" v-bind="courseData">
-        <button id="content-start" class="btn-med" @click="current = ContentContainer">Start</button>
+        <button id="content-start" class="btn-med" @click="current = TheContainer">Start</button>
     </component>
     <!--<button id="dev" @click="current=TitlePage">Dev Toggle</button>-->
 </template>

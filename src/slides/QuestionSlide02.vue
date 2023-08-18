@@ -8,10 +8,9 @@ const checked_el= ref(0);
 provide("answer", answer);
 
 const question = "What is the answer to this question?";
-const options = ["true", "false"];
 
 const test = useTestStore();
-test.addQuestion(question, "true-false", options, ["true"], false);
+test.addQuestion(question, "true-false", ["true"], false);
 test.setInteractions();
 </script>
 
@@ -19,13 +18,17 @@ test.setInteractions();
   <SlideQuestion :title=question :topic="topic">
     <template #options>
       <li class="choice" @click="checked_el=1" :class="{checked: checked_el == 1}">
-        <input id="true" value="true" v-model="answer" type="radio" />
+        <input id="true" value="true" v-model="answer" type="checkbox" />
         <label for="true">True</label>
       </li>
       <li class="choice" @click="checked_el=2" :class="{checked: checked_el == 2}">
-        <input id="false" value="false" v-model="answer" type="radio" />
+        <input id="false" value="false" v-model="answer" type="checkbox" />
         <label for="false">False</label>
       </li>
     </template>
   </SlideQuestion>
 </template>
+
+<style scoped>
+    
+</style>

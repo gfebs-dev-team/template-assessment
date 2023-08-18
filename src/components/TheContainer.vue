@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, watch } from 'vue'
-import { storeDataValue, Initialize, doExit, SetIncomplete } from  '../assets/APIWrapper'
+import { onMounted } from 'vue'
+import { storeDataValue, Initialize, doExit, SetIncomplete } from '../assets/APIWrapper'
 import { storeToRefs } from 'pinia'
 import { useTestStore } from '../stores/test'
 import ContentHeader from '../components/ContentHeader.vue'
-import ContentNavigation from './ContentNavigation.vue'
+import TheNavigation from './TheNavigation.vue'
 import views from '../views'
 
 var slidesComp = Object.keys(views).map((key) => {
@@ -12,37 +12,38 @@ var slidesComp = Object.keys(views).map((key) => {
 })
 
 onMounted(() => {
-  Initialize();
+  Initialize()
   console.log(`the component is now mounted.`)
 
-  const terminationEvent = "onpagehide" in self ? "pagehide" : "unload";
+  const terminationEvent = 'onpagehide' in self ? 'pagehide' : 'unload'
 
-      window.addEventListener(terminationEvent, () => {
-        SetIncomplete();
-        storeDataValue("cmi.success_status", "unknown");
-        storeDataValue("cmi.exit", "normal");
-        doExit();
-      });
+  window.addEventListener(terminationEvent, () => {
+    SetIncomplete()
+    storeDataValue('cmi.success_status', 'unknown')
+    storeDataValue('cmi.exit', 'normal')
+    doExit()
+  })
 })
 
 const test = useTestStore()
-const { current, disclaimer} = storeToRefs(test)
-
+const { current, disclaimer } = storeToRefs(test)
 
 defineProps(['topic', 'courseCode', 'courseTitle'])
-
 </script>
 
 <template>
   <main>
     <ContentHeader>GFEBS {{ courseCode }} {{ courseTitle }}</ContentHeader>
     <div class="layout">
-      <ContentNavigation>
-      <div class="content-box">
-        <component :is="slidesComp[current]" v-bind="{'topic' : topic }"></component>
-        <p id="disclaimer" v-if="disclaimer">Note: All questions must be answered to receive credit. Assessments with unanswered questions will be marked as a fail.</p>
-      </div>
-    </ContentNavigation>
+      <TheNavigation>
+        <div class="content-box">
+          <component :is="slidesComp[current]" v-bind="{ topic: topic }"></component>
+          <p id="disclaimer" v-if="disclaimer">
+            Note: All questions must be answered to receive credit. Assessments with unanswered
+            questions will be marked as a fail.
+          </p>
+        </div>
+      </TheNavigation>
     </div>
   </main>
   <!--<button id="dev" @click="current=total">Result Toggle</button>-->
@@ -78,10 +79,10 @@ main {
   }
 }
 button#dev {
-    position: absolute;
-    width: 5em;
-    height: 4em;
-    left: 6em;
-    bottom: -6em;
- }
+  position: absolute;
+  width: 5em;
+  height: 4em;
+  left: 6em;
+  bottom: -6em;
+}
 </style>

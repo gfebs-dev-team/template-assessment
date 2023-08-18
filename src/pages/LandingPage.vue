@@ -28,7 +28,7 @@ defineProps(['courseTitle', 'courseCode'])
       <h3>Select the Start button to continue</h3>
       <slot></slot>
     </section>
-  </main>
+  </main>  
 </template>
 
 <style scoped lang="scss">

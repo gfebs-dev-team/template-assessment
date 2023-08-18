@@ -72,12 +72,11 @@ export const useTestStore = defineStore('test', () => {
     return score
   }
 
-  function addQuestion(q, t, o, a, v) {
+  function addQuestion(q, t, a, v) {
     if (questionList.value[current.value] == null) {
       questionList.value[current.value] = {
         question: q,
         type: t,
-        options: o,
         answer: a,
         viewed: v
       }
