@@ -1,49 +1,30 @@
 <script setup>
-import TheContainer from './components/TheContainer';
-import LandingPage from './pages/LandingPage'
-import { onMounted, shallowRef } from 'vue'
-import { SCORM } from 'pipwerks-scorm-api-wrapper';
-
-onMounted(() => {
-  SCORM.init();
-
-  console.log(`the component is now mounted.`);
-  
-  const terminationEvent = "onpagehide" in self ? "pagehide" : "unload";
-
-      window.addEventListener(terminationEvent, () => {
-        SCORM.set("cmi.completion_status", "incomplete");
-        SCORM.set("cmi.success_status", "unknown");
-        SCORM.set("cmi.exit", "normal");
-        SCORM.save();
-        SCORM.quit()
-      });
-})
-
-const current = shallowRef(LandingPage);
-const courseData = {
-  "courseCode": "L210E",
-  "courseTitle": "Financials Process Overview",
-  "topic": "Finance"
-}
+import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-    <component :is="current" v-bind="courseData">
-        <button id="content-start" class="btn-med" @click="current = TheContainer">Start</button>
-    </component>
-    <!--<button id="dev" @click="current=TitlePage">Dev Toggle</button>-->
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped lang="scss">
-button#content-start{
- width: fit-content;
- align-self: center;
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
 }
- button#dev {
-    position: absolute;
-    width: 5em;
-    height: 4em;
-    bottom: -6em;
- }
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
 </style>
