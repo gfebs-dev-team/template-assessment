@@ -1,25 +1,25 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "$assets/*": [
-                "src/assets/*"
-            ],
-            "$components/*": [
-                "src/components/*"
-            ],
-            "$store/*": [
-                "src/store/*"
-            ],
-            "$/*": [
-                "src/*"
-            ],
-            "$views/*": [
-                "src/views/*"
-            ],
-            "$assessment/*": [
-                "src/components/assessment/*"
-            ]
-        }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$assets/*": [
+        "src/assets/*"
+      ],
+      "$components/*": [
+        "src/components/*"
+      ],
+      "$store/*": [
+        "src/store/*"
+      ],
+      "$/*": [
+        "src/*"
+      ],
+      "$views/*": [
+        "src/views/*"
+      ],
+      "$types/*": [
+        "src/types/*"
+      ]
     }
+  }
 }

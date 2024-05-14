@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,vue}"],
   theme: {
     colors: {
-      transparent: 'transparent',
+      transparent: "transparent",
       richblack: "#0b0e14",
       oxfordblue: "#0b1528",
       spacecadet: "#142342",
@@ -18,7 +18,11 @@ export default {
     fontFamily: {
       sans: ["Arial", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        width: 'width'
+      }
+    },
   },
   plugins: [],
 };

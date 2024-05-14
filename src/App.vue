@@ -1,29 +1,31 @@
 <script setup>
-import LandingPage from '$views/LandingPage.vue';
-import AssessmentPage from '$views/AssessmentPage.vue';
+import LandingPage from "$views/LandingPage.vue";
+import AssessmentPage from "$views/AssessmentPage.vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import { onMounted, shallowRef } from "vue";
 
 const curr = shallowRef(LandingPage);
 const courseData = {
-  "courseCode": "L210E",
-  "courseTitle": "Financial Process Overview",
-  "topic": "pre-assessment"
-}
+  courseCode: "L210E",
+  courseTitle: "Financial Process Overview",
+  topic: "pre-assessment",
+};
 
-onMounted(()=>{
-  SCORM.init()
-})
+onMounted(() => {
+  SCORM.init();
+});
 
-function startTest(){
-  curr.value = AssessmentPage
+function startTest() {
+  curr.value = AssessmentPage;
 }
 </script>
 
 <template>
-  <component :courseData :is="curr" @start="startTest" class="w-screen h-[100dvh]"></component>
+  <component
+    :courseData
+    :is="curr"
+    @start="startTest"
+    class="h-[100dvh] w-screen"></component>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

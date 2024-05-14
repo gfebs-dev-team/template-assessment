@@ -28,7 +28,12 @@
   {
     "question": "Which of the options below provides a uniform COA and technical guidance to be used in standardizing federal agency accounting?",
     "type": "choice",
-    "options": ["a. A 1081 document", "b. DoD", "c. USSGL", "d. None of the above"],
+    "options": [
+      "a. A 1081 document",
+      "b. DoD",
+      "c. USSGL",
+      "d. None of the above"
+    ],
     "answer": ["c"]
   },
   {
@@ -104,7 +109,12 @@
   {
     "question": "GFEBS sends outbound financial data to support financial external reporting at the end of the period-end close activities. Where does GFEBS send a trial balance to, which meets the SFIS standard for categorizing financial information?",
     "type": "choice",
-    "options": ["a. DDRS", "b. OBM", "c. United States Treasury", "d. All of the above"],
+    "options": [
+      "a. DDRS",
+      "b. OBM",
+      "c. United States Treasury",
+      "d. All of the above"
+    ],
     "answer": ["a"]
   },
   {
@@ -121,7 +131,12 @@
   {
     "question": "What organization passes down the business rules for executing the year-end close tasks? These business rules include policies and cut-off dates. ",
     "type": "choice",
-    "options": ["a. HQDA", "b. GAO", "c. United States Treasury", "d. All of the above"],
+    "options": [
+      "a. HQDA",
+      "b. GAO",
+      "c. United States Treasury",
+      "d. All of the above"
+    ],
     "answer": ["a"]
   },
   {
