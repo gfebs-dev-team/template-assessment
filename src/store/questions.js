@@ -19,8 +19,8 @@ export const useQuestionsStore = defineStore("questions", () => {
   const next = ref(true);
   const prev = ref(false);
 
-  function addQuestion(obj, index) {
-    if (questionsList.value[index] == null) {
+  function addQuestion(obj) {
+    if (questionsList.value[obj.id] == null) {
       questionsList.value.push(obj);
     }
     //console.log(questionsList.value);

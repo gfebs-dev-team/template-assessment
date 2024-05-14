@@ -4,14 +4,13 @@ import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
-  id: 0,
-  type: "choice",
-  query: "How does the Army manage the General Fund GL?",
+  id: 2,
+  type: "true-false",
+  query:
+    "The United States Treasury is one of the key financial organizations interacting with GFEBS by serving as the central bank for all government agencies.",
   responses: [
-    { content: "a. Process JVs", value: "a" },
-    { content: "b. Maintain GL accounts", value: "b" },
-    { content: "c. Execute period-end/year closing", value: "c" },
-    { content: "d. All of the above", value: "d", correct: true },
+    { content: "True", value: "true", correct: true },
+    { content: "False", value: "false" },
   ],
 };
 

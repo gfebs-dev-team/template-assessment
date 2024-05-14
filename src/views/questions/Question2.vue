@@ -1,20 +1,24 @@
 <script setup>
-// import {QuestionChoice, }
+import { QuestionChoice } from "$components/question";
+import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
   id: 1,
-  query: "What is the answer to this question?",
-  type: "choice",
-  correctResponses: ['a'],
+  type: "true-false",
+  query:
+    "Manage GL accounts is the sub-process area responsible for maintaining the GL accounts in GFEBS.",
+  responses: [
+    { content: "True", value: "true", correct: true },
+    { content: "False", value: "false" },
+  ],
 };
 
 const questions = useQuestionsStore();
-
-questions.addQuestion(questionData, 1);
-
-defineProps(["courseData"]);
+onBeforeMount(() => {
+  questions.addQuestion(questionData);
+});
 </script>
 <template>
-  <h2 class="text-aliceblue">testing text pt 2</h2>
+  <QuestionChoice :questionData />
 </template>
