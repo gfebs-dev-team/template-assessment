@@ -1,0 +1,184 @@
+[
+  {
+    "question": "How does the Army manage the General Fund GL?",
+    "type": "choice",
+    "options": [
+      "a. Process JVs",
+      "b. Maintains GL accounts",
+      "c. Executes period-end/year-end closing",
+      "d. All of the above"
+    ],
+    "answer": ["d"]
+  },
+  {
+    "question": "Manage GL accounts is the sub-process area responsible for maintaining the GL accounts in GFEBS.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "The United States Treasury is one of the key financial organizations interacting with GFEBS by serving as the central bank for all government agencies.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "The United States Congress is one of the key financial organizations interacting with GFEBS by its role of appropriating funds through the yearly budget.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "Which of the options below provides a uniform COA and technical guidance to be used in standardizing federal agency accounting?",
+    "type": "choice",
+    "options": [
+      "a. A 1081 document",
+      "b. DoD",
+      "c. USSGL",
+      "d. None of the above"
+    ],
+    "answer": ["c"]
+  },
+  {
+    "question": "In what situations would you request to create, modify, or block a GL account?",
+    "type": "choice",
+    "options": [
+      "a. Mandate for changes to the GL from Congress or the U.S. Treasury",
+      "b. A valid business need",
+      "c. All of the above",
+      "d. None of the above"
+    ],
+    "answer": ["c"]
+  },
+  {
+    "question": "What system does GFEBS utilize for accounting?",
+    "type": "choice",
+    "options": [
+      "a. The USSGL account numbering system",
+      "b. No standard account numbering system",
+      "c. A ten-digit account numbering system",
+      "d. None of the above"
+    ],
+    "answer": ["a"]
+  },
+  {
+    "question": "A JV is created when it is necessary to:",
+    "type": "choice",
+    "options": [
+      "a. Clear an open item in GFEBS.",
+      "b. Create a GL Point Account.",
+      "c. Request adjustment of accounting entries.",
+      "d. Transfer funds from one GL account to another."
+    ],
+    "answer": ["c"]
+  },
+  {
+    "question": "One of the GFEBS guidelines for JVs states that journal entries should identify the original amount of money involved in the transaction and include an explanation for the adjustment.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "A JV is created when it is necessary to make a current period adjustment.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "To prepare a JV manually in GFEBS, you must simply enter journal header information.",
+    "type": "true-false",
+    "answer": ["false"]
+  },
+  {
+    "question": "What process is carried out at the end of the month to close out accounts and ensure that the Army's General Fund GL accurately reflects the financial status of the Army for that month?",
+    "type": "choice",
+    "options": [
+      "a. Year-End Close",
+      "b. Period-End Close",
+      "c. Both Year-End and Period-End Close",
+      "d. None of the above"
+    ],
+    "answer": ["b"]
+  },
+  {
+    "question": "FI is responsible for opening and closing posting periods based upon standing business rules. The following periods are maintained in GFEBS:",
+    "type": "choice",
+    "options": [
+      "a. Material Management Period",
+      "b. Funds Management Period",
+      "c. Financial Accounting Periods",
+      "d. All of the above"
+    ],
+    "answer": ["d"]
+  },
+  {
+    "question": "GFEBS sends outbound financial data to support financial external reporting at the end of the period-end close activities. Where does GFEBS send a trial balance to, which meets the SFIS standard for categorizing financial information?",
+    "type": "choice",
+    "options": [
+      "a. DDRS",
+      "b. OBM",
+      "c. United States Treasury",
+      "d. All of the above"
+    ],
+    "answer": ["a"]
+  },
+  {
+    "question": "Activities involved in the Year-End Close sub-process of FI include:",
+    "type": "choice",
+    "options": [
+      "a. Preparation Activities",
+      "b. Perform Periodic Processing",
+      "c. Year-End Certification",
+      "d. All of the above"
+    ],
+    "answer": ["d"]
+  },
+  {
+    "question": "What organization passes down the business rules for executing the year-end close tasks? These business rules include policies and cut-off dates. ",
+    "type": "choice",
+    "options": [
+      "a. HQDA",
+      "b. GAO",
+      "c. United States Treasury",
+      "d. All of the above"
+    ],
+    "answer": ["a"]
+  },
+  {
+    "question": "Which of the following documents are closed out at the end of the year? ",
+    "type": "choice",
+    "options": [
+      "a. Open PRs",
+      "b. Open POs",
+      "c. Open payables with expiring and canceling funds",
+      "d. All of the above"
+    ],
+    "answer": ["d"]
+  },
+  {
+    "question": "To ensure that accounting transactions have in fact been properly recorded across the entire Army, each business process area needs to perform a complete review of unliquidated obligations and certify that all accounting transactions have been recorded",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "Reconciling the Army's cash account with the U.S. Treasury is a critical aspect of maintaining the Army's General Fund GL and fund balance with the U.S. Treasury.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "GFEBS reconciles the collections and expenditures process through the DCAS on a daily basis.",
+    "type": "true-false",
+    "answer": ["true"]
+  },
+  {
+    "question": "Which below is an electronic document that notifies the Treasury of a cash correction within GFEBS?",
+    "type": "choice",
+    "options": [
+      "a. Only a 1081",
+      "b. Only a JV",
+      "c. Both a JV and a 1081",
+      "d. Neither a JV nor a 1081"
+    ],
+    "answer": ["c"]
+  },
+  {
+    "question": "To correct the error of the disbursement/collection belonging to GFEBS, GFEBS will match the disbursement/collection with the correct GFEBS invoice or billing document and perform an internal adjustment, and DCAS will process a 1081 reversal with the U.S. Treasury and GFEBS.",
+    "type": "true-false",
+    "answer": ["true"]
+  }
+]

@@ -1,0 +1,64 @@
+$rich-black: rgb(11, 14, 20);
+$space-cadet: rgb(20, 35, 66);
+$oxford-blue: rgb(11, 21, 40);
+$charcoal: rgb(23, 35, 59);
+$delft-blue: rgb(36, 53, 88);
+$mas-blue: rgb(58, 75, 111);
+$cool-grey: rgb(145, 160, 190);
+$lavender: rgb(222, 228, 241);
+$alice-blue: rgb(231, 235, 243);
+$harvest-gold: rgb(231, 166, 13);
+$saffron: rgb(244, 188, 58);
+
+$m5: 3.12rem;
+$m4: 2.62rem;
+$m3: 2.12rem;
+$m2: 1.75rem;
+$m1: 1.5rem;
+$m0: 1.25rem;
+$m-1: 1rem;
+$m-2: 0.88rem;
+$m-3: 0.7rem;
+
+$p5: 5rem;
+$p4: 3rem;
+$p3: 2rem;
+$p2: 1.5rem;
+$p1: 1rem;
+$p0: 0.75rem;
+$p-1: 0.5rem;
+$p-2: 0.25rem;
+
+@use "sass:math";
+
+@media only screen and (max-width < 1000px) {
+  $m5: 2.62rem;
+  $m4: 2.12rem;
+  $m3: 1.75rem;
+  $m2: 1.5rem;
+  $m1: 1.25rem;
+  $m0: 1rem;
+  $m-1: 0.88rem;
+  $m-2: 0.7rem;
+  $m-3: 0.5rem;
+
+  $p5: 3rem;
+  $p4: 2rem;
+  $p3: 1.5rem;
+  $p2: 1rem;
+  $p1: 0.75rem;
+  $p0: 0.5rem;
+  $p-1: 0.25rem;
+  $p-2: 0.125rem;
+}
+
+@function clampBuilder($minV, $maxV, $minS, $maxS) {
+  $slope: math.div(
+    math.div($maxS, 1rem) - math.div($minS, 1rem),
+    math.div($maxV, 16) - math.div($minV, 16)
+  );
+
+  $yIntercept: (math.div(-$minV, 16) * $slope) + math.div($minS, 1rem);
+
+  @return calc(#{$yIntercept}rem + #{($slope * 100)}vw);
+}
