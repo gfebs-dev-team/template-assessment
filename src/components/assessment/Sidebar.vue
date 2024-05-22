@@ -10,7 +10,8 @@ import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["sidebarState"]);
 const questions = useQuestionsStore();
-const { current, checkpoint, questionsList, questionsComp } = storeToRefs(questions);
+const { current, checkpoint, questionsList, questionsComp } =
+  storeToRefs(questions);
 
 let links = questionsComp.value;
 
@@ -31,9 +32,9 @@ function getCompletion(i) {
 <template>
   <section
     id="sidebar"
-    class="flex absolute h-full w-64 bg-spacecadet p-6 transition z-10"
+    class="absolute z-10 flex h-full w-64 bg-spacecadet p-6 transition lg:bg-masblue"
     v-bind:class="{ '-translate-x-64': !sidebarState }">
-    <div class="links w-full overflow-auto flex flex-col gap-2">
+    <div class="links flex w-full flex-col gap-2 overflow-auto">
       <div
         class="hover:m-y-2 flex w-full items-center justify-between"
         v-for="(question, index) in links"

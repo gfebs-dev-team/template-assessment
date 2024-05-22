@@ -7,6 +7,7 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 defineProps(["courseData"]);
+defineEmits(["submit"]);
 
 const questions = useQuestionsStore();
 const { sidebarState } = storeToRefs(questions);
@@ -14,9 +15,15 @@ const { toggleSidebar } = questions;
 </script>
 
 <template>
-  <main class="flex h-[100dvh] flex-col justify-between">
-    <Header :course-data @toggleSidebar="toggleSidebar()"></Header>
-    <section class="relative size-full">
+  <main
+    class="flex h-dvh flex-col justify-between lg:items-center lg:bg-spacecadet lg:p-8 lg:px-12">
+    <Header
+      :course-data
+      @toggleSidebar="toggleSidebar()"
+      @submit="$emit('submit')"
+      class="lg:max-w-[1200px]"></Header>
+    <section
+      class="relative size-full overflow-hidden bg-oxfordblue lg:max-w-[1200px]">
       <Sidebar :sidebarState></Sidebar>
       <slot></slot>
     </section>

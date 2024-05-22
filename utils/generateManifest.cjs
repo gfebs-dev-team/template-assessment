@@ -175,7 +175,7 @@ function generateCourseMetadata() {
     </lom>
     `;
 
-  console.log(metadata);
+  //console.log(metadata);
   return metadata;
 }
 

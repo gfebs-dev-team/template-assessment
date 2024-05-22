@@ -9,7 +9,14 @@ onMounted(() => {
 });
 
 function quit() {
+  SCORM.set('cmi.exit', 'normal');
   SCORM.save();
+  if (SCORM.get('cmi.completion_status') == 'incomplete') {
+    SCORM.set('cmi.success_status', 'unknown')
+    SCORM.set('adl.nav.request', 'suspendAll')
+  } else {
+    SCORM.set('cmi.success_status', 'passed')
+  }
   SCORM.quit();
 }
 
@@ -18,10 +25,10 @@ defineProps(["courseData"]);
 </script>
 
 <template>
-  <div class="flex h-[100dvh] flex-col bg-oxfordblue md:gap-0">
+  <section class="flex h-dvh flex-col bg-oxfordblue md:gap-0">
     <AppHeader :course-data :isexit="true" @exit="quit()"></AppHeader>
     <!--PAGE CONTENT-->
-    <section
+    <div
       class="flex h-full flex-col justify-center gap-4 scroll-auto bg-oxfordblue p-4 md:absolute md:w-screen md:items-center md:gap-8">
       <!-- <div class="flex flex-col items-center gap-2 md:gap-4">
         <h1
@@ -38,7 +45,7 @@ defineProps(["courseData"]);
 
       <div class="space-y-4 p-2 md:flex md:max-w-screen-lg">
         <div class="flex flex-col items-center justify-center gap-2 md:gap-6">
-          <p class="text-md text-center text-aliceblue md:text-lg">
+          <p class="text-md text-center text-aliceblue md:text-xl">
             Welcome to the
             <span class="font-bold text-harvestgold">{{
               courseData.topic
@@ -57,12 +64,12 @@ defineProps(["courseData"]);
             actions being taken.
           </p>
           <AppButton
-            class="mt-4 w-min flex-grow-0 border-transparent bg-spacecadet px-4 py-1 text-sm text-aliceblue"
+            class="mt-4 w-min flex-grow-0 border-transparent bg-spacecadet px-4 py-1 text-sm text-aliceblue md:px-6 md:py-2 md:text-md"
             @click="$emit('start')"
             >Start</AppButton
           >
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>

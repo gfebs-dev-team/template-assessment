@@ -1,25 +1,20 @@
 <script setup>
 import AppButton from "$components/AppButton.vue";
+import Progress from "./Progress.vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
-import { ref, computed, onUpdated} from "vue";
+import { computed } from "vue";
 
 const questions = useQuestionsStore();
 const { current } = storeToRefs(questions);
-const { total } = questions;
 const { goNext, goPrev } = questions;
-const progress = computed(()=>
-   `${((current.value + 1)/ total)*100}%`
-);
+
 defineProps(["courseData"]);
 </script>
 
 <template>
-  <nav class="w-full">
-    <div class="left-0 h-2 w-full bg-masblue">
-
-      <div class="h-full bg-saffron transition-width duration-700 ease" :style="`width: ${progress}`"></div>
-    </div>
+  <Progress class="lg:hidden" />
+  <nav class="w-full lg:hidden">
     <div
       class="h-18 flex items-center justify-between bg-spacecadet p-4 text-xs text-aliceblue">
       <AppButton

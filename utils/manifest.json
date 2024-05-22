@@ -1,9 +1,9 @@
 {
   "general": {
-    "course_code": "A123",
+    "course_code": "",
     "course_title": "Course Title",
     "language": "en",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique augue nec pretium commodo. Cras lorem nisl, convallis ac condimentum et, elementum at sapien. Ut tincidunt porttitor placerat. Maecenas accumsan arcu vel magna posuere, finibus scelerisque mi dignissim. Nam elementum tortor est, et placerat lacus imperdiet et. Suspendisse malesuada metus nec turpis gravida, nec placerat nisl bibendum. Aliquam erat volutpat.",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique augue nec pretium commodo. Cras lorem nisl, convallis ac condimentum et, elementum at sapien. Ut tincidunt porttitor placerat.",
     "keywords": ["lorem", "ipsum", "dolor", "sit", "amet"],
     "aggregation_level": "2"
   },

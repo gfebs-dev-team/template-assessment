@@ -18,11 +18,13 @@ onMounted(() => {
   SCORM.set("cmi.interactions." + id + ".timestamp", timestamp);
   SCORM.set("cmi.interactions." + id + ".type", type);
   responses.forEach((r, i) => {
-    if (r.correct) {
+    let correctID = 0;
+    if (r.correct && !SCORM.get("cmi.interactions." + id + ".correct_responses." + correctID + ".pattern")) {
       SCORM.set(
-        "cmi.interactions." + id + ".correct_responses." + i + ".pattern",
+        "cmi.interactions." + id + ".correct_responses." + correctID + ".pattern",
         r.value,
       );
+      correctID++;
     }
   });
 });
