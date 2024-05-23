@@ -14,19 +14,19 @@ onMounted(() => {
       .toISOString()
       .slice(0, questionStart.toISOString().indexOf(".") + 2) + "Z";
 
-  SCORM.set("cmi.interactions." + id + ".id", "question_" + id);
-  SCORM.set("cmi.interactions." + id + ".timestamp", timestamp);
-  SCORM.set("cmi.interactions." + id + ".type", type);
-  responses.forEach((r, i) => {
-    let correctID = 0;
-    if (r.correct && !SCORM.get("cmi.interactions." + id + ".correct_responses." + correctID + ".pattern")) {
-      SCORM.set(
-        "cmi.interactions." + id + ".correct_responses." + correctID + ".pattern",
-        r.value,
-      );
-      correctID++;
-    }
-  });
+  // SCORM.set("cmi.interactions." + id + ".id", "question_" + id);
+  // SCORM.set("cmi.interactions." + id + ".timestamp", timestamp);
+  // SCORM.set("cmi.interactions." + id + ".type", type);
+  // responses.forEach((r, i) => {
+  //   let correctID = 0;
+  //   if (r.correct && !SCORM.get("cmi.interactions." + id + ".correct_responses." + correctID + ".pattern")) {
+  //     SCORM.set(
+  //       "cmi.interactions." + id + ".correct_responses." + correctID + ".pattern",
+  //       r.value,
+  //     );
+  //     correctID++;
+  //   }
+  // });
 });
 </script>
 

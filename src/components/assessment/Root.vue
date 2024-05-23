@@ -2,16 +2,16 @@
 import Header from "./Header.vue";
 import Navigation from "./Navigation.vue";
 import Sidebar from "./Sidebar.vue";
+import Disclaimer from "./Disclaimer.vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
 
 defineProps(["courseData"]);
 defineEmits(["submit"]);
 
 const questions = useQuestionsStore();
-const { sidebarState } = storeToRefs(questions);
-const { toggleSidebar } = questions;
+const { sidebarState, disclaimer, current } = storeToRefs(questions);
+const { toggleSidebar, questionsList } = questions;
 </script>
 
 <template>
@@ -23,9 +23,10 @@ const { toggleSidebar } = questions;
       @submit="$emit('submit')"
       class="lg:max-w-[1200px]"></Header>
     <section
-      class="relative size-full overflow-hidden bg-oxfordblue lg:max-w-[1200px]">
+      class="relative flex size-full h-full flex-col justify-between overflow-hidden bg-oxfordblue lg:max-w-[1200px]">
       <Sidebar :sidebarState></Sidebar>
       <slot></slot>
+      <Disclaimer v-if="disclaimer"></Disclaimer>
     </section>
 
     <Navigation :course-data></Navigation>

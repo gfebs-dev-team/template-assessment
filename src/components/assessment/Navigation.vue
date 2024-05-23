@@ -3,7 +3,6 @@ import AppButton from "$components/AppButton.vue";
 import Progress from "./Progress.vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
-import { computed } from "vue";
 
 const questions = useQuestionsStore();
 const { current } = storeToRefs(questions);

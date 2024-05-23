@@ -1,12 +1,10 @@
 <script setup>
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
-import { watch, onMounted } from "vue";
 import {
   RiCheckboxBlankCircleFill,
   RiCheckboxCircleFill,
 } from "@remixicon/vue";
-import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["sidebarState"]);
 const questions = useQuestionsStore();

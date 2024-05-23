@@ -17,8 +17,11 @@ const correct = ref(
   ).length,
 );
 const score = ref(correct.value / total);
-const results = ref(Math.round(score.value * 10000) / 100);
-
+const results = ref(
+  questionsList.value.some((q) => q.learnerResponse == undefined)
+    ? 0
+    : Math.round(score.value * 10000) / 100,
+);
 onMounted(() => {
   const passing = SCORM.get("cmi.passing_score");
   if (score.value >= passing) {

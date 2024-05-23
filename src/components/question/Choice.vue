@@ -1,7 +1,7 @@
 <script setup>
 import Base from "./Base.vue";
 import Radio from "./Radio.vue";
-import { provide, ref, onBeforeUnmount, onMounted, watch } from "vue";
+import { provide, ref, onBeforeUnmount, onMounted } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 const props = defineProps(["questionData", "courseData"]);
@@ -19,6 +19,8 @@ function setInput(v, i) {
   checked_el.value = i;
   v.index = i;
   answer.value = v;
+  questionsList[props.questionData.id].learnerResponse = answer.value;
+  console.log(questionsList[props.questionData.id].learnerResponse);
 }
 
 onMounted(() => {

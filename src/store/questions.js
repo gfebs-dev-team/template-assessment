@@ -18,21 +18,37 @@ export const useQuestionsStore = defineStore("questions", () => {
   const glossaryState = ref(false);
   const next = ref(true);
   const prev = ref(false);
+  const disclaimer = ref(false);
 
   function addQuestion(obj) {
     if (questionsList.value[obj.id] == null) {
       questionsList.value.push(obj);
     }
-    //console.log(questionsList.value);
   }
 
   function toggleSidebar() {
     sidebarState.value = !sidebarState.value;
   }
 
+  function needsDisclaimer() {
+    if (
+      disclaimer.value == false &&
+      questionsList.value[current.value].learnerResponse == undefined
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function goNext() {
-    current.value++;
-    console.log(current.value);
+    if (needsDisclaimer()) {
+      disclaimer.value = true;
+    } else {
+      current.value++;
+      disclaimer.value = false;
+      console.log(current.value);
+    }
   }
 
   function goPrev() {
@@ -65,10 +81,12 @@ export const useQuestionsStore = defineStore("questions", () => {
     total,
     questionsList,
     checkpoint,
+    disclaimer,
     next,
     prev,
     sidebarState,
     glossaryState,
+    needsDisclaimer,
     getTitle,
     toggleSidebar,
     addQuestion,
