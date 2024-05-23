@@ -4,11 +4,12 @@ import Radio from "./Radio.vue";
 import { provide, ref, onBeforeUnmount, onMounted } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
+import { storeToRefs } from "pinia";
 
 const props = defineProps(["questionData", "courseData"]);
 
 const questions = useQuestionsStore();
-const { questionsList } = questions;
+const { current, questionsList } = storeToRefs(questions);
 
 const answer = ref();
 const checked_el = ref(-1);
@@ -20,31 +21,31 @@ function setInput(v, i) {
   checked_el.value = i;
   v.index = i;
   answer.value = v;
-  questionsList[props.questionData.id].learnerResponse = answer.value;
-  console.log(questionsList[props.questionData.id].learnerResponse);
+  questionsList.value[props.questionData.id].learnerResponse = answer.value;
 }
 
 onMounted(() => {
-  if (questionsList[props.questionData.id].learnerResponse) {
+  if (questionsList.value[props.questionData.id].learnerResponse) {
     answer.value = questionsList[props.questionData.id].learnerResponse;
     checked_el.value = answer.value.index;
   }
 });
 
 onBeforeUnmount(() => {
+  const { id } = props.questionData;
   if (answer.value) {
-    questionsList[props.questionData.id].learnerResponse = answer.value;
+    questionsList.value[id].learnerResponse = answer.value;
     SCORM.set(
-      "cmi.interactions." + questionData.id + ".learner_response",
+      "cmi.interactions." + id + ".learner_response",
       answer.value.value,
     );
   }
   if (answer.correct) {
-    questionsList[props.questionData.id].correct = true;
-    SCORM.set("cmi.interactions." + questionData.id + ".result", "correct");
+    questionsList.value[id].correct = true;
+    SCORM.set("cmi.interactions." + id + ".result", "correct");
   } else {
-    questionsList[props.questionData.id].correct = false;
-    SCORM.set("cmi.interactions." + questionData.id + ".result", "incorrect");
+    questionsList.value[id].correct = false;
+    SCORM.set("cmi.interactions." + id + ".result", "incorrect");
   }
 });
 </script>

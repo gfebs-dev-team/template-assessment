@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
 
   const latency = "PT" + lT + "S";
 
-  SCORM.set("cmi.interactions." + id + ".latency", latency);
+  SCORM.set("cmi.interactions." + props.questionData.id + ".latency", latency);
 });
 </script>
 

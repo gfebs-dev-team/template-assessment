@@ -33,7 +33,8 @@ export const useQuestionsStore = defineStore("questions", () => {
   function needsDisclaimer() {
     if (
       disclaimer.value == false &&
-      questionsList.value[current.value].learnerResponse == undefined
+      (!questionsList.value[current.value] ||
+        questionsList.value[current.value].learnerResponse == undefined)
     ) {
       return true;
     } else {

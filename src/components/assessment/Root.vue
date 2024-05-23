@@ -23,7 +23,7 @@ const { toggleSidebar, questionsList } = questions;
       @submit="$emit('submit')"
       class="lg:max-w-[1200px]"></Header>
     <section
-      class="relative flex size-full h-full flex-col justify-between overflow-hidden bg-oxfordblue lg:max-w-[1200px]">
+      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue lg:max-w-[1200px]">
       <Sidebar :sidebarState></Sidebar>
       <slot></slot>
       <Disclaimer v-if="disclaimer"></Disclaimer>
