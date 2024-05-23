@@ -1,12 +1,13 @@
 <script setup>
-import { onMounted } from "vue";
+import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["questionData"]);
+let questionStart, questionEnd;
 //const {id, type, correctResponses, query } = questionData;
 
 onMounted(() => {
-  const questionStart = new Date();
+  questionStart = new Date();
   const { id, type } = props.questionData;
   const responses = props.questionData.responses;
   const timestamp =
@@ -14,19 +15,41 @@ onMounted(() => {
       .toISOString()
       .slice(0, questionStart.toISOString().indexOf(".") + 2) + "Z";
 
-  // SCORM.set("cmi.interactions." + id + ".id", "question_" + id);
-  // SCORM.set("cmi.interactions." + id + ".timestamp", timestamp);
-  // SCORM.set("cmi.interactions." + id + ".type", type);
-  // responses.forEach((r, i) => {
-  //   let correctID = 0;
-  //   if (r.correct && !SCORM.get("cmi.interactions." + id + ".correct_responses." + correctID + ".pattern")) {
-  //     SCORM.set(
-  //       "cmi.interactions." + id + ".correct_responses." + correctID + ".pattern",
-  //       r.value,
-  //     );
-  //     correctID++;
-  //   }
-  // });
+  SCORM.set("cmi.interactions." + id + ".id", "question_" + id);
+  SCORM.set("cmi.interactions." + id + ".timestamp", timestamp);
+  SCORM.set("cmi.interactions." + id + ".type", type);
+  responses.forEach((r, i) => {
+    let correctID = 0;
+    if (
+      r.correct &&
+      !SCORM.get(
+        "cmi.interactions." +
+          id +
+          ".correct_responses." +
+          correctID +
+          ".pattern",
+      )
+    ) {
+      SCORM.set(
+        "cmi.interactions." +
+          id +
+          ".correct_responses." +
+          correctID +
+          ".pattern",
+        r.value,
+      );
+      correctID++;
+    }
+  });
+});
+
+onBeforeUnmount(() => {
+  questionEnd = new Date();
+  const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
+
+  const latency = "PT" + lT + "S";
+
+  SCORM.set("cmi.interactions." + id + ".latency", latency);
 });
 </script>
 

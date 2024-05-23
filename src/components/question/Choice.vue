@@ -3,6 +3,7 @@ import Base from "./Base.vue";
 import Radio from "./Radio.vue";
 import { provide, ref, onBeforeUnmount, onMounted } from "vue";
 import { useQuestionsStore } from "$store/questions";
+import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["questionData", "courseData"]);
 
@@ -33,11 +34,17 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (answer.value) {
     questionsList[props.questionData.id].learnerResponse = answer.value;
+    SCORM.set(
+      "cmi.interactions." + questionData.id + ".learner_response",
+      answer.value.value,
+    );
   }
   if (answer.correct) {
     questionsList[props.questionData.id].correct = true;
+    SCORM.set("cmi.interactions." + questionData.id + ".result", "correct");
   } else {
     questionsList[props.questionData.id].correct = false;
+    SCORM.set("cmi.interactions." + questionData.id + ".result", "incorrect");
   }
 });
 </script>

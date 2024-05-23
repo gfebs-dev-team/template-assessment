@@ -24,6 +24,7 @@ const results = ref(
 );
 onMounted(() => {
   const passing = SCORM.get("cmi.passing_score");
+  SCORM.set("cmi.score.scaled", results.value);
   if (score.value >= passing) {
     SCORM.set("cmi.completion_status", "complete");
   } else {
