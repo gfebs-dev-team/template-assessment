@@ -7,11 +7,12 @@
     "dev": "vite",
     "format": "prettier . --write",
     "host": "vite --host",
-    "build": "vite build && node utils/generateManifest.cjs",
+    "build": "vite build && node utils/generateManifest.cjs && node utils/zip.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "@remixicon/vue": "^4.2.0",
+    "dayjs": "^1.11.11",
     "eslint": "^9.0.0",
     "generate-index": "^4.1.1",
     "pinia": "^2.1.7",

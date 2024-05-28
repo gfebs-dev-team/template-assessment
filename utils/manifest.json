@@ -1,6 +1,6 @@
 {
   "general": {
-    "course_code": "",
+    "course_code": "C123",
     "course_title": "Course Title",
     "language": "en",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique augue nec pretium commodo. Cras lorem nisl, convallis ac condimentum et, elementum at sapien. Ut tincidunt porttitor placerat.",
@@ -14,7 +14,7 @@
     "version": 1.0,
     "status": "final",
     "contribute": {
-      "entity": "BEGIN:VCARD\n\t\t\t\tFN:GFEBS E-Learning Team\n\t\t\t\tORG: Eagle Harbor/Panum\n\t\t\t\tEND:VCARD",
+      "entity": "BEGIN:VCARD\n\t\tFN:GFEBS E-Learning Team\n\t\tORG: Aretum/Eagle Harbor\n\t\tEND:VCARD",
       "date": "2023-01-25"
     }
   },
