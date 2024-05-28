@@ -7,10 +7,11 @@ const questions = useQuestionsStore();
 const { current, questionsComp } = storeToRefs(questions);
 
 defineProps(["courseData"]);
+defineEmits(["exit"]);
 </script>
 
 <template>
-  <Assessment :courseData @exit="quit()">
+  <Assessment :courseData @exit="$emit('exit')">
     <TransitionGroup
       name="fade"
       enter-active-class="transition-opacity duration-500 ease-in-out"

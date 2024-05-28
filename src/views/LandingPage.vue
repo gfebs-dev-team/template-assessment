@@ -1,32 +1,14 @@
 <script setup>
 import AppButton from "$components/AppButton.vue";
 import AppHeader from "$components/AppHeader.vue";
-import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { onMounted } from "vue";
 
-onMounted(() => {
-  SCORM.init();
-});
-
-function quit() {
-  SCORM.set('cmi.exit', 'normal');
-  SCORM.save();
-  if (SCORM.get('cmi.completion_status') == 'incomplete') {
-    SCORM.set('cmi.success_status', 'unknown')
-    SCORM.set('adl.nav.request', 'suspendAll')
-  } else {
-    SCORM.set('cmi.success_status', 'passed')
-  }
-  SCORM.quit();
-}
-
-defineEmits(["start"]);
+defineEmits(["start", "exit"]);
 defineProps(["courseData"]);
 </script>
 
 <template>
   <section class="flex h-dvh flex-col bg-oxfordblue md:gap-0">
-    <AppHeader :course-data :isexit="true" @exit="quit()"></AppHeader>
+    <AppHeader :course-data :isexit="true" @exit="$emit('exit')"></AppHeader>
     <!--PAGE CONTENT-->
     <div
       class="flex h-full flex-col justify-center gap-4 scroll-auto bg-oxfordblue p-4 md:absolute md:w-screen md:items-center md:gap-8">
@@ -64,7 +46,7 @@ defineProps(["courseData"]);
             actions being taken.
           </p>
           <AppButton
-            class="mt-4 w-min flex-grow-0 border-transparent bg-spacecadet px-4 py-1 text-sm text-aliceblue md:px-6 md:py-2 md:text-md"
+            class="md:text-md mt-4 w-min flex-grow-0 border-transparent bg-spacecadet px-4 py-1 text-sm text-aliceblue md:px-6 md:py-2"
             @click="$emit('start')"
             >Start</AppButton
           >

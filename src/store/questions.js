@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, markRaw } from "vue";
+import { ref, markRaw, reactive } from "vue";
 import views from "$views/questions";
 
 export const useQuestionsStore = defineStore("questions", () => {
@@ -19,6 +19,10 @@ export const useQuestionsStore = defineStore("questions", () => {
   const next = ref(true);
   const prev = ref(false);
   const disclaimer = ref(false);
+  const sessionTime = reactive({
+    start: 0,
+    end: 0,
+  });
 
   function addQuestion(obj) {
     if (questionsList.value[obj.id] == null) {
@@ -77,6 +81,22 @@ export const useQuestionsStore = defineStore("questions", () => {
     return questionsList.value[current.value].title;
   }
 
+  function setSession(time) {
+    if (time == "start") {
+      sessionTime.start = new Date();
+    } else if (time == "end") {
+      sessionTime.end = new Date();
+    }
+  }
+
+  function getSession(time) {
+    if (time == "start") {
+      return sessionTime.start;
+    } else if (time == "end") {
+      return sessionTime.end;
+    }
+  }
+
   return {
     current,
     total,
@@ -87,6 +107,9 @@ export const useQuestionsStore = defineStore("questions", () => {
     prev,
     sidebarState,
     glossaryState,
+    sessionTime,
+    getSession,
+    setSession,
     needsDisclaimer,
     getTitle,
     toggleSidebar,

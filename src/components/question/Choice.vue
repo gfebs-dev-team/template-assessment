@@ -26,7 +26,7 @@ function setInput(v, i) {
 
 onMounted(() => {
   if (questionsList.value[props.questionData.id].learnerResponse) {
-    answer.value = questionsList[props.questionData.id].learnerResponse;
+    answer.value = questionsList.value[props.questionData.id].learnerResponse;
     checked_el.value = answer.value.index;
   }
 });
@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
       answer.value.value,
     );
   }
-  if (answer.correct) {
+  if (answer.value && answer.value.correct) {
     questionsList.value[id].correct = true;
     SCORM.set("cmi.interactions." + id + ".result", "correct");
   } else {

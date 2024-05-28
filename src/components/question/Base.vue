@@ -20,16 +20,7 @@ onMounted(() => {
   SCORM.set("cmi.interactions." + id + ".type", type);
   responses.forEach((r, i) => {
     let correctID = 0;
-    if (
-      r.correct &&
-      !SCORM.get(
-        "cmi.interactions." +
-          id +
-          ".correct_responses." +
-          correctID +
-          ".pattern",
-      )
-    ) {
+    if (r.correct) {
       SCORM.set(
         "cmi.interactions." +
           id +

@@ -10,6 +10,7 @@ defineProps(["courseData"]);
 const questions = useQuestionsStore();
 const { questionsList } = storeToRefs(questions);
 const { total } = questions;
+const passing = ref();
 
 const correct = ref(
   questionsList.value.filter(
@@ -23,31 +24,21 @@ const results = ref(
     : Math.round(score.value * 10000) / 100,
 );
 onMounted(() => {
-  const passing = SCORM.get("cmi.passing_score");
-  SCORM.set("cmi.score.scaled", results.value);
-  if (score.value >= passing) {
-    SCORM.set("cmi.completion_status", "complete");
+  passing.value = SCORM.get("cmi.scaled_passing_score");
+  SCORM.set("cmi.score.scaled", results.value / 100);
+  if (score.value >= passing.value) {
+    SCORM.set("cmi.completion_status", "completed");
   } else {
     SCORM.set("cmi.completion_status", "incomplete");
   }
 });
 
-function quit() {
-  SCORM.set("cmi.exit", "normal");
-  SCORM.save();
-  if (SCORM.get("cmi.completion_status") == "incomplete") {
-    SCORM.set("cmi.success_status", "unknown");
-    SCORM.set("adl.nav.request", "suspendAll");
-  } else {
-    SCORM.set("cmi.success_status", "passed");
-  }
-  SCORM.quit();
-}
+defineEmits(["exit"]);
 </script>
 
 <template>
   <section class="flex h-dvh flex-col items-center bg-oxfordblue md:gap-0">
-    <AppHeader class="grow-1" @exit="quit()"></AppHeader>
+    <AppHeader class="grow-1" @exit="$emit('exit')"></AppHeader>
     <div class="box-border flex grow items-center p-12 lg:max-w-[1200px]">
       <img class="hidden h-96 md:block" src="/assets/crest.svg" alt="crest" />
       <div class="flex grow flex-col items-center justify-center gap-8 p-8">
