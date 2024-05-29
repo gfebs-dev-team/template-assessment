@@ -10,8 +10,8 @@ defineProps(["courseData"]);
 defineEmits(["submit"]);
 
 const questions = useQuestionsStore();
-const { sidebarState, disclaimer, current } = storeToRefs(questions);
-const { toggleSidebar, questionsList } = questions;
+const { sidebarState, disclaimer } = storeToRefs(questions);
+const { toggleSidebar } = questions;
 </script>
 
 <template>

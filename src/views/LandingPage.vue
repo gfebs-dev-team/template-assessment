@@ -12,19 +12,6 @@ defineProps(["courseData"]);
     <!--PAGE CONTENT-->
     <div
       class="flex h-full flex-col justify-center gap-4 scroll-auto bg-oxfordblue p-4 md:absolute md:w-screen md:items-center md:gap-8">
-      <!-- <div class="flex flex-col items-center gap-2 md:gap-4">
-        <h1
-          class="text-aliceblue text-2xl text-balance font-bold text-center uppercase md:text-4xl"
-        >
-          Financial Management School
-        </h1>
-         <h2
-        class="text-saffron text-lg text-balance font-bold text-center uppercase md:text-2xl"
-      >
-        GFEBS {{ courseData.courseCode }} {{ courseData.courseTitle }}
-      </h2>
-      </div> -->
-
       <div class="space-y-4 p-2 md:flex md:max-w-screen-lg">
         <div class="flex flex-col items-center justify-center gap-2 md:gap-6">
           <p class="text-md text-center text-aliceblue md:text-xl">

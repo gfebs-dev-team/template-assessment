@@ -8,7 +8,10 @@
     "format": "prettier . --write",
     "host": "vite --host",
     "build": "vite build && node utils/generateManifest.cjs && node utils/zip.cjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "npx mocha --no-timeouts src/__test__ --require chai/register-assert.js",
+    "pass": "npx mocha --no-timeouts src/views/auto/passing.js",
+    "fail": "npx mocha --no-timeouts src/views/auto/fail.js"
   },
   "dependencies": {
     "@remixicon/vue": "^4.2.0",

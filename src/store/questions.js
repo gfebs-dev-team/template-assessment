@@ -97,9 +97,33 @@ export const useQuestionsStore = defineStore("questions", () => {
     }
   }
 
+  function actionHandler(a, v) {
+    const action = {
+      action: a,
+      value: v,
+    };
+    console.log(action);
+    questionsList.value[current.value].actions = [];
+    questionsList.value[current.value].actions.push(action);
+  }
+
+  function saveLearnerActions() {
+    let lr = "";
+    questionsList.value[current.value].actions.forEach((a) => {
+      lr += `[.]${a.action} ${a.value}`;
+    });
+    console.log(lr);
+    questionsList.value[current.value].learnerResponse = lr;
+    SCORM.set(
+      "cmi.interactions." + (current.value + 1) + ".learner_response",
+      lr,
+    );
+  }
+
   return {
     current,
     total,
+    questionsComp,
     questionsList,
     checkpoint,
     disclaimer,
@@ -108,6 +132,8 @@ export const useQuestionsStore = defineStore("questions", () => {
     sidebarState,
     glossaryState,
     sessionTime,
+    actionHandler,
+    saveLearnerActions,
     getSession,
     setSession,
     needsDisclaimer,
@@ -120,6 +146,5 @@ export const useQuestionsStore = defineStore("questions", () => {
     enablePrev,
     goNext,
     goPrev,
-    questionsComp,
   };
 });

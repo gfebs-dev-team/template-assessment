@@ -3,11 +3,11 @@ import LandingPage from "$views/LandingPage.vue";
 import AssessmentPage from "$views/AssessmentPage.vue";
 import ResultsPage from "./views/ResultsPage.vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { onBeforeUnmount, onMounted, shallowRef } from "vue";
+import { onMounted, shallowRef } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
-const curr = shallowRef(LandingPage);
+const curr = shallowRef(AssessmentPage);
 const courseData = {
   courseCode: "L210E",
   courseTitle: "Financial Process Overview",
@@ -35,25 +35,14 @@ function submitTest() {
 onMounted(() => {
   SCORM.init();
   setSession("start");
-});
 
-onBeforeUnmount(() => {
-  // setSession("end");
-  // const totalSeconds =
-  //   (Math.round((sessionTime.end - sessionTime.start) / 1000) * 100) / 100;
-  // let seconds = totalSeconds % 60;
-  // let totalMinutes = Math.round(div(totalSeconds - seconds, 60));
-  // let minutes = totalMinutes % 60;
-  // let totalHours = Math.round(div(totalMinutes - minutes, 60));
-  // console.log(
-  //   "totalHours:" +
-  //     totalHours +
-  //     " totalMinutes:" +
-  //     totalMinutes +
-  //     " totalSeconds:" +
-  //     totalSeconds,
-  // );
-  // const latency = "PT" + lT + "S";
+  SCORM.set("cmi.interactions.0.id", "------STARTING_DIVIDER");
+  SCORM.set("cmi.interactions.0.type", "other");
+  SCORM.set(
+    "cmi.interactions.0.correct_responses.0.pattern",
+    "------------------",
+  );
+  SCORM.set("cmi.interactions.0.learner_response", "------------------");
 });
 
 function quit() {

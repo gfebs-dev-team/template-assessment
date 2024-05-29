@@ -1,13 +1,15 @@
 //@index('./*.vue', f=> `import ${f.name} from '${f.path}.vue';`)
-import Question1 from './Question1.vue';
-import Question2 from './Question2.vue';
-import Question3 from './Question3.vue';
+import Q0Simulation from "./Q0Simulation.vue";
+import Q1Choice from "./Q1Choice.vue";
+import Q2Choice from "./Q2Choice.vue";
+import Q3Choice from "./Q3Choice.vue";
 //@endindex
 export default {
   //@index('./*.vue', f=> `${f.name},`)
-  Question1,
-  Question2,
-  Question3,
+  Q0Simulation,
+  Q1Choice,
+  Q2Choice,
+  Q3Choice,
   //@endindex
 };
 

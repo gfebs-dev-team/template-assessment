@@ -36,16 +36,16 @@ onBeforeUnmount(() => {
   if (answer.value) {
     questionsList.value[id].learnerResponse = answer.value;
     SCORM.set(
-      "cmi.interactions." + id + ".learner_response",
+      "cmi.interactions." + (id + 1) + ".learner_response",
       answer.value.value,
     );
   }
   if (answer.value && answer.value.correct) {
     questionsList.value[id].correct = true;
-    SCORM.set("cmi.interactions." + id + ".result", "correct");
+    SCORM.set("cmi.interactions." + (id + 1) + ".result", "correct");
   } else {
     questionsList.value[id].correct = false;
-    SCORM.set("cmi.interactions." + id + ".result", "incorrect");
+    SCORM.set("cmi.interactions." + (id + 1) + ".result", "incorrect");
   }
 });
 </script>

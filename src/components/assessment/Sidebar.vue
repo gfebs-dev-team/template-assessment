@@ -34,7 +34,7 @@ function getCompletion(i) {
     v-bind:class="{ '-translate-x-64': !sidebarState }">
     <div class="links flex w-full flex-col gap-2 overflow-auto">
       <div
-        class="hover:m-y-2 flex w-full items-center justify-between"
+        class="link hover:m-y-2 flex w-full items-center justify-between"
         v-for="(question, index) in links"
         :key="index">
         <a

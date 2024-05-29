@@ -2,14 +2,14 @@
 import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
-const props = defineProps(["questionData"]);
+const props = defineProps(["questionData", "actions"]);
 let questionStart, questionEnd;
 //const {id, type, correctResponses, query } = questionData;
 
 onMounted(() => {
-  questionStart = new Date();
   const { id, type } = props.questionData;
   const responses = props.questionData.responses;
+  questionStart = new Date();
   const timestamp =
     questionStart
       .toISOString()
@@ -19,25 +19,16 @@ onMounted(() => {
   SCORM.set("cmi.interactions." + (id + 1) + ".timestamp", timestamp);
   SCORM.set("cmi.interactions." + (id + 1) + ".type", type);
   responses.forEach((r, i) => {
-    let correctID = 0;
-    if (r.correct) {
-      SCORM.set(
-        "cmi.interactions." +
-          (id + 1) +
-          ".correct_responses." +
-          correctID +
-          ".pattern",
-        r.value,
-      );
-      correctID++;
-    }
+    SCORM.set(
+      "cmi.interactions." + (id + 1) + ".correct_responses." + i + ".pattern",
+      r.value,
+    );
   });
 });
 
 onBeforeUnmount(() => {
   questionEnd = new Date();
   const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
-
   const latency = "PT" + lT + "S";
 
   SCORM.set(
@@ -48,11 +39,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 p-8 py-12">
-    <h3 class="text-md font-bold text-saffron">
-      Question {{ questionData.id + 1 }}
-    </h3>
-    <h2 class="text-lg font-bold text-aliceblue">{{ questionData.query }}</h2>
+  <section class="box flex h-full w-full flex-col rounded-none">
+    <div class="m-2 p-2 text-lg text-aliceblue">
+      <h3 class="text-md font-bold text-saffron">
+        Scenario {{ questionData.scenario }}: Question {{ questionData.id }}
+      </h3>
+      <h2>{{ questionData.query }}</h2>
+    </div>
     <slot></slot>
   </section>
 </template>
