@@ -5,30 +5,31 @@ import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
-const { current } = storeToRefs(questions);
-const { goNext, goPrev } = questions;
+const { currIndex } = storeToRefs(questions);
+const { goNext, goPrev, inSimulation } = questions;
 
 defineProps(["courseData"]);
 </script>
 
 <template>
-  <Progress class="lg:hidden" />
-  <nav class="w-full lg:hidden">
+  <Progress class="xl:hidden" />
+  <nav class="w-full xl:hidden">
     <div
-      class="h-18 flex items-center justify-between bg-spacecadet p-4 text-xs text-aliceblue">
+      class="h-18 flex items-center justify-between bg-spacecadet p-4 text-xs text-aliceblue md:h-12">
       <AppButton
-        class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
+        class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goPrev()"
-        :disabled="current == 0">
+        :disabled="currIndex.value == 0"
+        :class="{ 'opacity-0': inSimulation(currIndex) }">
         Back
       </AppButton>
       <span class="text-sm font-bold"
-        >{{ current + 1 }}/{{ questions.total }}</span
+        >{{ currIndex + 1 }}/{{ questions.total }}</span
       >
       <AppButton
-        class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
+        class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goNext()"
-        :disabled="current == questions.total - 1">
+        :disabled="currIndex == questions.total - 1">
         Next
       </AppButton>
     </div>

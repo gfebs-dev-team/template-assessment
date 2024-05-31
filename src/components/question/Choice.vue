@@ -10,6 +10,7 @@ const props = defineProps(["questionData", "courseData"]);
 
 const questions = useQuestionsStore();
 const { current, questionsList } = storeToRefs(questions);
+const { getQuestion } = questions;
 
 const answer = ref();
 const checked_el = ref(-1);
@@ -21,12 +22,15 @@ function setInput(v, i) {
   checked_el.value = i;
   v.index = i;
   answer.value = v;
-  questionsList.value[props.questionData.id].learnerResponse = answer.value;
+  getQuestion(props.questionData.id).learnerResponse = answer.value;
 }
 
 onMounted(() => {
-  if (questionsList.value[props.questionData.id].learnerResponse) {
-    answer.value = questionsList.value[props.questionData.id].learnerResponse;
+  if (
+    getQuestion(props.questionData.id) &&
+    getQuestion(props.questionData.id).learnerResponse
+  ) {
+    answer.value = getQuestion(props.questionData.id).learnerResponse;
     checked_el.value = answer.value.index;
   }
 });
@@ -34,17 +38,17 @@ onMounted(() => {
 onBeforeUnmount(() => {
   const { id } = props.questionData;
   if (answer.value) {
-    questionsList.value[id].learnerResponse = answer.value;
+    getQuestion(id).learnerResponse = answer.value;
     SCORM.set(
       "cmi.interactions." + (id + 1) + ".learner_response",
       answer.value.value,
     );
   }
   if (answer.value && answer.value.correct) {
-    questionsList.value[id].correct = true;
+    getQuestion(id).correct = true;
     SCORM.set("cmi.interactions." + (id + 1) + ".result", "correct");
   } else {
-    questionsList.value[id].correct = false;
+    getQuestion(id).correct = false;
     SCORM.set("cmi.interactions." + (id + 1) + ".result", "incorrect");
   }
 });

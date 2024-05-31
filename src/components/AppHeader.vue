@@ -10,7 +10,7 @@ const emit = defineEmits(["exit"]);
   <div
     class="z-10 box-content flex w-full flex-col items-center justify-end bg-spacecadet">
     <div
-      class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 lg:h-24 lg:p-6">
+      class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-24 xl:p-6">
       <img class="h-10 md:h-12" src="/assets/crest.svg" />
       <div class="flex flex-col gap-1">
         <h1

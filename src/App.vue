@@ -15,7 +15,7 @@ const courseData = {
 };
 
 const questions = useQuestionsStore();
-const { disclaimer, sessionTime } = storeToRefs(questions);
+const { disclaimer } = storeToRefs(questions);
 const { needsDisclaimer, setSession, getSession } = questions;
 
 function startTest() {
@@ -35,6 +35,7 @@ function submitTest() {
 onMounted(() => {
   SCORM.init();
   setSession("start");
+  questions.shuffleQuestions();
 
   SCORM.set("cmi.interactions.0.id", "------STARTING_DIVIDER");
   SCORM.set("cmi.interactions.0.type", "other");

@@ -4,7 +4,7 @@ import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
-  id: 1,
+  id: 0,
   type: "choice",
   query: "How does the Army manage the General Fund GL?",
   responses: [

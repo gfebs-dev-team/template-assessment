@@ -48,7 +48,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 p-8 py-12">
+  <section class="flex flex-col gap-2 p-8">
     <h3 class="text-md font-bold text-saffron">
       Question {{ questionData.id + 1 }}
     </h3>

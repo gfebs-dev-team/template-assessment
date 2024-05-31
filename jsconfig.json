@@ -17,11 +17,17 @@
       "$views/*": [
         "src/views/*"
       ],
-      "$types/*": [
-        "src/types/*"
-      ],
       "$__test__/*": [
         "src/__test__/*"
+      ],
+      "$Sections/*": [
+        "src/views/Sections/*"
+      ],
+      "$sections/*": [
+        "src/views/sections/*"
+      ],
+      "$questions/*": [
+        "src/views/sections/questions/*"
       ]
     }
   }
