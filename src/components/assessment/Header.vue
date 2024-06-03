@@ -31,29 +31,29 @@ const { goNext, goPrev } = questions;
     class="z-10 box-content flex w-full flex-col items-center justify-end bg-spacecadet xl:gap-4">
     <div
       class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-auto">
-      <img class="h-10 md:h-12 xl:h-24" src="/assets/crest.svg" />
-      <div class="flex flex-col gap-1">
+      <img class="h-10 md:h-12 xl:h-32" src="/assets/crest.svg" />
+      <div class="flex flex-col gap-1 xl:gap-2">
         <h1
-          class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base">
+          class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:max-w-64 xl:text-xl">
           Financial Management School
         </h1>
         <h2
-          class="hidden text-balance text-sm font-bold uppercase text-saffron xl:inline">
+          class="hidden text-balance text-sm font-bold uppercase text-saffron xl:inline xl:text-base">
           GFEBS {{ courseData.courseCode }}:
           {{ courseData.courseTitle }}
         </h2>
       </div>
-      <div class="flex flex-col gap-4 justify-self-end xl:w-1/2">
+      <div class="flex flex-col gap-4 justify-self-end xl:w-2/3">
         <Progress class="hidden xl:block" />
         <div class="flex w-full flex-row justify-end gap-4">
           <AppButton
-            class="hidden max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:flex xl:w-full xl:max-w-none"
+            class="hidden max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:flex xl:w-full xl:max-w-none xl:text-base"
             @click="$emit('submit')"
             v-if="questions.currIndex == questions.total - 1">
             <RiCloseLine class="size-6 fill-aliceblue" /> SUBMIT
           </AppButton>
           <AppButton
-            class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:w-full xl:max-w-none"
+            class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:w-full xl:max-w-none xl:text-base"
             @click="quit()">
             <RiCloseLine class="size-6 fill-aliceblue" /> EXIT
           </AppButton>
@@ -73,7 +73,7 @@ const { goNext, goPrev } = questions;
       <AppButton
         @click="$emit('submit')"
         v-if="questions.currIndex == questions.total - 1"
-        class="max-w-min justify-self-end border-2 border-saffron p-1 px-2 text-xs text-saffron md:px-4 md:py-1 md:text-xs xl:hidden"
+        class="max-w-min justify-self-end border-2 border-saffron p-1 px-2 text-xs text-saffron md:px-4 md:py-1 md:text-xs xl:hidden xl:text-base"
         >Submit</AppButton
       >
       <div

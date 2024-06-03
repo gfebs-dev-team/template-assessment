@@ -1,6 +1,7 @@
 <script setup>
-import { onBeforeUnmount, onMounted, watchEffect } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
+import { useQuestionsStore } from "$store/questions";
 import {
   RiArrowLeftLine,
   RiArrowRightLine,
@@ -8,11 +9,14 @@ import {
   RiAccountCircleFill,
   RiPushpinFill,
   RiCloseLine,
+  RiLoopLeftLine,
 } from "@remixicon/vue";
 
-const props = defineProps(["questionData", "actions", "url", "title"]);
+const questions = useQuestionsStore();
+const { getQuestion } = questions;
+const props = defineProps(["questionData", "url", "title"]);
+const emits = defineEmits(["resetSim"]);
 let questionStart, questionEnd;
-//const {id, type, correctResponses, query } = questionData;
 
 onMounted(() => {
   const { id, type } = props.questionData;
@@ -44,30 +48,65 @@ onBeforeUnmount(() => {
     latency,
   );
 });
+
+const responseHistory = ref(false);
+function toggleResponseHistory() {
+  responseHistory.value = !responseHistory.value;
+}
 </script>
 
 <template>
-  <section class="flex h-full w-full flex-col gap-2 rounded-none p-8">
-    <h3 class="text-md font-bold text-saffron">
+  <section
+    class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:p-12">
+    <h3 class="text-base font-bold text-saffron xl:text-lg">
       Scenario {{ questionData.scenario }}: Question {{ questionData.id + 1 }}
     </h3>
-    <h2 class="text-lg font-bold text-aliceblue">
-      {{ questionData.query }} Click
-      <span class="text-md rounded-sm bg-saffron p-1 font-bold text-oxfordblue"
-        >Next</span
-      >
-      to submit.
-    </h2>
+    <div class="flex items-center gap-4">
+      <h2 class="text-lg font-bold text-aliceblue xl:text-xl">
+        {{ questionData.query }} Click
+        <span
+          class="text-md rounded-sm bg-saffron p-1 font-bold text-oxfordblue"
+          >Next</span
+        >
+        to submit.
+      </h2>
+      <!-- <div class="group relative flex items-center gap-2">
+        <RiLoopLeftLine
+          class="size-8 rounded-md bg-saffron fill-oxfordblue p-1"
+          @click="$emit('resetSim')" />
+        <span
+          class="pointer-events-none font-bold text-saffron opacity-0 transition-opacity group-hover:opacity-100">
+          Reset Answer</span
+        >
+      </div> -->
+    </div>
     <!-- Mock Web Browswer -->
     <div class="flex h-full w-full flex-col overflow-auto bg-[#DFE1E5]">
-      <div class="flex h-8 w-full flex-col p-2">
-        <div class="flex h-6 bg-[#DFE1E5]">
+      <div class="flex h-10 w-full flex-col p-4">
+        <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
           <div class="min-w-48 rounded-t-md bg-[#fff] p-1">
             <div
               class="grid h-full min-w-48 grid-cols-[auto_1fr_auto] items-center gap-2">
               <RiPushpinFill class="size-3" />
               <div class="h-fit w-full text-xs">{{ title }}</div>
               <RiCloseLine class="size-3 justify-self-end" color="#5F6367" />
+            </div>
+          </div>
+          <div
+            class="absolute -top-3 right-0 flex h-full gap-2 rounded-t-md p-1">
+            <button
+              class="h-fit w-full rounded-sm border border-spacecadet border-opacity-30 p-1 text-center text-xs font-bold text-spacecadet active:translate-y-[.1rem]"
+              @click="toggleResponseHistory">
+              <p>Review Response</p>
+            </button>
+            <div>
+              <div class="group relative w-max">
+                <button @click="$emit('resetSim')"><RiLoopLeftLine /></button>
+                <span
+                  class="z-100 before: pointer-events-none absolute right-0 top-9 flex w-max rounded-md bg-masblue p-1 px-2 text-xs text-aliceblue opacity-0 transition-opacity group-hover:opacity-100">
+                  Click here to reset actions
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -88,7 +127,32 @@ onBeforeUnmount(() => {
           <div class="size-[.2rem] rounded-full bg-[#5F6367]"></div>
         </div>
       </div>
-      <slot></slot>
+      <div class="relative h-full w-full overflow-auto">
+        <slot></slot>
+        <div
+          :data-toggle="responseHistory"
+          class="absolute left-0 top-0 hidden h-full w-full items-center justify-center bg-[#000] bg-opacity-20 backdrop-blur-sm data-[toggle=true]:flex">
+          <div class="h-1/2 w-1/2 rounded-md bg-[#fff] p-2">
+            <table
+              class="w-full table-auto border-collapse border border-spacecadet text-spacecadet">
+              <thead>
+                <th class="border">#</th>
+                <th class="border">Action</th>
+                <th class="border">Value</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(action, index) in getQuestion(questionData.id)
+                    .actions">
+                  <td class="border">{{ index }}</td>
+                  <td class="border">{{ action.action }}</td>
+                  <td class="border">{{ action.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>

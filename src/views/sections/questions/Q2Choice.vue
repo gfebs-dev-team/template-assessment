@@ -3,8 +3,7 @@ import { QuestionChoice } from "$components/question";
 import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
-const questionData = {
-  id: 1,
+let questionData = {
   type: "true-false",
   query:
     "Manage GL accounts is the sub-process area responsible for maintaining the GL accounts in GFEBS.",
@@ -16,7 +15,7 @@ const questionData = {
 
 const questions = useQuestionsStore();
 onBeforeMount(() => {
-  questions.addQuestion(questionData);
+  questionData = questions.addQuestion(questionData);
 });
 </script>
 <template>

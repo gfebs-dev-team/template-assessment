@@ -3,8 +3,7 @@ import { QuestionChoice } from "$components/question";
 import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
-const questionData = {
-  id: 0,
+let questionData = {
   type: "choice",
   query: "How does the Army manage the General Fund GL?",
   responses: [
@@ -17,7 +16,7 @@ const questionData = {
 
 const questions = useQuestionsStore();
 onBeforeMount(() => {
-  questions.addQuestion(questionData);
+  questionData = questions.addQuestion(questionData);
 });
 </script>
 <template>

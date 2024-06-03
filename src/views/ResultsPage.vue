@@ -12,11 +12,8 @@ const { questionsList } = storeToRefs(questions);
 const { total } = questions;
 const passing = ref();
 
-const correct = ref(
-  questionsList.value.filter(
-    (q) => "learnerResponse" in q && "correct" in q.learnerResponse,
-  ).length,
-);
+const correct = ref(questionsList.value.filter((q) => q.correct).length);
+console.log(correct.value);
 const score = ref(correct.value / total);
 const results = ref(
   questionsList.value.some((q) => q.learnerResponse == undefined)
@@ -24,6 +21,7 @@ const results = ref(
     : Math.round(score.value * 10000) / 100,
 );
 onMounted(() => {
+  console.log(questionsList.value);
   passing.value = SCORM.get("cmi.scaled_passing_score");
   SCORM.set("cmi.score.scaled", results.value / 100);
   if (score.value >= passing.value) {

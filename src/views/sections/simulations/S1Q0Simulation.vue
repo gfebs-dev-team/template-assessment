@@ -4,7 +4,6 @@ import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
-  id: 0,
   scenario: 1,
   query: "Select the first step.",
   type: "performance",
@@ -21,7 +20,7 @@ onBeforeMount(() => {
     <div
       class="flex h-full w-full flex-shrink items-center justify-center overflow-auto bg-[#fff] p-4">
       <div
-        class="flex h-full w-[70%] max-w-[600px] flex-col gap-2 overflow-auto border-2 border-[#cbcbcb91] bg-gradient-to-b from-[#ffffff] via-[#e9ecf0] to-[#ededf5ba] p-4 text-xs font-bold">
+        class="flex h-auto max-h-full w-[70%] max-w-[600px] flex-col gap-2 overflow-auto border-2 border-[#cbcbcb91] bg-gradient-to-b from-[#ffffff] via-[#e9ecf0] to-[#ededf5ba] p-4 text-xs font-bold">
         <h2 class="font-bold uppercase">
           You are accessing a u.s. government (usg) information system (is) that
           is provided for USG-Authorized use only.
@@ -62,7 +61,7 @@ onBeforeMount(() => {
           </li>
         </ul>
         <button
-          @click="questions.actionHandler('clicked', 'I Accept')"
+          @click="questions.actionHandler('clicked', 'I accept')"
           class="w-fit self-center border-2 border-[#14141486] bg-[#4ead41] p-2 font-bold text-[#fefefe] transition active:translate-y-0.5">
           I Accept
         </button>

@@ -28,30 +28,14 @@ export const useQuestionsStore = defineStore("questions", () => {
   const next = ref(true);
   const prev = ref(false);
   const disclaimer = ref(false);
-  const showModal = ref(true);
   const sessionTime = reactive({
     start: 0,
     end: 0,
   });
 
-  // function current() {
-  //   const simL = simsComp.value.length;
-  //   const questL = questionsComp.value.length;
-
-  //   if (currIndex.value <= simL) {
-  //     return simsComp.value[currIndex.value];
-  //   } else if (currIndex.value - simL < questL) {
-  //     return questionsComp[currIndex.value - simL];
-  //   }
-  // }
-
   function goNext() {
     const simL = simsComp.value.length;
     const questL = questionsComp.value.length;
-
-    // console.log(currIndex.value);
-    // console.log(simL);
-    // console.log(questL);
 
     if (currIndex.value < simL) {
       saveLearnerActions();
@@ -124,13 +108,14 @@ export const useQuestionsStore = defineStore("questions", () => {
 
   function addQuestion(obj) {
     let data = obj;
+    data.id = currIndex.value;
     if (obj.type == "performance") {
       data.actions = new Array();
     }
     if (questionsList.value[data.id] == null) {
       questionsList.value.push(data);
-      //console.log(questionsList.value[data.id].actions);
     }
+    return data;
   }
 
   function getQuestion(index) {
@@ -174,23 +159,26 @@ export const useQuestionsStore = defineStore("questions", () => {
       action: a,
       value: v,
     };
-    console.log(action);
     questionsList.value[currIndex.value].actions.push(action);
-    console.log(questionsList.value[currIndex.value].actions);
   }
 
   function saveLearnerActions() {
+    let currSim = questionsList.value[currIndex.value];
     let lr = "";
-    questionsList.value[currIndex.value].actions.forEach((a, i) => {
+    currSim.actions.forEach((a, i) => {
       lr += `${i > 0 ? "[,]" : ""}[.]${a.action} ${a.value}`;
     });
-    console.log(lr);
     questionsList.value[currIndex.value].learnerResponse = lr;
+    currSim.responses.forEach((r) => {
+      let res = r.replace(/{.*}/, "");
+      if (res == lr) {
+        questionsList.value[currIndex.value].correct = true;
+      }
+    });
     SCORM.set(
       "cmi.interactions." + (currIndex.value + 1) + ".learner_response",
       lr,
     );
-    console.log(lr);
   }
 
   function shuffleQuestions() {
@@ -202,6 +190,10 @@ export const useQuestionsStore = defineStore("questions", () => {
       array[j] = temp;
     }
     questionsComp.value = array;
+  }
+
+  function resetSim() {
+    questionsList.value[currIndex.value].actions = new Array();
   }
 
   return {
@@ -216,6 +208,7 @@ export const useQuestionsStore = defineStore("questions", () => {
     sidebarState,
     sessionTime,
     current,
+    resetSim,
     shuffleQuestions,
     getQuestion,
     inSimulation,

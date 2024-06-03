@@ -13,7 +13,7 @@ const answer = inject("answer");
     @click="$emit('selected')"
     :data-checked="checked_el == index">
     <input
-      class="relative m-0 mt-[.49rem] flex aspect-square size-[.75rem] scale-[1.2] appearance-none items-center justify-center rounded-full border-2 border-transparent bg-aliceblue text-sm text-saffron data-[checked=true]:border-oxfordblue data-[checked=true]:bg-transparent data-[checked=true]:after:aspect-square data-[checked=true]:after:w-[70%] data-[checked=true]:after:rounded-full data-[checked=true]:after:bg-oxfordblue data-[checked=true]:after:content-[''] data-[checked=false]:group-hover:border-saffron data-[checked=false]:group-hover:bg-saffron data-[checked=false]:group-hover:bg-opacity-35"
+      class="relative m-0 mt-[.43rem] flex aspect-square size-[.8rem] appearance-none items-center justify-center rounded-full border-2 border-transparent bg-aliceblue text-sm text-saffron data-[checked=true]:bg-transparent data-[checked=true]:after:mt-[.23rem] data-[checked=true]:after:h-max data-[checked=true]:after:w-max data-[checked=true]:after:text-[1rem] data-[checked=true]:after:text-oxfordblue data-[checked=true]:after:content-['◉'] data-[checked=false]:group-hover:border-saffron data-[checked=false]:group-hover:bg-saffron data-[checked=false]:group-hover:bg-opacity-35"
       type="radio"
       :id
       :value
@@ -21,7 +21,7 @@ const answer = inject("answer");
       :true-value="checked_el == index"
       :data-checked="checked_el == index" />
     <label
-      class="h-min w-full p-1 text-sm text-aliceblue data-[checked=true]:font-bold data-[checked=true]:text-spacecadet data-[checked=false]:group-hover:font-bold data-[checked=false]:group-hover:text-saffron"
+      class="h-min w-full p-1 text-sm text-aliceblue data-[checked=true]:font-bold data-[checked=true]:text-spacecadet data-[checked=false]:group-hover:font-bold data-[checked=false]:group-hover:text-saffron xl:text-lg"
       :data-checked="checked_el == index"
       :for="id">
       <slot></slot>

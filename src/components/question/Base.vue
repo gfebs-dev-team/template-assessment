@@ -4,7 +4,6 @@ import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["questionData"]);
 let questionStart, questionEnd;
-//const {id, type, correctResponses, query } = questionData;
 
 onMounted(() => {
   questionStart = new Date();
@@ -48,11 +47,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 p-8">
-    <h3 class="text-md font-bold text-saffron">
+  <section class="flex flex-col gap-2 p-8 xl:gap-3 xl:p-12">
+    <h3 class="text-base font-bold text-saffron xl:text-lg">
       Question {{ questionData.id + 1 }}
     </h3>
-    <h2 class="text-lg font-bold text-aliceblue">{{ questionData.query }}</h2>
+    <h2 class="text-lg font-bold text-aliceblue xl:text-xl">
+      {{ questionData.query }}
+    </h2>
     <slot></slot>
   </section>
 </template>

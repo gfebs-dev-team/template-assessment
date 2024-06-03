@@ -10,7 +10,7 @@ import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
 const { sidebarState, disclaimer, current } = storeToRefs(questions);
-const { toggleSidebar } = questions;
+const { toggleSidebar, resetSim } = questions;
 
 defineProps(["courseData"]);
 defineEmits(["exit", "submit"]);
@@ -18,14 +18,14 @@ defineEmits(["exit", "submit"]);
 
 <template>
   <main
-    class="flex h-dvh flex-col justify-between xl:items-center xl:bg-spacecadet xl:p-8 xl:px-12">
+    class="flex h-dvh flex-col justify-between xl:items-center xl:bg-spacecadet xl:p-14 xl:px-16">
     <AssessmentHeader
       :course-data
       @toggleSidebar="toggleSidebar()"
       @submit="$emit('submit')"
-      class="xl:max-w-[1200px]" />
+      class="xl:max-w-[1400px]" />
     <section
-      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-[1200px]">
+      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-[1400px]">
       <AssessmentSidebar :sidebarState />
       <Transition
         name="fade"
@@ -33,7 +33,7 @@ defineEmits(["exit", "submit"]);
         leave-active-class="transition-opacity duration-500 ease-in-out"
         enter-from-class="absolute opacity-0"
         leave-to-class="absolute opacity-0">
-        <component :is="current" />
+        <component :is="current" @resetSim="resetSim" />
       </Transition>
       <AssessmentDisclaimer v-if="disclaimer" />
     </section>

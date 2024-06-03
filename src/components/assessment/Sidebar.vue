@@ -11,7 +11,7 @@ const questions = useQuestionsStore();
 const { current, simsComp, questionsComp } = storeToRefs(questions);
 const { getQuestion, goToQuestion } = questions;
 
-let links = questionsComp.value;
+let links = simsComp.value.concat(questionsComp.value);
 
 function getCompletion(i) {
   if (getQuestion(i) && getQuestion(i).learnerResponse) {
@@ -33,7 +33,7 @@ function getCompletion(i) {
         v-for="(question, index) in links"
         :key="index">
         <a
-          class="text-sm font-bold text-aliceblue"
+          class="text-sm font-bold text-aliceblue xl:text-lg"
           :class="{ 'text-saffron': current == index }"
           @click="goToQuestion(index)">
           Question {{ index + 1 }}

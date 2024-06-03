@@ -12,7 +12,7 @@ defineProps(["courseData"]);
 
 <template>
   <div
-    class="left-0 h-2 w-full overflow-hidden bg-masblue xl:h-4 xl:rounded-md">
+    class="left-0 h-2 w-full overflow-hidden bg-masblue xl:h-6 xl:rounded-md">
     <div
       class="ease h-full bg-saffron transition-width duration-700"
       :style="`width: ${progress}`"></div>
