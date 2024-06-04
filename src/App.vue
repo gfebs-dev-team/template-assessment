@@ -7,7 +7,7 @@ import { onMounted, shallowRef } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
-const curr = shallowRef(AssessmentPage);
+const curr = shallowRef(LandingPage);
 const courseData = {
   courseCode: "L210E",
   courseTitle: "Financial Process Overview",

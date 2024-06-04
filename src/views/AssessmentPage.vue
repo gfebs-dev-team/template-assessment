@@ -5,27 +5,35 @@ import {
   AssessmentSidebar,
   AssessmentDisclaimer,
 } from "$components/assessment";
+import { watchEffect } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
-const { sidebarState, disclaimer, current } = storeToRefs(questions);
+const { sidebarState, disclaimer, current, currIndex, viewed } =
+  storeToRefs(questions);
 const { toggleSidebar, resetSim } = questions;
 
 defineProps(["courseData"]);
 defineEmits(["exit", "submit"]);
+
+watchEffect(() => {
+  if (currIndex.value > viewed.value) {
+    viewed.value = currIndex.value;
+  }
+});
 </script>
 
 <template>
   <main
-    class="flex h-dvh flex-col justify-between xl:items-center xl:bg-spacecadet xl:p-14 xl:px-16">
+    class="flex h-dvh flex-col justify-between xl:items-center xl:bg-spacecadet xl:px-32 xl:py-10">
     <AssessmentHeader
       :course-data
       @toggleSidebar="toggleSidebar()"
       @submit="$emit('submit')"
-      class="xl:max-w-[1400px]" />
+      class="xl:max-w-[1200px]" />
     <section
-      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-[1400px]">
+      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-[1200px]">
       <AssessmentSidebar :sidebarState />
       <Transition
         name="fade"

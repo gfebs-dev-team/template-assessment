@@ -21,6 +21,7 @@ export const useQuestionsStore = defineStore("questions", () => {
   );
 
   const currIndex = ref(0);
+  const viewed = ref(0);
   const current = shallowRef(simsComp.value[0]);
   const questionsList = ref(new Array());
   const total = questionsComp.value.length + simsComp.value.length;
@@ -83,7 +84,26 @@ export const useQuestionsStore = defineStore("questions", () => {
     }
   }
 
-  function goToQuestion(i) {}
+  function goToQuestion(i) {
+    const simL = simsComp.value.length;
+    const questL = questionsComp.value.length;
+
+    if (i > viewed.value + 1) {
+      return;
+    }
+
+    if (currIndex.value < simL) {
+      saveLearnerActions();
+    }
+    if (i < simL) {
+      currIndex.value = i;
+      current.value = simsComp.value[i];
+    } else if (currIndex.value - simL < questL) {
+      currIndex.value = i;
+      current.value = questionsComp.value[i - simL];
+    }
+    toggleSidebar();
+  }
 
   function disableNext() {
     next.value = false;
@@ -130,7 +150,8 @@ export const useQuestionsStore = defineStore("questions", () => {
     return (
       disclaimer.value == false &&
       (!getQuestion(currIndex.value) ||
-        getQuestion(currIndex.value).learnerResponse == undefined)
+        getQuestion(currIndex.value).learnerResponse == undefined ||
+        getQuestion(currIndex.value).learnerResponse == "")
     );
   }
 
@@ -208,7 +229,9 @@ export const useQuestionsStore = defineStore("questions", () => {
     sidebarState,
     sessionTime,
     current,
+    viewed,
     resetSim,
+    goToQuestion,
     shuffleQuestions,
     getQuestion,
     inSimulation,

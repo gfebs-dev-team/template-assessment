@@ -33,7 +33,7 @@ onMounted(() => {
   responses.forEach((r, i) => {
     SCORM.set(
       "cmi.interactions." + (id + 1) + ".correct_responses." + i + ".pattern",
-      r.value,
+      r,
     );
   });
 });
@@ -57,7 +57,7 @@ function toggleResponseHistory() {
 
 <template>
   <section
-    class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:p-12">
+    class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Scenario {{ questionData.scenario }}: Question {{ questionData.id + 1 }}
     </h3>
@@ -93,7 +93,7 @@ function toggleResponseHistory() {
             </div>
           </div>
           <div
-            class="absolute -top-3 right-0 flex h-full gap-2 rounded-t-md p-1">
+            class="absolute -right-2 -top-3 flex h-full gap-2 rounded-t-md p-1">
             <button
               class="h-fit w-full rounded-sm border border-spacecadet border-opacity-30 p-1 text-center text-xs font-bold text-spacecadet active:translate-y-[.1rem]"
               @click="toggleResponseHistory">
@@ -131,22 +131,30 @@ function toggleResponseHistory() {
         <slot></slot>
         <div
           :data-toggle="responseHistory"
+          @click.self="toggleResponseHistory"
           class="absolute left-0 top-0 hidden h-full w-full items-center justify-center bg-[#000] bg-opacity-20 backdrop-blur-sm data-[toggle=true]:flex">
-          <div class="h-1/2 w-1/2 rounded-md bg-[#fff] p-2">
+          <div
+            class="flex h-1/2 w-1/2 flex-col rounded-md bg-spacecadet px-4 py-2">
             <table
-              class="w-full table-auto border-collapse border border-spacecadet text-spacecadet">
-              <thead>
-                <th class="border">#</th>
-                <th class="border">Action</th>
-                <th class="border">Value</th>
+              class="text-surface w-full table-fixed border-collapse text-left text-sm font-light text-aliceblue">
+              <thead class="border-b border-lavendar border-opacity-40">
+                <th scope="col" class="px-6 py-4">#</th>
+                <th scope="col" class="px-6 py-4">Action</th>
+                <th scope="col" class="px-6 py-4">Value</th>
               </thead>
               <tbody>
                 <tr
+                  class="border-b border-lavendar border-opacity-40"
                   v-for="(action, index) in getQuestion(questionData.id)
-                    .actions">
-                  <td class="border">{{ index }}</td>
-                  <td class="border">{{ action.action }}</td>
-                  <td class="border">{{ action.value }}</td>
+                    ? getQuestion(questionData.id).actions
+                    : ['']">
+                  <td class="whitespace-nowrap px-6 py-4">{{ index + 1 }}</td>
+                  <td class="whitespace-nowrap px-6 py-4">
+                    {{ action.action }}
+                  </td>
+                  <td class="whitespace-nowrap px-6 py-4">
+                    {{ action.value }}
+                  </td>
                 </tr>
               </tbody>
             </table>

@@ -19,8 +19,7 @@ defineProps(["courseData"]);
       <AppButton
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goPrev()"
-        :disabled="currIndex.value == 0"
-        :class="{ 'opacity-0': inSimulation(currIndex) }">
+        :disabled="currIndex == 0">
         Back
       </AppButton>
       <span class="text-sm font-bold"

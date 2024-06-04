@@ -31,7 +31,7 @@ const { goNext, goPrev } = questions;
     class="z-10 box-content flex w-full flex-col items-center justify-end bg-spacecadet xl:gap-4">
     <div
       class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-auto">
-      <img class="h-10 md:h-12 xl:h-32" src="/assets/crest.svg" />
+      <img class="h-10 md:h-12 xl:h-24" src="/assets/crest.svg" />
       <div class="flex flex-col gap-1 xl:gap-2">
         <h1
           class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:max-w-64 xl:text-xl">

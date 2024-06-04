@@ -12,7 +12,9 @@ defineProps(["courseData"]);
     <!--PAGE CONTENT-->
     <div
       class="flex h-full flex-col justify-center gap-4 scroll-auto bg-oxfordblue p-4 md:absolute md:w-screen md:items-center md:gap-8">
-      <div class="space-y-4 p-2 md:flex md:max-w-screen-lg">
+      <div
+        class="space-y-4 p-2 md:flex md:max-w-screen-lg xl:h-full xl:items-center">
+        <img class="hidden h-96 md:block" src="/assets/crest.svg" alt="crest" />
         <div class="flex flex-col items-center justify-center gap-2 md:gap-6">
           <p class="text-md text-center text-aliceblue md:text-xl">
             Welcome to the
