@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@remixicon/vue": "^4.2.0",
+    "@vueuse/core": "^10.10.0",
     "dayjs": "^1.11.11",
     "eslint": "^9.0.0",
     "generate-index": "^4.1.1",

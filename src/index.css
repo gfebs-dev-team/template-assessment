@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-  @apply bg-oxfordblue;
+  @apply bg-oxfordblue relative;
+}
+
+#highlight {
+  @apply fixed w-[125px] h-[60px] bg-saffron bg-opacity-30 border-saffron border-2 pointer-events-none
 }

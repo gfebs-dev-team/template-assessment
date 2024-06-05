@@ -130,7 +130,7 @@ export const useQuestionsStore = defineStore("questions", () => {
     let data = obj;
     data.id = currIndex.value;
     if (obj.type == "performance") {
-      data.actions = new Array();
+      data.action = "";
     }
     if (questionsList.value[data.id] == null) {
       questionsList.value.push(data);
@@ -150,8 +150,7 @@ export const useQuestionsStore = defineStore("questions", () => {
     return (
       disclaimer.value == false &&
       (!getQuestion(currIndex.value) ||
-        getQuestion(currIndex.value).learnerResponse == undefined ||
-        getQuestion(currIndex.value).learnerResponse == "")
+        getQuestion(currIndex.value).learnerResponse == undefined)
     );
   }
 
@@ -180,15 +179,13 @@ export const useQuestionsStore = defineStore("questions", () => {
       action: a,
       value: v,
     };
-    questionsList.value[currIndex.value].actions.push(action);
+    questionsList.value[currIndex.value].action = action;
+    return true;
   }
 
   function saveLearnerActions() {
     let currSim = questionsList.value[currIndex.value];
-    let lr = "";
-    currSim.actions.forEach((a, i) => {
-      lr += `${i > 0 ? "[,]" : ""}[.]${a.action} ${a.value}`;
-    });
+    let lr = `[.]${currSim.action.action} ${currSim.action.value}`;
     questionsList.value[currIndex.value].learnerResponse = lr;
     currSim.responses.forEach((r) => {
       let res = r.replace(/{.*}/, "");

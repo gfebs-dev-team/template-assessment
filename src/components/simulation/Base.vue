@@ -1,5 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useMouseInElement } from "@vueuse/core";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import { useQuestionsStore } from "$store/questions";
 import {
@@ -9,16 +10,31 @@ import {
   RiAccountCircleFill,
   RiPushpinFill,
   RiCloseLine,
-  RiLoopLeftLine,
 } from "@remixicon/vue";
 
 const questions = useQuestionsStore();
-const { getQuestion } = questions;
+const { actionHandler, getQuestion } = questions;
 const props = defineProps(["questionData", "url", "title"]);
 const emits = defineEmits(["resetSim"]);
 let questionStart, questionEnd;
+const target = ref(null);
+const { x, y, isOutside } = useMouseInElement(target);
 
 onMounted(() => {
+  if (getQuestion(props.questionData.id).lastMouse) {
+    let lastMouse = getQuestion(props.questionData.id).lastMouse;
+    let elem = document.createElement("div");
+    elem.innerHTML = " ";
+    elem.setAttribute("id", "highlight");
+    let style = `top: ${lastMouse.y - 30}px; left: ${lastMouse.x - 62}px;`;
+    elem.setAttribute("style", style);
+
+    if (document.getElementById("highlight")) {
+      document.getElementById("highlight").outerHTML = elem.outerHTML;
+    } else {
+      document.body.appendChild(elem);
+    }
+  }
   const { id, type } = props.questionData;
   const responses = props.questionData.responses;
   questionStart = new Date();
@@ -40,6 +56,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   questionEnd = new Date();
+  if (document.getElementById("highlight"))
+    document.getElementById("highlight").remove();
   const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
   const latency = "PT" + lT + "S";
 
@@ -49,9 +67,26 @@ onBeforeUnmount(() => {
   );
 });
 
-const responseHistory = ref(false);
-function toggleResponseHistory() {
-  responseHistory.value = !responseHistory.value;
+function clicked(a) {
+  console.log("clicked");
+
+  let elem = document.createElement("div");
+  elem.innerHTML = " ";
+  elem.setAttribute("id", "highlight");
+  let style = `top: ${y.value - 30}px; left: ${x.value - 62}px;`;
+  elem.setAttribute("style", style);
+
+  if (document.getElementById("highlight")) {
+    document.getElementById("highlight").outerHTML = elem.outerHTML;
+  } else {
+    document.body.appendChild(elem);
+  }
+
+  if (!isOutside.value) {
+    getQuestion(props.questionData.id).lastMouse = { x: x.value, y: y.value };
+  }
+  console.log(getQuestion(props.questionData.id).lastMouse);
+  return `[${x.value}, ${y.value}]`;
 }
 </script>
 
@@ -60,6 +95,7 @@ function toggleResponseHistory() {
     class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Scenario {{ questionData.scenario }}: Question {{ questionData.id + 1 }}
+      {{ isOutside }}
     </h3>
     <div class="flex items-center gap-4">
       <h2 class="text-lg font-bold text-aliceblue xl:text-xl">
@@ -81,7 +117,11 @@ function toggleResponseHistory() {
       </div> -->
     </div>
     <!-- Mock Web Browswer -->
-    <div class="flex h-full w-full flex-col overflow-auto bg-[#DFE1E5]">
+    <div
+      class="flex h-full w-full flex-col overflow-auto bg-[#DFE1E5]"
+      ref="target"
+      @click="clicked()"
+      @click.self="actionHandler('clicked', clicked())">
       <div class="flex h-10 w-full flex-col p-4">
         <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
           <div class="min-w-48 rounded-t-md bg-[#fff] p-1">
@@ -90,23 +130,6 @@ function toggleResponseHistory() {
               <RiPushpinFill class="size-3" />
               <div class="h-fit w-full text-xs">{{ title }}</div>
               <RiCloseLine class="size-3 justify-self-end" color="#5F6367" />
-            </div>
-          </div>
-          <div
-            class="absolute -right-2 -top-3 flex h-full gap-2 rounded-t-md p-1">
-            <button
-              class="h-fit w-full rounded-sm border border-spacecadet border-opacity-30 p-1 text-center text-xs font-bold text-spacecadet active:translate-y-[.1rem]"
-              @click="toggleResponseHistory">
-              <p>Review Response</p>
-            </button>
-            <div>
-              <div class="group relative w-max">
-                <button @click="$emit('resetSim')"><RiLoopLeftLine /></button>
-                <span
-                  class="z-100 before: pointer-events-none absolute right-0 top-9 flex w-max rounded-md bg-masblue p-1 px-2 text-xs text-aliceblue opacity-0 transition-opacity group-hover:opacity-100">
-                  Click here to reset actions
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -129,37 +152,6 @@ function toggleResponseHistory() {
       </div>
       <div class="relative h-full w-full overflow-auto">
         <slot></slot>
-        <div
-          :data-toggle="responseHistory"
-          @click.self="toggleResponseHistory"
-          class="absolute left-0 top-0 hidden h-full w-full items-center justify-center bg-[#000] bg-opacity-20 backdrop-blur-sm data-[toggle=true]:flex">
-          <div
-            class="flex h-1/2 w-1/2 flex-col rounded-md bg-spacecadet px-4 py-2">
-            <table
-              class="text-surface w-full table-fixed border-collapse text-left text-sm font-light text-aliceblue">
-              <thead class="border-b border-lavendar border-opacity-40">
-                <th scope="col" class="px-6 py-4">#</th>
-                <th scope="col" class="px-6 py-4">Action</th>
-                <th scope="col" class="px-6 py-4">Value</th>
-              </thead>
-              <tbody>
-                <tr
-                  class="border-b border-lavendar border-opacity-40"
-                  v-for="(action, index) in getQuestion(questionData.id)
-                    ? getQuestion(questionData.id).actions
-                    : ['']">
-                  <td class="whitespace-nowrap px-6 py-4">{{ index + 1 }}</td>
-                  <td class="whitespace-nowrap px-6 py-4">
-                    {{ action.action }}
-                  </td>
-                  <td class="whitespace-nowrap px-6 py-4">
-                    {{ action.value }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </section>
