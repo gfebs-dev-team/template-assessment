@@ -12,7 +12,7 @@ import { storeToRefs } from "pinia";
 const questions = useQuestionsStore();
 const { sidebarState, disclaimer, current, currIndex, viewed } =
   storeToRefs(questions);
-const { toggleSidebar, resetSim } = questions;
+const { toggleSidebar } = questions;
 
 defineProps(["courseData"]);
 defineEmits(["exit", "submit"]);
@@ -41,7 +41,7 @@ watchEffect(() => {
         leave-active-class="transition-opacity duration-500 ease-in-out"
         enter-from-class="absolute opacity-0"
         leave-to-class="absolute opacity-0">
-        <component :is="current" @resetSim="resetSim" />
+        <component :is="current" />
       </Transition>
       <AssessmentDisclaimer v-if="disclaimer" />
     </section>

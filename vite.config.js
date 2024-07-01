@@ -4,7 +4,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'./',
+  base: "./",
   plugins: [
     vue(),
     ViteAliases({
@@ -15,9 +15,6 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @use 'sass:color';
-        @use "sass:math";
-        @import "$assets/sass/base.scss";
         `,
       },
     },
