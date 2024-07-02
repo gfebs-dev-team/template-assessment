@@ -11,12 +11,4 @@ export default defineConfig({
       prefix: "$",
     }),
   ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-        `,
-      },
-    },
-  },
 });
