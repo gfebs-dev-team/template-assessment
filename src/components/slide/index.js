@@ -1,15 +1,15 @@
 //@index('./*.vue', f=> `import ${f.name} from "${f.path}.vue";`)
 import Base from "./Base.vue";
-import Web from "./Web.vue";
+import Content from "./Content.vue";
 //@endindex
 export {
   //@index('./*.vue', f=> `${f.name},`)
   Base,
-  Web,
+  Content,
   //@endindex
-  //@index('./*.vue', f=> `${f.name} as Simulation${f.name},`)
-  Base as Simulation,
-  Web as SimulationWeb,
+  //@index('./*.vue', f=> `${f.name} as Slide${f.name},`)
+  Base as Slide,
+  Content as SlideContent,
   //@endindex
 };
 

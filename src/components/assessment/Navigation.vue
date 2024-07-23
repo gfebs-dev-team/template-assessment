@@ -5,7 +5,7 @@ import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
-const { currIndex } = storeToRefs(questions);
+const { currIndex, next, prev } = storeToRefs(questions);
 const { goNext, goPrev, inSimulation } = questions;
 
 defineProps(["courseData"]);
@@ -19,7 +19,7 @@ defineProps(["courseData"]);
       <AppButton
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goPrev()"
-        :disabled="currIndex == 0">
+        :disabled="!prev">
         Back
       </AppButton>
       <span class="text-sm font-bold"
@@ -28,7 +28,7 @@ defineProps(["courseData"]);
       <AppButton
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goNext()"
-        :disabled="currIndex == questions.total - 1">
+        :disabled="!next">
         Next
       </AppButton>
     </div>

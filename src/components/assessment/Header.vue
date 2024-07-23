@@ -22,7 +22,7 @@ function quit() {
   SCORM.quit();
 }
 
-const { currIndex } = storeToRefs(questions);
+const { next, prev, currInSimulation } = storeToRefs(questions);
 const { goNext, goPrev } = questions;
 </script>
 
@@ -30,24 +30,26 @@ const { goNext, goPrev } = questions;
   <div
     class="z-10 box-content flex w-full flex-col items-center justify-end bg-spacecadet xl:gap-4">
     <div
-      class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-auto">
-      <img class="h-10 md:h-12 xl:h-24" src="/assets/crest.svg" />
-      <div class="flex flex-col gap-1 xl:gap-2">
+      class="grid h-full w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 sm:h-20 xl:h-auto">
+      <img
+        class="h-8 min-w-max md:h-12 xl:h-16"
+        src="/assets/gfebs_white.png" />
+      <div class="flex flex-col gap-1">
         <h1
           class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:max-w-64 xl:text-xl">
-          Financial Management School
+          GFEBS {{ courseData.courseCode }}
+          {{ courseData.courseTitle }}
         </h1>
         <h2
-          class="hidden text-balance text-sm font-bold uppercase text-saffron xl:inline xl:text-base">
-          GFEBS {{ courseData.courseCode }}:
-          {{ courseData.courseTitle }}
+          class="text-balance text-sm font-bold uppercase text-saffron xl:inline xl:text-base">
+          {{ courseData.topic }}
         </h2>
       </div>
       <div class="flex flex-col gap-4 justify-self-end xl:w-2/3">
         <Progress class="hidden xl:block" />
-        <div class="flex w-full flex-row justify-end gap-4">
+        <div class="flex w-full flex-col justify-end gap-4 sm:flex-row">
           <AppButton
-            class="hidden max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:flex xl:w-full xl:max-w-none xl:text-base"
+            class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:flex xl:w-full xl:max-w-none xl:text-base"
             @click="$emit('submit')"
             v-if="questions.currIndex == questions.total - 1">
             <RiCloseLine class="size-6 fill-aliceblue" /> SUBMIT
@@ -61,33 +63,26 @@ const { goNext, goPrev } = questions;
       </div>
     </div>
     <div
-      class="grid h-16 w-full grid-cols-[1.5rem_1fr_auto] items-center gap-4 border-t border-masblue p-4 shadow-md transition md:h-12 md:py-1 xl:h-16 xl:rounded-t-lg xl:border-t-0 xl:bg-masblue">
+      class="grid h-16 w-full items-center gap-4 border-t border-masblue p-4 shadow-md transition md:h-12 md:py-1 xl:h-16 xl:rounded-t-lg xl:border-t-0 xl:bg-masblue"
+      :class="currInSimulation ? '' : 'grid-cols-[1.5rem_1fr_auto]'"
+      :data-sim="currInSimulation">
       <RiMenuLine
+        v-if="!currInSimulation"
         @click="$emit('toggleSidebar')"
         class="size-6 fill-coolgrey p-1 hover:cursor-pointer xl:size-8"></RiMenuLine>
-      <h2
-        class="text-balance text-xs font-bold uppercase text-coolgrey md:text-sm xl:hidden">
-        GFEBS {{ courseData.courseCode }}:
-        {{ courseData.courseTitle }}
-      </h2>
-      <AppButton
-        @click="$emit('submit')"
-        v-if="questions.currIndex == questions.total - 1"
-        class="max-w-min justify-self-end border-2 border-saffron p-1 px-2 text-xs text-saffron md:px-4 md:py-1 md:text-xs xl:hidden xl:text-base"
-        >Submit</AppButton
-      >
+
       <div
         class="hidden h-12 items-center justify-end gap-4 text-xs text-aliceblue xl:flex">
         <AppButton
           class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goPrev()"
-          :disabled="currIndex == 0">
+          :disabled="!prev">
           Back
         </AppButton>
         <AppButton
           class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goNext()"
-          :disabled="currIndex == questions.total - 1">
+          :disabled="!next">
           Next
         </AppButton>
       </div>

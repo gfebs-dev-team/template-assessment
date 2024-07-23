@@ -1,8 +1,11 @@
 <script setup>
 import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
+import { useQuestionsStore } from "$store/questions";
 
-const props = defineProps(["questionData"]);
+const questions = useQuestionsStore();
+const { getQuestion } = questions;
+const props = defineProps(["questionData", "answer"]);
 let questionStart, questionEnd;
 
 onMounted(() => {
@@ -26,6 +29,35 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   questionEnd = new Date();
+  const answer = props.answer;
+  const { id } = props.questionData;
+  let learnersResponse = "";
+
+  //console.log(answer);
+  if (answer.length > 0) {
+    console.log(answer);
+    getQuestion(id).learnerResponse = answer;
+    answer.forEach((r, i) => {
+      if (i !== 0) {
+        learnersResponse += "[,]";
+      }
+      learnersResponse += r;
+    });
+
+    SCORM.set(
+      "cmi.interactions." + (id + 1) + ".learner_response",
+      learnersResponse,
+    );
+  }
+
+  if (learnersResponse == getQuestion(id).correctResponse) {
+    getQuestion(id).correct = true;
+    SCORM.set("cmi.interactions." + (id + 1) + ".result", "correct");
+  } else {
+    getQuestion(id).correct = false;
+    SCORM.set("cmi.interactions." + (id + 1) + ".result", "incorrect");
+  }
+
   const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
 
   const latency = "PT" + lT + "S";
@@ -38,7 +70,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
+  <section
+    class="absolute flex h-full flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Question {{ questionData.id + 1 }}
     </h3>

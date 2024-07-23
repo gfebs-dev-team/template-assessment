@@ -12,16 +12,20 @@ import {
   RiCloseLine,
 } from "@remixicon/vue";
 
+const props = defineProps(["questionData", "url", "title", "className"]);
+
 const questions = useQuestionsStore();
 const { actionHandler, getQuestion } = questions;
-const props = defineProps(["questionData", "url", "title"]);
 const emits = defineEmits(["resetSim"]);
 let questionStart, questionEnd;
 const target = ref(null);
 const { x, y, isOutside } = useMouseInElement(target);
 
 onMounted(() => {
-  if (getQuestion(props.questionData.id).lastMouse) {
+  if (
+    getQuestion(props.questionData.id) &&
+    getQuestion(props.questionData.id).lastMouse
+  ) {
     let lastMouse = getQuestion(props.questionData.id).lastMouse;
     let elem = document.createElement("div");
     elem.innerHTML = " ";
@@ -68,7 +72,7 @@ onBeforeUnmount(() => {
 });
 
 function clicked(a) {
-  console.log("clicked");
+  //console.log("clicked");
 
   let elem = document.createElement("div");
   elem.innerHTML = " ";
@@ -85,7 +89,6 @@ function clicked(a) {
   if (!isOutside.value) {
     getQuestion(props.questionData.id).lastMouse = { x: x.value, y: y.value };
   }
-  console.log(getQuestion(props.questionData.id).lastMouse);
   return `[${x.value}, ${y.value}]`;
 }
 </script>
@@ -94,11 +97,10 @@ function clicked(a) {
   <section
     class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
-      Scenario {{ questionData.scenario }}: Question {{ questionData.id + 1 }}
-      {{ isOutside }}
+      Scenario {{ questionData.scenario }}: Question {{ questionData.question }}
     </h3>
     <div class="flex items-center gap-4">
-      <h2 class="text-lg font-bold text-aliceblue xl:text-xl">
+      <h2 class="text-lg text-aliceblue">
         {{ questionData.query }} Click
         <span
           class="text-md rounded-sm bg-saffron p-1 font-bold text-oxfordblue"
@@ -106,15 +108,6 @@ function clicked(a) {
         >
         to submit.
       </h2>
-      <!-- <div class="group relative flex items-center gap-2">
-        <RiLoopLeftLine
-          class="size-8 rounded-md bg-saffron fill-oxfordblue p-1"
-          @click="$emit('resetSim')" />
-        <span
-          class="pointer-events-none font-bold text-saffron opacity-0 transition-opacity group-hover:opacity-100">
-          Reset Answer</span
-        >
-      </div> -->
     </div>
     <!-- Mock Web Browswer -->
     <div
@@ -122,13 +115,13 @@ function clicked(a) {
       ref="target"
       @click="clicked()"
       @click.self="actionHandler('clicked', clicked())">
-      <div class="flex h-10 w-full flex-col p-4">
+      <div class="flex h-8 w-full flex-col p-2">
         <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
           <div class="min-w-48 rounded-t-md bg-[#fff] p-1">
             <div
               class="grid h-full min-w-48 grid-cols-[auto_1fr_auto] items-center gap-2">
               <RiPushpinFill class="size-3" />
-              <div class="h-fit w-full text-xs">{{ title }}</div>
+              <div class="h-fit w-full text-[.7rem]">{{ title }}</div>
               <RiCloseLine class="size-3 justify-self-end" color="#5F6367" />
             </div>
           </div>
@@ -136,21 +129,21 @@ function clicked(a) {
       </div>
       <div
         class="flex h-fit items-center gap-2 border-b-2 border-[#adadad65] bg-[#fff] p-2">
-        <RiArrowLeftLine color="#5F6367" class="size-4" />
-        <RiArrowRightLine color="#5F6367" class="size-4" />
-        <RiRestartLine color="#5F6367" class="size-4" />
+        <RiArrowLeftLine color="#5F6367" class="size-3" />
+        <RiArrowRightLine color="#5F6367" class="size-3" />
+        <RiRestartLine color="#5F6367" class="size-3" />
         <div
-          class="flex h-full w-full items-center rounded-full bg-[#F0F3F4] px-2 text-xs">
+          class="flex h-full w-full items-center rounded-full bg-[#F0F3F4] px-2 text-[.65rem]">
           {{ url }}
         </div>
-        <RiAccountCircleFill color="#5F6367" class="size-4" />
-        <div class="flex flex-col gap-[.1rem]">
+        <RiAccountCircleFill color="#5F6367" class="size-3" />
+        <div class="flex flex-col gap-[.05rem]">
           <div class="size-[.2rem] rounded-full bg-[#5F6367]"></div>
           <div class="size-[.2rem] rounded-full bg-[#5F6367]"></div>
           <div class="size-[.2rem] rounded-full bg-[#5F6367]"></div>
         </div>
       </div>
-      <div class="relative h-full w-full overflow-auto">
+      <div class="relative h-full w-full overflow-auto" :class="className">
         <slot></slot>
       </div>
     </div>
