@@ -72,15 +72,15 @@ const { goNext, goPrev } = questions;
         class="size-6 fill-coolgrey p-1 hover:cursor-pointer xl:size-8"></RiMenuLine>
 
       <div
-        class="hidden h-12 items-center justify-end gap-4 text-xs text-aliceblue xl:flex">
+        class="hidden items-center justify-end gap-4 text-xs text-aliceblue xl:flex">
         <AppButton
-          class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
+          class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goPrev()"
           :disabled="!prev">
           Back
         </AppButton>
         <AppButton
-          class="h-fit max-w-fit border-2 border-aliceblue p-2 px-4 disabled:border-coolgrey disabled:text-coolgrey"
+          class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goNext()"
           :disabled="!next">
           Next

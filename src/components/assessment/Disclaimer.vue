@@ -4,6 +4,12 @@ import { RiCloseLine } from "@remixicon/vue";
 
 const show = ref(true);
 </script>
+<script setup>
+import { ref } from "vue";
+import { RiCloseLine } from "@remixicon/vue";
+
+const show = ref(true);
+</script>
 <template>
   <div
     v-if="show"

@@ -20,14 +20,20 @@
       "$__test__/*": [
         "src/__test__/*"
       ],
-      "$Sections/*": [
-        "src/views/Sections/*"
+      "$assessment/*": [
+        "src/components/assessment/*"
       ],
-      "$sections/*": [
-        "src/views/sections/*"
+      "$question/*": [
+        "src/components/question/*"
       ],
-      "$questions/*": [
-        "src/views/sections/questions/*"
+      "$simulation/*": [
+        "src/components/simulation/*"
+      ],
+      "$slide/*": [
+        "src/components/slide/*"
+      ],
+      "$matching/*": [
+        "src/components/question/matching/*"
       ]
     }
   }

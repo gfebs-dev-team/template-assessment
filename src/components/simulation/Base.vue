@@ -8,8 +8,9 @@ import {
   RiArrowRightLine,
   RiRestartLine,
   RiAccountCircleFill,
-  RiPushpinFill,
+  RiQuestionFill,
   RiCloseLine,
+  RiMapPin2Fill,
 } from "@remixicon/vue";
 
 const props = defineProps(["questionData", "url", "title", "className"]);
@@ -27,17 +28,9 @@ onMounted(() => {
     getQuestion(props.questionData.id).lastMouse
   ) {
     let lastMouse = getQuestion(props.questionData.id).lastMouse;
-    let elem = document.createElement("div");
-    elem.innerHTML = " ";
-    elem.setAttribute("id", "highlight");
-    let style = `top: ${lastMouse.y - 30}px; left: ${lastMouse.x - 62}px;`;
+    let elem = document.getElementById("highlight");
+    let style = `top: ${lastMouse.y - 25}px; left: ${lastMouse.x - 10}px;`;
     elem.setAttribute("style", style);
-
-    if (document.getElementById("highlight")) {
-      document.getElementById("highlight").outerHTML = elem.outerHTML;
-    } else {
-      document.body.appendChild(elem);
-    }
   }
   const { id, type } = props.questionData;
   const responses = props.questionData.responses;
@@ -60,8 +53,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   questionEnd = new Date();
-  if (document.getElementById("highlight"))
-    document.getElementById("highlight").remove();
   const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
   const latency = "PT" + lT + "S";
 
@@ -79,12 +70,6 @@ function clicked(a) {
   elem.setAttribute("id", "highlight");
   let style = `top: ${y.value - 30}px; left: ${x.value - 62}px;`;
   elem.setAttribute("style", style);
-
-  if (document.getElementById("highlight")) {
-    document.getElementById("highlight").outerHTML = elem.outerHTML;
-  } else {
-    document.body.appendChild(elem);
-  }
 
   if (!isOutside.value) {
     getQuestion(props.questionData.id).lastMouse = { x: x.value, y: y.value };
@@ -117,7 +102,7 @@ function clicked(a) {
       @click.self="actionHandler('clicked', clicked())">
       <div class="flex h-8 w-full flex-col p-2">
         <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
-          <div class="min-w-48 rounded-t-md bg-[#fff] p-1">
+          <div class="min-w-48 rounded-t-md bg-[#fff] p-1 px-2">
             <div
               class="grid h-full min-w-48 grid-cols-[auto_1fr_auto] items-center gap-2">
               <RiPushpinFill class="size-3" />
