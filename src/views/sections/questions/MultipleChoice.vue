@@ -4,12 +4,14 @@ import { onBeforeMount } from "vue";
 import { useQuestionsStore } from "$store/questions";
 
 let questionData = {
-  type: "true-false",
+  type: "choice",
   query:
-    "The United States Treasury is one of the key financial organizations interacting with GFEBS by serving as the central bank for all government agencies.",
+    "This is a multiple choice question. It uses the QuestionChoice component",
   responses: [
-    { content: "True", value: "true", correct: true },
-    { content: "False", value: "false" },
+    { content: "a. One", value: "a" },
+    { content: "b. Two", value: "b" },
+    { content: "c. Three", value: "c" },
+    { content: "d. Correct", value: "d", correct: true },
   ],
 };
 

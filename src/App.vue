@@ -2,18 +2,21 @@
 import LandingPage from "$views/LandingPage.vue";
 import AssessmentPage from "$views/AssessmentPage.vue";
 import ResultsPage from "./views/ResultsPage.vue";
-import { SCORM } from "pipwerks-scorm-api-wrapper";
+import { SCORM, debug } from "pipwerks-scorm-api-wrapper";
 import { onMounted, shallowRef } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
 
-const curr = shallowRef(LandingPage);
 const courseData = {
-  courseCode: "L210E",
-  courseTitle: "Financial Process Overview",
-  topic: "pre-assessment",
+  courseCode: "",
+  courseTitle: "Assesment Template",
+  topic: "demo",
 };
 
+// SET THIS TO TRUE TO SKIP THE LANDING PAGE
+const dev = true;
+
+const curr = shallowRef(dev ? AssessmentPage : LandingPage);
 const questions = useQuestionsStore();
 const { disclaimer } = storeToRefs(questions);
 const { needsDisclaimer, setSession, getSession } = questions;
@@ -33,6 +36,9 @@ function submitTest() {
 }
 
 onMounted(() => {
+  //Set this to true or comment it out to get SCORM debug logs in the console.
+  debug.isActive = false;
+
   SCORM.init();
   setSession("start");
   questions.shuffleQuestions();

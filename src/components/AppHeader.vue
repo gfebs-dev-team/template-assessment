@@ -16,7 +16,7 @@ const emit = defineEmits(["exit"]);
         src="/assets/gfebs_white.png" />
       <div class="flex flex-col gap-1">
         <h1
-          class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:max-w-64 xl:text-xl">
+          class="text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:text-xl">
           GFEBS {{ courseData.courseCode }}
           {{ courseData.courseTitle }}
         </h1>

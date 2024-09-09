@@ -16,7 +16,7 @@ import {
 const props = defineProps(["questionData", "url", "title", "className"]);
 
 const questions = useQuestionsStore();
-const { actionHandler, getQuestion } = questions;
+const { getQuestion } = questions;
 const emits = defineEmits(["resetSim"]);
 let questionStart, questionEnd;
 const target = ref(null);
@@ -62,30 +62,35 @@ onBeforeUnmount(() => {
   );
 });
 
-function clicked(a) {
-  //console.log("clicked");
-
-  let elem = document.createElement("div");
-  elem.innerHTML = " ";
-  elem.setAttribute("id", "highlight");
-  let style = `top: ${y.value - 30}px; left: ${x.value - 62}px;`;
+function clicked() {
+  let elem = document.getElementById("highlight");
+  let style = `top: ${y.value - 25}px; left: ${x.value - 10}px;`;
   elem.setAttribute("style", style);
 
   if (!isOutside.value) {
     getQuestion(props.questionData.id).lastMouse = { x: x.value, y: y.value };
   }
-  return `[${x.value}, ${y.value}]`;
+  const coord = `[${x.value}, ${y.value}]`;
+
+  if (!getQuestion(props.questionData.id).action) {
+    questions.actionHandler("clicked", coord);
+  } else if (
+    getQuestion(props.questionData.id).action.value.startsWith("[") &&
+    getQuestion(props.questionData.id).action.value.endsWith("]")
+  ) {
+    questions.actionHandler("clicked", coord);
+  }
 }
 </script>
 
 <template>
   <section
     class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:px-12 xl:py-8">
-    <h3 class="text-base font-bold text-saffron xl:text-lg">
+    <h3 class="text-base font-bold text-saffron">
       Scenario {{ questionData.scenario }}: Question {{ questionData.question }}
     </h3>
     <div class="flex items-center gap-4">
-      <h2 class="text-lg text-aliceblue">
+      <h2 class="text-base text-aliceblue">
         {{ questionData.query }} Click
         <span
           class="text-md rounded-sm bg-saffron p-1 font-bold text-oxfordblue"
@@ -98,14 +103,22 @@ function clicked(a) {
     <div
       class="flex h-full w-full flex-col overflow-auto bg-[#DFE1E5]"
       ref="target"
-      @click="clicked()"
-      @click.self="actionHandler('clicked', clicked())">
+      @click="clicked()">
+      <Teleport to="#app">
+        <RiMapPin2Fill
+          id="highlight"
+          v-show="
+            getQuestion(props.questionData.id) &&
+            getQuestion(props.questionData.id).lastMouse
+          "
+          class="stroke-charcoal pointer-events-none fixed z-50 fill-saffron stroke-2" />
+      </Teleport>
       <div class="flex h-8 w-full flex-col p-2">
         <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
           <div class="min-w-48 rounded-t-md bg-[#fff] p-1 px-2">
             <div
               class="grid h-full min-w-48 grid-cols-[auto_1fr_auto] items-center gap-2">
-              <RiPushpinFill class="size-3" />
+              <RiQuestionFill class="size-3" />
               <div class="h-fit w-full text-[.7rem]">{{ title }}</div>
               <RiCloseLine class="size-3 justify-self-end" color="#5F6367" />
             </div>

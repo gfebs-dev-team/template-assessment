@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, markRaw, reactive, shallowRef } from "vue";
+import { ref, markRaw, reactive, shallowRef, computed } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import questions from "$/views/sections/questions";
 import simulations from "$views/sections/simulations";
@@ -25,25 +25,91 @@ export const useQuestionsStore = defineStore("questions", () => {
   const current = shallowRef(simsComp.value[0]);
   const questionsList = ref(new Array());
   const total = questionsComp.value.length + simsComp.value.length;
+  const qtotal =
+    questionsComp.value.length +
+    simsComp.value.filter((s) => s.__name.startsWith("Q")).length;
   const sidebarState = ref(false);
-  const next = ref(true);
-  const prev = ref(false);
+  const next = computed(() => currIndex.value < total - 1);
+  const prev = computed(
+    () => currIndex.value > 0 && !inSimulation(currIndex.value - 1),
+  );
   const disclaimer = ref(false);
+  const currInSimulation = computed(() => {
+    return inSimulation(currIndex.value);
+  });
   const sessionTime = reactive({
     start: 0,
     end: 0,
   });
 
+  function addQuestion(obj) {
+    let data = obj;
+    data.id = currIndex.value;
+    if (obj.type == "choice") {
+      data.correctResponse = getChoiceCorrect(data.responses);
+    }
+
+    if (obj.type == "performance") {
+      data.action = { action: "", value: "" };
+    }
+
+    if (obj.type == "matching") {
+      let correctResp = "";
+      data.pairs.forEach((p, index) => {
+        if (index != 0) {
+          correctResp += "[,]";
+        }
+        correctResp += p.a + "[.]" + p.b;
+      });
+
+      data.correctResponse = correctResp;
+    }
+
+    if (obj.type == "sequencing") {
+      let correctResp = "";
+      data.sequence.forEach((p, index) => {
+        if (index != 0) {
+          correctResp += "[,]";
+        }
+        correctResp += p;
+      });
+
+      data.correctResponse = correctResp;
+    }
+
+    if (questionsList.value[data.id] == null) {
+      questionsList.value.push(data);
+    }
+    return data;
+  }
+
+  function getQuestion(index) {
+    return questionsList.value[index];
+  }
+
   function goNext() {
     const simL = simsComp.value.length;
     const questL = questionsComp.value.length;
+    const q = getQuestion(currIndex.value);
 
-    if (currIndex.value < simL) {
-      saveLearnerActions();
+    if (
+      currIndex.value < simL - 1 &&
+      !simsComp.value[currIndex.value].__name.startsWith("Q")
+    ) {
+      currIndex.value++;
+      current.value = simsComp.value[currIndex.value];
+      return;
+    }
+
+    if (q.type == "performance") {
+      if (q.action) {
+        saveLearnerActions();
+      } else {
+        q.learnerResponse = "";
+      }
     }
 
     if (currIndex.value + 1 < simL) {
-      console.log("Simualtion");
       if (needsDisclaimer()) {
         disclaimer.value = true;
       } else {
@@ -52,7 +118,6 @@ export const useQuestionsStore = defineStore("questions", () => {
         current.value = simsComp.value[currIndex.value];
       }
     } else if (currIndex.value - simL < questL) {
-      console.log("Question");
       if (needsDisclaimer()) {
         disclaimer.value = true;
       } else {
@@ -68,16 +133,10 @@ export const useQuestionsStore = defineStore("questions", () => {
     const questL = questionsComp.value.length;
     disclaimer.value = false;
 
-    if (currIndex.value < simL) {
-      saveLearnerActions();
-    }
-
     if (currIndex.value - 1 < simL) {
-      console.log("Simualtion");
       currIndex.value--;
       current.value = simsComp.value[currIndex.value];
     } else if (currIndex.value - simL < questL) {
-      console.log("Question");
       disclaimer.value = false;
       currIndex.value--;
       current.value = questionsComp.value[currIndex.value - simL];
@@ -92,7 +151,7 @@ export const useQuestionsStore = defineStore("questions", () => {
       return;
     }
 
-    if (currIndex.value < simL) {
+    if (currIndex.value < simL && simsComp[currIndex].__name.startsWith("Q")) {
       saveLearnerActions();
     }
     if (i < simL) {
@@ -105,41 +164,15 @@ export const useQuestionsStore = defineStore("questions", () => {
     toggleSidebar();
   }
 
-  function disableNext() {
-    next.value = false;
-  }
-
-  function enableNext() {
-    next.value = true;
-  }
-
-  function disablePrev() {
-    prev.value = false;
-  }
-
-  function enablePrev() {
-    prev.value = true;
-  }
-
   function inSimulation(n) {
-    if (questionsList.value[n] != undefined)
-      return questionsList.value[n].type == "performance";
-  }
-
-  function addQuestion(obj) {
-    let data = obj;
-    data.id = currIndex.value;
-    if (obj.type == "performance") {
-      data.action = "";
+    if (questionsList.value[n] != undefined) {
+      // console.log(questionsList.value[n].type);
+      console.log(`${n}: ${getQuestion(n).type}`);
+      return (
+        questionsList.value[n].type == "performance" ||
+        questionsList.value[n].type == "content"
+      );
     }
-    if (questionsList.value[data.id] == null) {
-      questionsList.value.push(data);
-    }
-    return data;
-  }
-
-  function getQuestion(index) {
-    return questionsList.value[index];
   }
 
   function toggleSidebar() {
@@ -147,11 +180,15 @@ export const useQuestionsStore = defineStore("questions", () => {
   }
 
   function needsDisclaimer() {
-    return (
-      disclaimer.value == false &&
-      (!getQuestion(currIndex.value) ||
-        getQuestion(currIndex.value).learnerResponse == undefined)
-    );
+    if (getQuestion(currIndex.value).type == "content") {
+      return false;
+    } else {
+      return (
+        disclaimer.value == false &&
+        (!getQuestion(currIndex.value) ||
+          getQuestion(currIndex.value).learnerResponse == undefined)
+      );
+    }
   }
 
   function getTitle() {
@@ -174,17 +211,35 @@ export const useQuestionsStore = defineStore("questions", () => {
     }
   }
 
+  function getChoiceCorrect(responses) {
+    let correct = "";
+    responses.forEach((r) => {
+      if (r.correct) {
+        if (correct !== "") {
+          correct += "[,]";
+        }
+        correct += r.value;
+      }
+    });
+
+    return correct;
+  }
+
   function actionHandler(a, v) {
     const action = {
       action: a,
       value: v,
     };
     questionsList.value[currIndex.value].action = action;
+    console.log(a + " " + v);
     return true;
   }
 
   function saveLearnerActions() {
     let currSim = questionsList.value[currIndex.value];
+    if (currSim.action == undefined) {
+      currSim.action = { action: "null", value: "null" };
+    }
     let lr = `[.]${currSim.action.action} ${currSim.action.value}`;
     questionsList.value[currIndex.value].learnerResponse = lr;
     currSim.responses.forEach((r) => {
@@ -221,16 +276,19 @@ export const useQuestionsStore = defineStore("questions", () => {
     simsComp,
     questionsList,
     disclaimer,
+    currInSimulation,
     next,
     prev,
     sidebarState,
     sessionTime,
     current,
     viewed,
+    qtotal,
     resetSim,
     goToQuestion,
     shuffleQuestions,
     getQuestion,
+    getChoiceCorrect,
     inSimulation,
     actionHandler,
     saveLearnerActions,
@@ -240,10 +298,6 @@ export const useQuestionsStore = defineStore("questions", () => {
     getTitle,
     toggleSidebar,
     addQuestion,
-    disableNext,
-    disablePrev,
-    enableNext,
-    enablePrev,
     goNext,
     goPrev,
   };

@@ -31,9 +31,9 @@ watchEffect(() => {
       :course-data
       @toggleSidebar="toggleSidebar()"
       @submit="$emit('submit')"
-      class="xl:max-w-[1200px]" />
+      class="xl:max-w-screen-lg" />
     <section
-      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-[1200px]">
+      class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-screen-lg">
       <AssessmentSidebar :sidebarState />
       <Transition
         name="fade"

@@ -32,11 +32,11 @@ const { goNext, goPrev } = questions;
     <div
       class="grid h-full w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 sm:h-20 xl:h-auto">
       <img
-        class="h-8 min-w-max md:h-12 xl:h-16"
+        class="h-8 object-contain md:h-12 xl:h-16"
         src="/assets/gfebs_white.png" />
       <div class="flex flex-col gap-1">
         <h1
-          class="max-w-56 text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:max-w-64 xl:text-xl">
+          class="text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:text-xl">
           GFEBS {{ courseData.courseCode }}
           {{ courseData.courseTitle }}
         </h1>
@@ -63,9 +63,10 @@ const { goNext, goPrev } = questions;
       </div>
     </div>
     <div
-      class="grid h-16 w-full items-center gap-4 border-t border-masblue p-4 shadow-md transition md:h-12 md:py-1 xl:h-16 xl:rounded-t-lg xl:border-t-0 xl:bg-masblue"
-      :class="currInSimulation ? '' : 'grid-cols-[1.5rem_1fr_auto]'"
-      :data-sim="currInSimulation">
+      class="grid h-16 w-full items-center gap-4 border-t border-masblue p-4 shadow-md transition md:h-max xl:rounded-t-lg xl:border-t-0 xl:bg-masblue"
+      :class="
+        currInSimulation ? 'hidden xl:grid' : 'grid-cols-[1.5rem_1fr_auto]'
+      ">
       <RiMenuLine
         v-if="!currInSimulation"
         @click="$emit('toggleSidebar')"

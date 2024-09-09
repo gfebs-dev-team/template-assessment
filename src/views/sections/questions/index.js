@@ -1,13 +1,15 @@
 //@index('./*.vue', f=> `import ${f.name} from '${f.path}.vue';`)
-import Q1Choice from "./Q1Choice.vue";
-import Q2Choice from "./Q2Choice.vue";
-import Q3Choice from "./Q3Choice.vue";
+import MatchingDropdown from "./MatchingDropdown.vue";
+import MultipleCheck from "./MultipleCheck.vue";
+import MultipleChoice from "./MultipleChoice.vue";
+import TrueFalse from "./TrueFalse.vue";
 //@endindex
 export default {
   //@index('./*.vue', f=> `${f.name},`)
-  Q1Choice,
-  Q2Choice,
-  Q3Choice,
+  MatchingDropdown,
+  MultipleCheck,
+  MultipleChoice,
+  TrueFalse,
   //@endindex
 };
 

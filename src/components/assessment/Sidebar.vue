@@ -26,9 +26,9 @@ function getCompletion(i) {
 <template>
   <section
     id="sidebar"
-    class="absolute z-20 flex h-full w-64 bg-spacecadet p-6 pt-0 transition xl:bg-masblue xl:py-2"
+    class="absolute z-50 flex h-full w-64 bg-spacecadet p-6 pt-0 transition xl:bg-masblue xl:p-0"
     v-bind:class="{ '-translate-x-64': !sidebarState }">
-    <div class="links flex w-full flex-col gap-2 overflow-auto">
+    <div class="links flex w-full flex-col gap-2 overflow-auto px-6 py-2">
       <h2 class="py-2 text-lg font-bold text-saffron">Question Bank</h2>
       <template v-for="(question, index) in links">
         <div
@@ -36,7 +36,8 @@ function getCompletion(i) {
           :key="index"
           v-if="
             !question.__name.includes('Simulation') &&
-            !question.__name.startsWith('A')
+            !question.__name.startsWith('A') &&
+            !question.__name.startsWith('Z')
           ">
           <a
             class="w-full text-sm font-bold text-aliceblue xl:text-base"
