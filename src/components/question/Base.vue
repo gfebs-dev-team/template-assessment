@@ -7,19 +7,19 @@ let questionStart, questionEnd;
 
 onMounted(() => {
   questionStart = new Date();
-  const { id, type } = props.questionData;
+  const { sID, type } = props.questionData;
   const correctResponse = props.questionData.correctResponse;
   const timestamp =
     questionStart
       .toISOString()
       .slice(0, questionStart.toISOString().indexOf(".") + 2) + "Z";
 
-  SCORM.set("cmi.interactions." + (id + 1) + ".id", "question_" + (id + 1));
-  SCORM.set("cmi.interactions." + (id + 1) + ".timestamp", timestamp);
-  SCORM.set("cmi.interactions." + (id + 1) + ".type", type);
+  SCORM.set("cmi.interactions." + (sID + 1) + ".id", "question_" + (sID + 1));
+  SCORM.set("cmi.interactions." + (sID + 1) + ".timestamp", timestamp);
+  SCORM.set("cmi.interactions." + (sID + 1) + ".type", type);
 
   SCORM.set(
-    "cmi.interactions." + (id + 1) + ".correct_responses.0.pattern",
+    "cmi.interactions." + (sID + 1) + ".correct_responses.0.pattern",
     correctResponse,
   );
 });
@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
   const latency = "PT" + lT + "S";
 
   SCORM.set(
-    "cmi.interactions." + (props.questionData.id + 1) + ".latency",
+    "cmi.interactions." + (props.questionData.sID + 1) + ".latency",
     latency,
   );
 });

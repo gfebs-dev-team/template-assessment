@@ -24,14 +24,14 @@ export const dataHandler = (event) => {
 
     const dragPI = dragParent.dataset.index;
     const dropPI = dropParent.dataset.index;
-    console.log(dropParent.id + ": " + dropPI);
+    //console.log(dropParent.id + ": " + dropPI);
     const ret = [
       true,
       { index: Number(dragPI), value: itemID + "[.]" + dragParent.id },
       { index: Number(dropPI), value: drop.id + "[.]" + dropParent.id },
     ];
 
-    console.log(ret);
+    //console.log(ret);
 
     return ret;
   } else {
@@ -58,7 +58,7 @@ export const swap = (event) => {
 
 export function setElems(s) {
   let elems = s.split("[.]");
-  console.log(elems);
+  //console.log(elems);
   const drag = document.getElementById(elems[0]);
   const drop = document.getElementById(elems[1]);
   drop.appendChild(drag);

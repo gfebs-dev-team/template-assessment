@@ -19,5 +19,5 @@ onBeforeMount(() => {
 });
 </script>
 <template>
-  <QuestionChoice :questionData />
+  <QuestionChoice aID="B02T0" :questionData />
 </template>

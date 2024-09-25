@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 
 function selectHandler() {
   getQuestion(props.questionData.id).learnerResponse = answer;
-  console.log(getQuestion(props.questionData.id).learnerResponse);
+  //console.log(getQuestion(props.questionData.id).learnerResponse);
 }
 </script>
 <template>

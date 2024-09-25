@@ -33,17 +33,21 @@ onBeforeMount(() => {
         what they log to the console.
       </p>
       <div class="flex items-center gap-4">
+        <!-- Make Sure to Add data-name for answer key + selenium automation -->
         <button
+          data-name="button"
           @click="questions.actionHandler('clicked', 'button')"
           class="w-fit self-center rounded bg-oxfordblue p-2 font-bold text-[#fefefe] transition active:translate-y-0.5">
           Click Here
         </button>
         <a
+          data-name="link"
           class="text-[#00f] underline"
           @click="questions.actionHandler('clicked', 'link')"
           href="#"
           >Click here</a
         ><input
+          data-name="textBox"
           class="border border-[#d8d8d8] p-1"
           @click="questions.actionHandler('clicked', 'textBox')"
           href="#"

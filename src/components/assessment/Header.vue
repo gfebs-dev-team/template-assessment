@@ -49,12 +49,14 @@ const { goNext, goPrev } = questions;
         <Progress class="hidden xl:block" />
         <div class="flex w-full flex-col justify-end gap-4 sm:flex-row">
           <AppButton
+            id="assessment_header_submit"
             class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:flex xl:w-full xl:max-w-none xl:text-base"
             @click="$emit('submit')"
             v-if="questions.currIndex == questions.total - 1">
             <RiCloseLine class="size-6 fill-aliceblue" /> SUBMIT
           </AppButton>
           <AppButton
+            id="assessment_header_exit"
             class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm xl:w-full xl:max-w-none xl:text-base"
             @click="quit()">
             <RiCloseLine class="size-6 fill-aliceblue" /> EXIT
@@ -75,12 +77,14 @@ const { goNext, goPrev } = questions;
       <div
         class="hidden items-center justify-end gap-4 text-xs text-aliceblue xl:flex">
         <AppButton
+          id="assessment_header_prev"
           class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goPrev()"
           :disabled="!prev">
           Back
         </AppButton>
         <AppButton
+          id="assessment_header_next"
           class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
           @click="goNext()"
           :disabled="!next">

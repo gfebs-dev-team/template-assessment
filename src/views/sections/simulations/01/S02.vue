@@ -1,14 +1,13 @@
 <script setup>
 import { Simulation } from "$components/simulation";
 import { onBeforeMount, ref } from "vue";
-import { RiIdCardFill, RiCheckboxBlankLine } from "@remixicon/vue";
 import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
   scenario: 1,
   query: "This is a input question demo. Use this area to add the query.",
   type: "performance",
-  responses: ["{order_matters=true}[.]clicked Sign In"],
+  responses: ["{order_matters=true}[.]entered bagles"],
 };
 
 const questions = useQuestionsStore();
@@ -38,6 +37,8 @@ const inputRef = ref("");
       <div class="flex items-center gap-4">
         <label for="demo" class="font-bold">Input</label>
         <input
+          data-name="textBox"
+          placeholder="Answer is bagles"
           @input="questions.actionHandler('entered', inputRef)"
           id="demo"
           type="text"

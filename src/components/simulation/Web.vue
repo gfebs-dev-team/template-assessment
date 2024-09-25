@@ -4,7 +4,7 @@ import {
   RiArrowRightLine,
   RiRestartLine,
   RiAccountCircleFill,
-  RiPushpinFill,
+  RiQuestionAnswerFill,
   RiCloseLine,
 } from "@remixicon/vue";
 defineProps(["url", "title", "className"]);
@@ -16,10 +16,10 @@ defineProps(["url", "title", "className"]);
     ref="target">
     <div class="flex h-10 w-full flex-col p-4">
       <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">
-        <div class="min-w-48 rounded-t-md bg-[#fff] p-1">
+        <div class="min-w-48 rounded-t-md bg-[#fff] p-1 px-2">
           <div
             class="grid h-full min-w-48 grid-cols-[auto_1fr_auto] items-center gap-2">
-            <RiPushpinFill class="size-3" />
+            <RiQuestionAnswerFill class="size-3" />
             <div class="h-fit w-full text-xs">{{ title }}</div>
             <RiCloseLine class="size-3 justify-self-end" color="#5F6367" />
           </div>

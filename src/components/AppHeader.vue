@@ -12,7 +12,7 @@ const emit = defineEmits(["exit"]);
     <div
       class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-28 xl:p-6">
       <img
-        class="h-8 min-w-max md:h-12 xl:h-16"
+        class="h-8 w-24 object-contain object-center md:h-12 xl:h-16"
         src="/assets/gfebs_white.png" />
       <div class="flex flex-col gap-1">
         <h1
@@ -26,6 +26,7 @@ const emit = defineEmits(["exit"]);
         </h2>
       </div>
       <AppButton
+        id="app_exit"
         class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm"
         @click="$emit('exit')">
         <RiCloseLine class="size-6 fill-aliceblue" /> EXIT

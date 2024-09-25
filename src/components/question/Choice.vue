@@ -36,20 +36,20 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  const { id } = props.questionData;
+  const { id, sID } = props.questionData;
   if (answer.value) {
     getQuestion(id).learnerResponse = answer.value;
     SCORM.set(
-      "cmi.interactions." + (id + 1) + ".learner_response",
+      "cmi.interactions." + (sID + 1) + ".learner_response",
       answer.value.value,
     );
   }
   if (answer.value && answer.value.correct) {
     getQuestion(id).correct = true;
-    SCORM.set("cmi.interactions." + (id + 1) + ".result", "correct");
+    SCORM.set("cmi.interactions." + (sID + 1) + ".result", "correct");
   } else {
     getQuestion(id).correct = false;
-    SCORM.set("cmi.interactions." + (id + 1) + ".result", "incorrect");
+    SCORM.set("cmi.interactions." + (sID + 1) + ".result", "incorrect");
   }
 });
 </script>

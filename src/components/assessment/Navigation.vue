@@ -17,6 +17,7 @@ defineProps(["courseData"]);
     <div
       class="h-18 flex items-center justify-between bg-spacecadet p-4 text-xs text-aliceblue md:h-12">
       <AppButton
+        id="assessment_nav_prev"
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goPrev()"
         :disabled="!prev">
@@ -26,6 +27,7 @@ defineProps(["courseData"]);
         >{{ currIndex + 1 }}/{{ questions.total }}</span
       >
       <AppButton
+        id="assessment_nav_prev"
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goNext()"
         :disabled="!next">

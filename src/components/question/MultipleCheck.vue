@@ -57,26 +57,29 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  const { id } = props.questionData;
+  const { id, sID } = props.questionData;
   let scoAnswer = "";
 
   getQuestion(id).checked = checked_el.value;
-  if (answer.value > 0) {
+
+  if (answer.value.length > 0) {
     getQuestion(id).learnerResponse = answer.value;
-    answer.value.forEach((a) => {
+    JSON.parse(JSON.stringify(answer.value)).forEach((a) => {
       if (scoAnswer !== "") {
         scoAnswer += "[,]";
       }
       scoAnswer += a.value;
     });
-    SCORM.set("cmi.interactions." + (id + 1) + ".learner_response", scoAnswer);
+    //console.log(scoAnswer);
+    SCORM.set("cmi.interactions." + (sID + 1) + ".learner_response", scoAnswer);
   }
+
   if (scoAnswer == getQuestion(id).correctResponse) {
     getQuestion(id).correct = true;
-    SCORM.set("cmi.interactions." + (id + 1) + ".result", "correct");
+    SCORM.set("cmi.interactions." + (sID + 1) + ".result", "correct");
   } else {
     getQuestion(id).correct = false;
-    SCORM.set("cmi.interactions." + (id + 1) + ".result", "incorrect");
+    SCORM.set("cmi.interactions." + (sID + 1) + ".result", "incorrect");
   }
 });
 </script>

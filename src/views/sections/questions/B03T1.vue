@@ -39,5 +39,5 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <QuestionMultipleCheck :questionData />
+  <QuestionMultipleCheck aID="B03T1" :questionData />
 </template>

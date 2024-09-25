@@ -1,0 +1,52 @@
+{
+  "S0101": {
+    "key": "button",
+    "type": "click"
+  },
+  "S0102": {
+    "key": "textBox",
+    "type": "input",
+    "value": "bagles"
+  },
+  "B04T2": {
+    "key": {
+      "B01T2_0": "This is the first answer",
+      "B01T2_1": "This is the second answer",
+      "B01T2_2": "This is the third answer",
+      "B01T2_3": "This is the fourth answerr "
+    },
+    "type": "matching dropdown"
+  },
+  "B04T1": {
+    "key": ["B02T1_2", "B02T1_3"],
+    "type": "check"
+  },
+  "B02T0": {
+    "key": "B03T0_0",
+    "type": "choice"
+  },
+
+  "B01T0": {
+    "type": "choice",
+    "key": "B01T0_3"
+  },
+  "B05T3": {
+    "key": {
+      "One": "1",
+      "Two": "2",
+      "Three": "3",
+      "Four": "4"
+    },
+    "type": "matching drag"
+  },
+  "B06T4": {
+    "key": [
+      "This is step 1",
+      "Next is step 2",
+      "Step 3 is this one",
+      "Now for step 4",
+      "Lastly, for step 5, we end here"
+    ],
+    "type": "sequence"
+  }
+}
