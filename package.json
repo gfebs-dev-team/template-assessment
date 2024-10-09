@@ -7,12 +7,12 @@
     "dev": "vite",
     "format": "prettier . --write",
     "host": "vite --host",
-    "build": "vite build && node utils/generateManifest.cjs && node utils/zip.cjs",
+    "build": "vite build && node utils/generateManifest.js && node utils/zip.js",
     "preview": "vite preview",
     "test": "npx mocha --no-timeouts src/tests/test.js",
     "rcc": "npx mocha --no-timeouts src/tests/rcc.js",
-    "pass": "vite build && node utils/generateManifest.cjs && node utils/test_zip.cjs && npx mocha --no-timeouts src/tests/pass.js",
-    "fail": "vite build && node utils/generateManifest.cjs && node utils/test_zip.cjs && npx mocha --no-timeouts src/tests/fail.js"
+    "pass": "vite build && node utils/generateManifest.js && node utils/test_zip.cjs && npx mocha --no-timeouts src/tests/pass.js",
+    "fail": "vite build && node utils/generateManifest.js && node utils/test_zip.cjs && npx mocha --no-timeouts src/tests/fail.js"
   },
   "dependencies": {
     "@remixicon/vue": "^4.2.0",

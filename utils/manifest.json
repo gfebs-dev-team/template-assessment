@@ -1,7 +1,7 @@
 {
   "general": {
     "course_code": "C123",
-    "course_title": "Course Title",
+    "course_title": "Launcher Demo: Course Title",
     "language": "en",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tristique augue nec pretium commodo. Cras lorem nisl, convallis ac condimentum et, elementum at sapien. Ut tincidunt porttitor placerat.",
     "keywords": ["lorem", "ipsum", "dolor", "sit", "amet"],

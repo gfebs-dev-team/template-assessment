@@ -1,27 +1,28 @@
-const scorm = require("./manifest.json");
-const fs = require("fs");
+import scorm from './manifest.json' assert { type: 'json' }
+import * as fs from 'fs'
+
 const identifier = scorm.general.course_title
-  .split(" ")
+  .split(' ')
   .map((n) => n[0])
-  .join("");
-const manPath = "./dist/imsmanifest.xml";
-const mdPath = scorm.general.course_code + "-metadata.xml";
+  .join('')
+const manPath = './dist/imsmanifest.xml'
+const mdPath = scorm.general.course_code + '-metadata.xml'
 
 /**
  * A function that generates Army SCORM compliant manifest and metadata files
  */
 function generateManifest() {
-  fs.writeFile("./dist/" + mdPath, generateCourseMetadata(), function (err) {
-    if (err) throw err;
-    console.log(err);
-  });
+  fs.writeFile('./dist/' + mdPath, generateCourseMetadata(), function (err) {
+    if (err) throw err
+    console.log(err)
+  })
 
-  let resources = "";
+  let resources = ''
 
-  let assets = fs.readdirSync("./dist/assets");
+  let assets = fs.readdirSync('./dist/assets')
   assets.forEach((asset) => {
-    resources += '\n\t\t<file href="assets/' + asset + '"/>';
-  });
+    resources += '\n\t\t<file href="assets/' + asset + '"/>'
+  })
 
   let mfData = `<manifest identifier="${identifier}_scorm" version="1"
     xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
@@ -45,19 +46,19 @@ function generateManifest() {
     <organizations default="${identifier}">
         <organization identifier="${identifier}" adlseq:objectivesGlobalToSystem="false">
             <title>${scorm.general.course_title}</title>
-            <item identifier="${scorm.general.course_code + identifier}" identifierref="${identifier}_SCO" isvisible="true">
-                <title>${scorm.general.course_code + ": " + scorm.general.course_title}</title>
+            <item identifier="${
+              scorm.general.course_code + identifier
+            }" identifierref="${identifier}_SCO">
+                <title>${scorm.general.course_code + ': ' + scorm.general.course_title}</title>
                 <imsss:sequencing>
                     <imsss:controlMode choiceExit="false"/>
                     <imsss:objectives>
-                            <imsss:primaryObjective satisfiedByMeasure="true" objectiveID="${identifier}_EXAM">
-                                <imsss:minNormalizedMeasure>${scorm.assessment.passing_score}</imsss:minNormalizedMeasure>
-                            </imsss:primaryObjective>
+                            <imsss:primaryObjective satisfiedByMeasure="false" objectiveID="scoObj"></imsss:primaryObjective>
                     </imsss:objectives>
                 </imsss:sequencing>
             </item>
             <imsss:sequencing>
-                <imsss:controlMode choice="false" flow="true"/>
+                <imsss:controlMode choice="false" flow= "true"/>
                 <imsss:rollupRules>
                     <imsss:rollupRule childActivitySet="all">
                         <imsss:rollupConditions conditionCombination="all">
@@ -73,8 +74,7 @@ function generateManifest() {
                     </imsss:rollupRule>
                     <imsss:rollupRule childActivitySet="any">
                         <imsss:rollupConditions conditionCombination="any">
-                            <imsss:rollupCondition operator="not" condition="satisfied"/>
-                        </imsss:rollupConditions>
+                            <imsss:rollupCondition operator="not" condition="satisfied"/></imsss:rollupConditions>
                         <imsss:rollupAction action="incomplete"/>
                     </imsss:rollupRule>
                 </imsss:rollupRules>
@@ -86,27 +86,27 @@ function generateManifest() {
         <file href="index.html"/>
         </resource>
     </resources>
-    </manifest>`;
+    </manifest>`
 
   fs.writeFile(manPath, mfData, function (err) {
-    if (err) throw err;
-    console.log(err);
-  });
+    if (err) throw err
+    console.log(err)
+  })
 }
 
 function generateCourseMetadata() {
-  let keywords = "";
+  let keywords = ''
 
   scorm.general.keywords.forEach((keyword) => {
-    keywords += "\n\t<keyword><string>" + keyword + "</string></keyword>";
-  });
+    keywords += '\n\t<keyword><string>' + keyword + '</string></keyword>'
+  })
 
-  let technical = "";
-  let formats = scorm.technical.format;
+  let technical = ''
+  let formats = scorm.technical.format
 
   formats.forEach((format) => {
-    technical += "\n\t<format>" + format + "</format>";
-  });
+    technical += '\n\t<format>' + format + '</format>'
+  })
 
   let metadata = `<?xml version="1.0"?>
     <lom xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomStrict.xsd">
@@ -173,15 +173,15 @@ function generateCourseMetadata() {
     </rights>
     ${generateClassifications()}
     </lom>
-    `;
+    `
 
   //console.log(metadata);
-  return metadata;
+  return metadata
 }
 
 function generateClassifications() {
-  let classParsed = "";
-  let classifications = scorm.classifications;
+  let classParsed = ''
+  let classifications = scorm.classifications
 
   classifications.forEach((classification) => {
     classParsed += `<classification>
@@ -196,11 +196,11 @@ function generateClassifications() {
             <string>${classification.keyword}</string>
         </keyword>
     </classification>
-    `;
-  });
+    `
+  })
 
   //console.log(classParsed)
-  return classParsed;
+  return classParsed
 }
 
-generateManifest();
+generateManifest()
