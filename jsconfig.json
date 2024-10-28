@@ -34,6 +34,9 @@
       ],
       "$matching/*": [
         "src/components/question/matching/*"
+      ],
+      "$__tests__/*": [
+        "src/__tests__/*"
       ]
     }
   }
