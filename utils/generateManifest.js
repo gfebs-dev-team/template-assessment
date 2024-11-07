@@ -1,28 +1,31 @@
-import scorm from './manifest.json' assert { type: 'json' }
-import * as fs from 'fs'
+import config from "../gfebs.config.js";
+import * as fs from "fs";
 
-const identifier = scorm.general.course_title
-  .split(' ')
+const scorm = config.data;
+const identifier = scorm.course.title
+  .split(" ")
   .map((n) => n[0])
-  .join('')
-const manPath = './dist/imsmanifest.xml'
-const mdPath = scorm.general.course_code + '-metadata.xml'
+  .join("");
+const manPath = "./dist/imsmanifest.xml";
+const mdPath = scorm.course.code
+  ? scorm.course.code
+  : identifier + "-metadata.xml";
 
 /**
  * A function that generates Army SCORM compliant manifest and metadata files
  */
 function generateManifest() {
-  fs.writeFile('./dist/' + mdPath, generateCourseMetadata(), function (err) {
-    if (err) throw err
-    console.log(err)
-  })
+  fs.writeFile("./dist/" + mdPath, generateCourseMetadata(), function (err) {
+    if (err) throw err;
+    console.log(err);
+  });
 
-  let resources = ''
+  let resources = "";
 
-  let assets = fs.readdirSync('./dist/assets')
+  let assets = fs.readdirSync("./dist/assets");
   assets.forEach((asset) => {
-    resources += '\n\t\t<file href="assets/' + asset + '"/>'
-  })
+    resources += '\n\t\t<file href="assets/' + asset + '"/>';
+  });
 
   let mfData = `<manifest identifier="${identifier}_scorm" version="1"
     xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
@@ -45,11 +48,11 @@ function generateManifest() {
     </metadata>
     <organizations default="${identifier}">
         <organization identifier="${identifier}" adlseq:objectivesGlobalToSystem="false">
-            <title>${scorm.general.course_title}</title>
+            <title>${scorm.course.title} - ${scorm.course.topic}</title>
             <item identifier="${
-              scorm.general.course_code + identifier
+              scorm.course.code + identifier
             }" identifierref="${identifier}_SCO">
-                <title>${scorm.general.course_code + ': ' + scorm.general.course_title}</title>
+                <title>${scorm.course.code + ": " + scorm.course.title} - ${scorm.course.topic}</title>
                 <imsss:sequencing>
                     <imsss:controlMode choiceExit="false"/>
                     <imsss:objectives>
@@ -86,27 +89,27 @@ function generateManifest() {
         <file href="index.html"/>
         </resource>
     </resources>
-    </manifest>`
+    </manifest>`;
 
   fs.writeFile(manPath, mfData, function (err) {
-    if (err) throw err
-    console.log(err)
-  })
+    if (err) throw err;
+    console.log(err);
+  });
 }
 
 function generateCourseMetadata() {
-  let keywords = ''
+  let keywords = "";
 
   scorm.general.keywords.forEach((keyword) => {
-    keywords += '\n\t<keyword><string>' + keyword + '</string></keyword>'
-  })
+    keywords += "\n\t<keyword><string>" + keyword + "</string></keyword>";
+  });
 
-  let technical = ''
-  let formats = scorm.technical.format
+  let technical = "";
+  let formats = scorm.technical.format;
 
   formats.forEach((format) => {
-    technical += '\n\t<format>' + format + '</format>'
-  })
+    technical += "\n\t<format>" + format + "</format>";
+  });
 
   let metadata = `<?xml version="1.0"?>
     <lom xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomStrict.xsd">
@@ -116,7 +119,7 @@ function generateCourseMetadata() {
             <entry>TBD</entry>
         </identifier>
         <title>
-            <string>${scorm.general.course_title}</string>
+            <string>${scorm.course.title}</string>
         </title>
         <language>${scorm.general.language}</language>
         <description>
@@ -173,15 +176,15 @@ function generateCourseMetadata() {
     </rights>
     ${generateClassifications()}
     </lom>
-    `
+    `;
 
   //console.log(metadata);
-  return metadata
+  return metadata;
 }
 
 function generateClassifications() {
-  let classParsed = ''
-  let classifications = scorm.classifications
+  let classParsed = "";
+  let classifications = scorm.classifications;
 
   classifications.forEach((classification) => {
     classParsed += `<classification>
@@ -196,11 +199,11 @@ function generateClassifications() {
             <string>${classification.keyword}</string>
         </keyword>
     </classification>
-    `
-  })
+    `;
+  });
 
   //console.log(classParsed)
-  return classParsed
+  return classParsed;
 }
 
-generateManifest()
+generateManifest();

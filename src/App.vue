@@ -6,12 +6,9 @@ import { SCORM, debug } from "pipwerks-scorm-api-wrapper";
 import { onMounted, shallowRef } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { storeToRefs } from "pinia";
+import config from "/gfebs.config.js";
 
-const courseData = {
-  courseCode: "",
-  courseTitle: "Assesment Template",
-  topic: "demo",
-};
+const courseData = config.data.course;
 
 // SET THIS TO TRUE TO SKIP THE LANDING PAGE
 const dev = true;
