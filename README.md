@@ -48,9 +48,9 @@ Internal boilerplate for creating GFEBs DL assessment packages.
 To create a new GFEBS DL Product, install `template-assessment` with [Github CLI](https://cli.github.com/)
 
 ```bash
-gh repo create [COURSE_CODE]-assessment --template="aretum-eagleharbor-gfebs/template-assessment"
+gh repo create gfebs-dev-team/[COURSE_CODE]-[pre/post]-assessment --template="gfebs-dev-team/template-assessment"
 
-cd [COURSE_CODE]-assessment
+cd [COURSE_CODE]-[pre/post]--assessment
 
 npm i -D
 ```
