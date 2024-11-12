@@ -31,6 +31,34 @@ Internal boilerplate for creating GFEBs DL assessment packages.
 
 ## About The Project
 
+Question {
+id: Number,
+type: String,
+query: String,
+responses: Response[],
+learnerResponse?: Response,
+correct: Boolean
+}
+
+Response {
+content: String,
+value: ShortIdentifierType,
+correct?: Boolean
+}
+
+aidStructure {
+tag + typeID + index
+}
+
+"S": Simulation
+"B": Question Bank
+
+T0: Choice
+T1: Check
+T2: Matching Dropdown
+T3: Matching Drag
+T4: Sequence
+
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
