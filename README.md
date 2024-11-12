@@ -31,6 +31,7 @@ Internal boilerplate for creating GFEBs DL assessment packages.
 
 ## About The Project
 
+```bash
 Question {
 id: Number,
 type: String,
@@ -58,6 +59,7 @@ T1: Check
 T2: Matching Dropdown
 T3: Matching Drag
 T4: Sequence
+```
 
 <!--Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`-->
 
