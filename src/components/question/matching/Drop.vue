@@ -12,7 +12,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="drop relative" @drop="$emit('data', $event)" :class="className">
+  <div
+    :data-drop-id="id"
+    class="drop relative"
+    @drop="$emit('data', $event)"
+    :class="className">
     <div class="relative">
       <h2 class="text-transparent"><slot /></h2>
       <h2 class="absolute inset-0 z-20"><slot /></h2>

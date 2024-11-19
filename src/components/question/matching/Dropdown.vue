@@ -5,7 +5,7 @@ import { onBeforeUnmount, onMounted, ref, provide } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { shuffleArray } from "$assets/script/utils";
 
-const props = defineProps(["questionData"]);
+const props = defineProps(["questionData", "aID"]);
 
 const answer = ref([]);
 provide("answer", answer);
@@ -35,11 +35,12 @@ function selectHandler() {
 }
 </script>
 <template>
-  <Base :questionData :answer>
+  <Base :questionData :answer :aID="aID">
     <QuestionSelect
       @change="selectHandler()"
       v-for="(l, index) in label"
       :index="index"
+      :id="aID"
       :value
       :label="l" />
   </Base>

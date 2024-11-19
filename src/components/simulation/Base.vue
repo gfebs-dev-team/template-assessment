@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useMouseInElement } from "@vueuse/core";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import { useQuestionsStore } from "$store/questions";
+import { storeToRefs } from "pinia";
 import {
   RiArrowLeftLine,
   RiArrowRightLine,
@@ -13,7 +14,7 @@ import {
   RiMapPin2Fill,
 } from "@remixicon/vue";
 
-const props = defineProps(["questionData", "url", "title", "className"]);
+const props = defineProps(["questionData", "url", "title", "className", "aID"]);
 
 const questions = useQuestionsStore();
 const { getQuestion } = questions;
@@ -85,6 +86,7 @@ function clicked() {
 
 <template>
   <section
+    :data-id="aID"
     class="flex h-full w-full flex-col gap-2 rounded-none p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron">
       Scenario {{ questionData.scenario }}: Question {{ questionData.question }}

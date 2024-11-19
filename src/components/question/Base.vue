@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
-const props = defineProps(["questionData"]);
+const props = defineProps(["questionData", "aID"]);
 let questionStart, questionEnd;
 
 onMounted(() => {
@@ -27,7 +27,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   questionEnd = new Date();
   const lT = (Math.round((questionEnd - questionStart) / 1000) * 100) / 100;
-
   const latency = "PT" + lT + "S";
 
   SCORM.set(
@@ -38,7 +37,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
+  <section
+    :data-id="aID"
+    class="flex flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Question {{ questionData.id + 1 }}
     </h3>

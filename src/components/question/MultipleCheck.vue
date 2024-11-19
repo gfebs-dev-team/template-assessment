@@ -5,7 +5,7 @@ import { provide, ref, onBeforeUnmount, onMounted } from "vue";
 import { useQuestionsStore } from "$store/questions";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
-const props = defineProps(["questionData", "courseData"]);
+const props = defineProps(["questionData", "courseData", "aID"]);
 
 const questions = useQuestionsStore();
 const { getQuestion } = questions;
@@ -85,13 +85,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Base :questionData>
+  <Base :questionData :aID="aID">
     <template v-for="(response, index) in questionData.responses" :key="index">
       <Checkbox
         @selected="setInput(response, index)"
         :responses="questionData.responses"
         :value="response"
-        :id="`question_${questionData.id}_${index}`"
+        :id="`${aID}_${index}`"
         :index>
         {{ response.content }}
       </Checkbox>

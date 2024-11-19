@@ -7,9 +7,9 @@ const show = ref(true);
 <template>
   <div
     v-if="show"
-    class="absolute bottom-4 z-50 flex w-full items-center justify-center justify-self-end px-4 xl:h-min">
+    class="absolute bottom-4 z-40 flex w-full items-center justify-center justify-self-end px-4 xl:h-min">
     <div
-      class="relative flex w-full items-center justify-center gap-2 text-balance rounded-md bg-spacecadet p-2 px-4 text-center text-sm italic text-saffron">
+      class="relative flex w-full items-center justify-center gap-2 text-balance rounded-md border border-oxfordblue border-opacity-60 bg-spacecadet p-2 px-4 text-center text-sm italic text-saffron">
       <p>
         <span class="font-bold">Note:</span> All questions must be answered to
         receive credit. Assessments with unanswered questions will be marked as

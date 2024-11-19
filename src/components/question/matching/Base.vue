@@ -5,7 +5,7 @@ import { useQuestionsStore } from "$store/questions";
 
 const questions = useQuestionsStore();
 const { getQuestion } = questions;
-const props = defineProps(["questionData", "answer"]);
+const props = defineProps(["questionData", "answer", "aID"]);
 let questionStart, questionEnd;
 
 onMounted(() => {
@@ -71,6 +71,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section
+    :data-id="aID"
     class="flex h-full w-full flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Question {{ questionData.id + 1 }}

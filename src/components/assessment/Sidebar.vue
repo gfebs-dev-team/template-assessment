@@ -34,11 +34,7 @@ function getCompletion(i) {
         <div
           class="link hover:m-y-2 flex w-full items-center justify-between gap-2 pl-3"
           :key="index"
-          v-if="
-            !question.__name.includes('Simulation') &&
-            !question.__name.startsWith('A') &&
-            !question.__name.startsWith('Z')
-          ">
+          v-if="question.__name.startsWith('B')">
           <a
             class="w-full text-sm font-bold text-aliceblue xl:text-base"
             :class="{

@@ -5,12 +5,12 @@ import Drop from "./Drop.vue";
 import { onDrop, setElems } from "$components/question/matching/draggable";
 import { useQuestionsStore } from "$store/questions";
 import { onMounted, ref } from "vue";
-const props = defineProps(["questionData", "answer"]);
+const props = defineProps(["questionData", "answer", "aID"]);
 
 const answer = ref([]);
 const questions = useQuestionsStore();
 
-let array = props.questionData.sequence;
+let array = [...props.questionData.sequence];
 for (let i = array.length - 1; i > 0; i--) {
   let j = Math.floor(Math.random() * (i + 1));
   let temp = array[i];
@@ -38,7 +38,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <Base :questionData :answer>
+  <Base :questionData :answer :aID="aID">
     <div class="flex h-full w-full flex-col gap-4">
       <Drop
         v-for="(item, index) in array"

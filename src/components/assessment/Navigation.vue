@@ -27,7 +27,7 @@ defineProps(["courseData"]);
         >{{ currIndex + 1 }}/{{ questions.total }}</span
       >
       <AppButton
-        id="assessment_nav_prev"
+        id="assessment_nav_next"
         class="h-fit max-w-fit border-2 border-aliceblue p-1 px-4 disabled:border-coolgrey disabled:text-coolgrey"
         @click="goNext()"
         :disabled="!next">
