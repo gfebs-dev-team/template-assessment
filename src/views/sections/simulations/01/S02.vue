@@ -5,6 +5,7 @@ import { useQuestionsStore } from "$store/questions";
 
 const questionData = {
   scenario: 1,
+  question: 2,
   query: "This is a input question demo. Use this area to add the query.",
   type: "performance",
   responses: ["{order_matters=true}[.]entered bagles"],

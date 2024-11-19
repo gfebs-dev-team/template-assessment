@@ -1,43 +1,25 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "$assets/*": [
-        "src/assets/*"
-      ],
-      "$components/*": [
-        "src/components/*"
-      ],
-      "$store/*": [
-        "src/store/*"
-      ],
-      "$/*": [
-        "src/*"
-      ],
-      "$views/*": [
-        "src/views/*"
-      ],
-      "$__test__/*": [
-        "src/__test__/*"
-      ],
-      "$assessment/*": [
-        "src/components/assessment/*"
-      ],
-      "$question/*": [
-        "src/components/question/*"
-      ],
-      "$simulation/*": [
-        "src/components/simulation/*"
-      ],
-      "$slide/*": [
-        "src/components/slide/*"
-      ],
-      "$matching/*": [
-        "src/components/question/matching/*"
-      ],
-      "$__tests__/*": [
-        "src/__tests__/*"
-      ]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "$__tests__/*": [
+                "src/__tests__/*"
+            ],
+            "$assets/*": [
+                "src/assets/*"
+            ],
+            "$components/*": [
+                "src/components/*"
+            ],
+            "$store/*": [
+                "src/store/*"
+            ],
+            "$views/*": [
+                "src/views/*"
+            ],
+            "$/*": [
+                "src/*"
+            ]
+        }
     }
-  }
 }
