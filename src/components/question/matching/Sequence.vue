@@ -2,8 +2,8 @@
 import Base from "./Base.vue";
 import Drag from "./Drag.vue";
 import Drop from "./Drop.vue";
-import { onDrop, setElems } from "$components/question/matching/draggable";
-import { useQuestionsStore } from "$store/questions";
+import { onDrop, setElems } from "@components/question/matching/draggable";
+import { useQuestionsStore } from "@store/questions";
 import { onMounted, ref } from "vue";
 const props = defineProps(["questionData", "answer", "aID"]);
 

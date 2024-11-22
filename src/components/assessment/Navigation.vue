@@ -1,7 +1,7 @@
 <script setup>
-import AppButton from "$components/AppButton.vue";
+import AppButton from "@components/AppButton.vue";
 import Progress from "./Progress.vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();

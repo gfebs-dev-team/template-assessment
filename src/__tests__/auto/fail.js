@@ -1,5 +1,5 @@
 import { Builder, By, until } from "selenium-webdriver";
-import answers from "$/assets/answers.json" assert { type: "json" };
+import answers from "@/assets/answers.json" assert { type: "json" };
 import { assert } from "chai";
 import * as path from "path";
 import { Select } from "selenium-webdriver";

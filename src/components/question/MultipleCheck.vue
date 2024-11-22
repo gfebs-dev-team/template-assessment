@@ -2,7 +2,7 @@
 import Base from "./Base.vue";
 import Checkbox from "./Checkbox.vue";
 import { provide, ref, onBeforeUnmount, onMounted } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
 const props = defineProps(["questionData", "courseData", "aID"]);

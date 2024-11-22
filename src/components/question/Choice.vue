@@ -2,7 +2,7 @@
 import Base from "./Base.vue";
 import Radio from "./Radio.vue";
 import { provide, ref, onBeforeUnmount, onMounted } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import { storeToRefs } from "pinia";
 

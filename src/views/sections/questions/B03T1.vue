@@ -1,8 +1,8 @@
 <script setup>
-import { QuestionMultipleCheck } from "$components/question";
+import { QuestionMultipleCheck } from "@components/question";
 import { onBeforeMount } from "vue";
 
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 const questionData = {
   type: "choice",
   query:

@@ -1,12 +1,13 @@
 <script setup>
-import { Simulation } from "$components/simulation";
+import { Simulation } from "@components/simulation";
 import { onBeforeMount, ref } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 
 const questionData = {
   scenario: 1,
   question: 2,
-  query: "This is a input question demo. Use this area to add the query.",
+  query:
+    "This is a input question demo. Use this area to add the query. Extra words to pad the question for regex test.",
   type: "performance",
   responses: ["{order_matters=true}[.]entered bagles"],
 };

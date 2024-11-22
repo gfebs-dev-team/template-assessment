@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useMouseInElement } from "@vueuse/core";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { storeToRefs } from "pinia";
 import {
   RiArrowLeftLine,
@@ -113,7 +113,7 @@ function clicked() {
             getQuestion(props.questionData.id) &&
             getQuestion(props.questionData.id).lastMouse
           "
-          class="pointer-events-none fixed z-50 fill-saffron stroke-charcoal stroke-2" />
+          class="stroke-charcoal pointer-events-none fixed z-50 fill-saffron stroke-2" />
       </Teleport>
       <div class="flex h-8 w-full flex-col p-2">
         <div class="relative flex h-6 justify-between gap-2 bg-[#DFE1E5]">

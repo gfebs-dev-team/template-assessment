@@ -1,5 +1,5 @@
 <script setup>
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { storeToRefs } from "pinia";
 import {
   RiCheckboxBlankCircleFill,

@@ -1,7 +1,7 @@
 <script setup>
-import { Simulation } from "$components/simulation";
+import { Simulation } from "@components/simulation";
 import { onBeforeMount } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 
 const questionData = {
   scenario: 1,

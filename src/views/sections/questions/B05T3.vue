@@ -3,15 +3,15 @@ import {
   Matching,
   MatchingDrag,
   MatchingDrop,
-} from "$components/question/matching";
+} from "@components/question/matching";
 import { onBeforeMount, onMounted, ref } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import {
   onDrop,
   dataHandler,
   setElems,
-} from "$components/question/matching/draggable";
-import { shuffleArray } from "$assets/script/utils";
+} from "@components/question/matching/draggable";
+import { shuffleArray } from "@assets/script/utils";
 
 let questionData = {
   type: "matching",

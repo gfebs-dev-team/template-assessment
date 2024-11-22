@@ -1,10 +1,10 @@
 <script setup>
-import LandingPage from "$views/LandingPage.vue";
-import AssessmentPage from "$views/AssessmentPage.vue";
+import LandingPage from "@views/LandingPage.vue";
+import AssessmentPage from "@views/AssessmentPage.vue";
 import ResultsPage from "./views/ResultsPage.vue";
 import { SCORM, debug } from "pipwerks-scorm-api-wrapper";
 import { onMounted, shallowRef } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { storeToRefs } from "pinia";
 import config from "/gfebs.config.js";
 

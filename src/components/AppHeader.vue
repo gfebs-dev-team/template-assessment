@@ -1,5 +1,5 @@
 <script setup>
-import AppButton from "$components/AppButton.vue";
+import AppButton from "@components/AppButton.vue";
 import { RiCloseLine } from "@remixicon/vue";
 
 const props = defineProps(["courseData"]);

@@ -1,8 +1,8 @@
 <script setup>
-import AppButton from "$components/AppButton.vue";
-import AppHeader from "$components/AppHeader.vue";
+import AppButton from "@components/AppButton.vue";
+import AppHeader from "@components/AppHeader.vue";
 import { ref } from "vue";
-import essentialsGraphic from "$assets/essentials-introduction-slide01-multiple.svg";
+import essentialsGraphic from "@assets/essentials-introduction-slide01-multiple.svg";
 
 const page = ref(0);
 

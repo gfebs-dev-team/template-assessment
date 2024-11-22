@@ -1,7 +1,7 @@
 <script setup>
-import { QuestionChoice } from "$components/question";
+import { QuestionChoice } from "@components/question";
 import { onBeforeMount } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 
 let questionData = {
   type: "true-false",

@@ -1,9 +1,9 @@
 <script setup>
-import AppButton from "$components/AppButton.vue";
+import AppButton from "@components/AppButton.vue";
 import Progress from "./Progress.vue";
 import { RiMenuLine, RiCloseLine } from "@remixicon/vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { useQuestionsStore } from "$store/questions.js";
+import { useQuestionsStore } from "@store/questions.js";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();

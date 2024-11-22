@@ -4,9 +4,9 @@ import {
   AssessmentNav,
   AssessmentSidebar,
   AssessmentDisclaimer,
-} from "$components/assessment";
+} from "@components/assessment";
 import { watchEffect } from "vue";
-import { useQuestionsStore } from "$store/questions";
+import { useQuestionsStore } from "@store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
