@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 
-const props = defineProps(["questionData", "aID"]);
+const props = defineProps(["questionData", "aID", "className"]);
 let questionStart, questionEnd;
 
 onMounted(() => {
@@ -39,7 +39,7 @@ onBeforeUnmount(() => {
 <template>
   <section
     :data-id="aID"
-    class="flex flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
+    class="flex h-full min-h-0 flex-col gap-2 p-8 xl:gap-3 xl:px-12 xl:py-8">
     <h3 class="text-base font-bold text-saffron xl:text-lg">
       Question {{ questionData.id + 1 }}
     </h3>

@@ -3,6 +3,7 @@ import { ref, markRaw, reactive, shallowRef, computed } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
 import questions from "@/views/sections/questions";
 import simulations from "@views/sections/simulations";
+import { ConsoleLogEntry } from "selenium-webdriver/bidi/logEntries";
 
 export const useQuestionsStore = defineStore("questions", () => {
   const questionsComp = ref(
@@ -27,7 +28,9 @@ export const useQuestionsStore = defineStore("questions", () => {
   const total = questionsComp.value.length + simsComp.value.length;
   const qtotal =
     questionsComp.value.length +
-    simsComp.value.filter((s) => s.__name.startsWith("Q")).length;
+    simsComp.value.filter(
+      (s) => s.__name.startsWith("Q") && !s.__name.endsWith("T"),
+    ).length;
   const sidebarState = ref(false);
   const next = computed(() => currIndex.value < total - 1);
   const prev = computed(
@@ -77,6 +80,10 @@ export const useQuestionsStore = defineStore("questions", () => {
       data.correctResponse = correctResp;
     }
 
+    if (obj.type == "fill-in") {
+      data.correctResponse = `{case_matters=${data.responses.shift()}}{order_matters=${data.responses.shift()}}${data.responses.length > 1 ? data.responses.map((x) => x + "[,]") : data.responses[0]}`;
+    }
+
     if (questionsList.value[data.id] == null) {
       questionsList.value.push(data);
     }
@@ -91,6 +98,7 @@ export const useQuestionsStore = defineStore("questions", () => {
     const simL = simsComp.value.length;
     const questL = questionsComp.value.length;
     const q = getQuestion(currIndex.value);
+    console.log(questionsList.value[currIndex.value]);
 
     if (
       currIndex.value < simL - 1 &&
@@ -126,6 +134,7 @@ export const useQuestionsStore = defineStore("questions", () => {
         current.value = questionsComp.value[currIndex.value - simL];
       }
     }
+    console.log(questionsList.value[currIndex.value].action);
   }
 
   function goPrev() {
@@ -231,7 +240,7 @@ export const useQuestionsStore = defineStore("questions", () => {
       value: v,
     };
     questionsList.value[currIndex.value].action = action;
-    console.log(a + " " + v);
+    console.log(currIndex.value + ": " + a + " " + v);
     return true;
   }
 

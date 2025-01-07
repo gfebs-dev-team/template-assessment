@@ -1,9 +1,9 @@
 <script setup>
 import Base from "./Base.vue";
-import { QuestionSelect } from "$components/question";
+import { QuestionSelect } from "@components/question";
 import { onBeforeUnmount, onMounted, ref, provide } from "vue";
-import { useQuestionsStore } from "$store/questions";
-import { shuffleArray } from "$assets/script/utils";
+import { useQuestionsStore } from "@store/questions";
+import { shuffleArray } from "@assets/script/utils";
 
 const props = defineProps(["questionData", "aID"]);
 

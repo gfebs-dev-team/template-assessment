@@ -1,4 +1,4 @@
-//@index('./*.vue', f=> `import ${f.name} from "${f.path}.vue";`)
+//@index('./*.vue', f=> `import ${f.name} from "@{f.path}.vue";`)
 import Base from "./Base.vue";
 import Drag from "./Drag.vue";
 import Drop from "./Drop.vue";

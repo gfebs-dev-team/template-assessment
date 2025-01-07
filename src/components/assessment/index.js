@@ -1,4 +1,4 @@
-//@index('./*.vue', f=> `import ${f.name} from "${f.path}.vue";`)
+//@index('./*.vue', f=> `import ${f.name} from "@{f.path}.vue";`)
 import Disclaimer from "./Disclaimer.vue";
 import Header from "./Header.vue";
 import Navigation from "./Navigation.vue";

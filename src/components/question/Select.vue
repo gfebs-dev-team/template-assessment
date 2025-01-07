@@ -18,7 +18,7 @@ const answer = inject("answer");
       :name="id + '_' + index"
       :id="id + '_' + index"
       v-model="answer[index]"
-      class="rounded-md border border-charcoal bg-transparent p-2 px-4 text-sm text-coolgrey outline-none">
+      class="border-charcoal rounded-md border bg-transparent p-2 px-4 text-sm text-coolgrey outline-none">
       <option
         class="text-oxfordblue"
         v-for="(v, index) in value"

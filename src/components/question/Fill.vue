@@ -29,7 +29,7 @@ onBeforeUnmount(() => {
   let responses = new Array(getQuestion(id).responses);
   const caseMatters = responses.shift();
   const orderMatters = responses.shift();
-  const correctArray = responses;
+  let correctArray = responses;
 
   if (answer.value.length > 0) {
     getQuestion(id).learnerResponse = answer.value;

@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["value"]);
+const props = defineProps(["value", "index"]);
 const model = defineModel();
 
 function update(x) {
@@ -9,10 +9,11 @@ function update(x) {
 
 <template>
   <span
+    :data-index="index"
     @input="(event) => update(event.target.innerText)"
     contenteditable="true"
     class="border-b border-saffron px-2 text-saffron"
-    >{{ value }}</span
+    >{{ value[index] }}</span
   >
 </template>
 
