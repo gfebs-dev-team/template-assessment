@@ -1,7 +1,7 @@
 <script setup>
-import { MatchingDropdown } from "@components/question/matching";
+import { MatchingDropdown } from "#components/question/matching";
 import { onBeforeMount } from "vue";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 
 let questionData = {
   type: "matching",

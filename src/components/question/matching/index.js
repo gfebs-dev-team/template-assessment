@@ -1,9 +1,9 @@
-//@index('./*.vue', f=> `import ${f.name} from "@{f.path}.vue";`)
+//@index('./*.vue', f=> `import ${f.name} from "#{f.path}.vue";`)
 import Base from "./Base.vue";
-import Drag from "./Drag.vue";
-import Drop from "./Drop.vue";
-import Dropdown from "./Dropdown.vue";
-import Sequence from "./Sequence.vue";
+import Drag from "./dragndrop/Drag.vue";
+import Drop from "./dragndrop/Drop.vue";
+import Dropdown from "./dropdown/Dropdown.vue";
+import Sequence from "./sequence/Sequence.vue";
 //@endindex
 export {
   //@index('./*.vue', f=> `${f.name},`)

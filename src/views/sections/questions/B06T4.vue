@@ -1,7 +1,7 @@
 <script setup>
-import { MatchingSequence } from "@components/question/matching";
+import { MatchingSequence } from "#components/question/matching";
 import { onBeforeMount } from "vue";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 
 const questions = useQuestionsStore();
 

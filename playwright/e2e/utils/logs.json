@@ -1,0 +1,42 @@
+{
+  "2025_01_28_1441": {
+    "rccPassPath": "",
+    "rccFailPath": ""
+  },
+  "2025_01_28_1444": {
+    "rccPassPath": "",
+    "rccFailPath": "https://content.atis.army.mil/api/logs/debug/content/4769/versions/40/a6a701b6-92b4-4533-b870-228124db62a3?userId=jennifer.t.nguyen29.ctr@army.mil"
+  },
+  "2025_01_28_1445": {
+    "rccPassPath": "https://content.atis.army.mil/api/logs/debug/content/4769/versions/40/f814d1b6-e5d8-4017-9412-5e328ac033bc?userId=jennifer.t.nguyen29.ctr@army.mil",
+    "rccFailPath": ""
+  },
+  "2025_01_28_1549": {
+    "pass": {
+      "summary": "https://acts.dldart.org/api/working/17380973722660.082571/logs/index.html",
+      "download": "https://acts.dldart.org/api/working/17380973722660.082571/download/logs"
+    }
+  },
+  "2025_01_28_1552": {
+    "pass": {
+      "summary": "https://acts.dldart.org/api/working/17380975722880.452502/logs/index.html",
+      "download": "https://acts.dldart.org/api/working/17380975722880.452502/download/logs"
+    }
+  },
+  "2025_01_28_1604": {
+    "pass": {
+      "summary": "https://acts.dldart.org/api/working/17380982838090.591242/logs/index.html",
+      "download": "https://acts.dldart.org/api/working/17380982838090.591242/download/logs"
+    },
+    "fail": {
+      "summary": "https://acts.dldart.org/api/working/17380983586910.190914/logs/index.html",
+      "download": "https://acts.dldart.org/api/working/17380983586910.190914/download/logs"
+    }
+  },
+  "2025_01_28_1609": {
+    "rccFailPath": "https://content.atis.army.mil/api/logs/debug/content/4769/versions/41/62166172-a350-4015-9bc9-32fd6eb6d8d7?userId=jennifer.t.nguyen29.ctr@army.mil",
+    "rccPassPath": "https://content.atis.army.mil/api/logs/debug/content/4769/versions/41/fdc5c91d-31b2-47aa-9f6f-8cd3b9daebd2?userId=jennifer.t.nguyen29.ctr@army.mil"
+  },
+  "2025_01_29_1448": {},
+  "2025_01_29_1455": {}
+}

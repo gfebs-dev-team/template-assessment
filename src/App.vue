@@ -1,17 +1,17 @@
 <script setup>
-import LandingPage from "@views/LandingPage.vue";
-import AssessmentPage from "@views/AssessmentPage.vue";
+import LandingPage from "#views/LandingPage.vue";
+import AssessmentPage from "#views/AssessmentPage.vue";
 import ResultsPage from "./views/ResultsPage.vue";
 import { SCORM, debug } from "pipwerks-scorm-api-wrapper";
 import { onMounted, shallowRef } from "vue";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 import { storeToRefs } from "pinia";
 import config from "/gfebs.config.js";
 
 const courseData = config.data.course;
 
 // SET THIS TO TRUE TO SKIP THE LANDING PAGE
-const dev = true;
+const dev = false;
 
 const curr = shallowRef(dev ? AssessmentPage : LandingPage);
 const questions = useQuestionsStore();

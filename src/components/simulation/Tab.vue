@@ -18,7 +18,7 @@ defineProps(["color"]);
       </g>
     </svg>
     <p
-      class="-ml-[1px] h-full text-nowrap rounded-[.2rem] border border-b-0 border-l-0 border-[#000] border-opacity-30 p-1"
+      class="-ml-[1px] h-full rounded-[.2rem] border border-b-0 border-l-0 border-[#000]/30 p-1 text-nowrap"
       :style="`background-color: ${color}`">
       <slot></slot>
     </p>

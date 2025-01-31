@@ -1,7 +1,7 @@
 <script setup>
-import { QuestionFill, QuestionInput } from "@components/question";
+import { QuestionFill, QuestionInput } from "#components/question";
 import { onBeforeMount, ref, provide } from "vue";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 
 let questionData = {
   type: "fill-in",

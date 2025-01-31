@@ -1,15 +1,8 @@
 <script setup>
-import { SlideContent } from "@components/slide";
-import { SimulationWeb } from "@components/simulation";
+import { SlideContent } from "#components/layout/slide";
+import { SimulationWeb } from "#components/simulation";
 import { onBeforeMount } from "vue";
-import { useQuestionsStore } from "@store/questions";
-import {
-  RiFolderFill,
-  RiArrowDropRightFill,
-  RiArrowLeftSFill,
-  RiArrowRightSFill,
-  RiArrowDownSFill,
-} from "@remixicon/vue";
+import { useQuestionsStore } from "#store/questions";
 
 const questionData = {
   type: "content",

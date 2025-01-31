@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useMouseInElement } from "@vueuse/core";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 import { storeToRefs } from "pinia";
 import {
   RiArrowLeftLine,

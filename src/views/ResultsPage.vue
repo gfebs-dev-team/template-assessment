@@ -1,6 +1,6 @@
 <script setup>
-import AppHeader from "@components/AppHeader.vue";
-import { useQuestionsStore } from "@store/questions";
+import AppHeader from "#components/layout/AppHeader.vue";
+import { useQuestionsStore } from "#store/questions";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";

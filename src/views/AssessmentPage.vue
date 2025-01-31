@@ -4,9 +4,9 @@ import {
   AssessmentNav,
   AssessmentSidebar,
   AssessmentDisclaimer,
-} from "@components/assessment";
+} from "#components/layout/assessment";
 import { watchEffect } from "vue";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 import { storeToRefs } from "pinia";
 
 const questions = useQuestionsStore();
@@ -31,6 +31,7 @@ watchEffect(() => {
       :course-data
       @toggleSidebar="toggleSidebar()"
       @submit="$emit('submit')"
+      @exit="$emit('exit')"
       class="xl:max-w-screen-lg" />
     <section
       class="relative flex size-full h-full flex-col justify-between overflow-hidden rounded-b-lg bg-oxfordblue xl:max-w-screen-lg">

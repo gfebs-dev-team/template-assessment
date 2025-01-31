@@ -1,9 +1,8 @@
 import { defineStore } from "pinia";
 import { ref, markRaw, reactive, shallowRef, computed } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import questions from "@/views/sections/questions";
-import simulations from "@views/sections/simulations";
-import { ConsoleLogEntry } from "selenium-webdriver/bidi/logEntries";
+import questions from "#/views/sections/questions";
+import simulations from "#views/sections/simulations";
 
 export const useQuestionsStore = defineStore("questions", () => {
   const questionsComp = ref(

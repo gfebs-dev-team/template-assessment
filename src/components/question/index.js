@@ -1,12 +1,12 @@
 //@index('./*.vue', f=> `import ${f.name} from "${f.path}.vue";`)
 import Base from "./Base.vue";
-import Checkbox from "./Checkbox.vue";
-import Choice from "./Choice.vue";
-import Fill from "./Fill.vue";
-import Input from "./Input.vue";
-import MultipleCheck from "./MultipleCheck.vue";
-import Radio from "./Radio.vue";
-import Select from "./Select.vue";
+import Checkbox from "./multicheck/Checkbox.vue";
+import Choice from "./multichoice/Choice.vue";
+import Fill from "./fill/Fill.vue";
+import Input from "./fill/Input.vue";
+import MultipleCheck from "./multicheck/MultipleCheck.vue";
+import Radio from "./multichoice/Radio.vue";
+import Select from "./matching/dropdown/Select.vue";
 //@endindex
 export {
   //@index('./*.vue', f=> `${f.name},`)

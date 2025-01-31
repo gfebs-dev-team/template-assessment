@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted } from "vue";
 import { SCORM } from "pipwerks-scorm-api-wrapper";
-import { useQuestionsStore } from "@store/questions";
+import { useQuestionsStore } from "#store/questions";
 
 const questions = useQuestionsStore();
 const { getQuestion } = questions;
