@@ -1,8 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-richblack: #0b0e14;
+  --color-oxfordblue: #0b1528;
+  --color-spacecadet: #142342;
+  --color-delftblue: #243558;
+  --color-masblue: #3a4b6f;
+  --color-coolgrey: #91a0be;
+  --color-lavendar: #dee4f1;
+  --color-aliceblue: #e7ebf3;
+  --color-harvestgold: #e7a60d;
+  --color-saffron: #f4bc3a;
+
+  --font-sans: Arial, sans-serif;
+
+  --transition-width: "width";
+}
 
 body {
   @apply bg-oxfordblue relative;
 }
-

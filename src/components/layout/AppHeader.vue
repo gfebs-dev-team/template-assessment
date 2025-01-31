@@ -8,7 +8,7 @@ const emit = defineEmits(["exit"]);
 
 <template>
   <div
-    class="z-10 box-content flex w-full flex-col items-center justify-end bg-spacecadet">
+    class="bg-spacecadet z-10 box-content flex w-full flex-col items-center justify-end">
     <div
       class="grid h-20 w-full grid-cols-[auto_auto_1fr] items-center gap-4 p-4 xl:h-28 xl:p-6">
       <img
@@ -16,20 +16,20 @@ const emit = defineEmits(["exit"]);
         src="/assets/gfebs_white.png" />
       <div class="flex flex-col gap-1">
         <h1
-          class="text-balance text-sm font-bold uppercase text-aliceblue md:text-base xl:text-xl">
+          class="text-aliceblue text-sm font-bold text-balance uppercase md:text-base xl:text-xl">
           GFEBS {{ courseData.code }}
           {{ courseData.title }}
         </h1>
         <h2
-          class="text-balance text-sm font-bold uppercase text-saffron xl:inline xl:text-base">
+          class="text-saffron text-sm font-bold text-balance uppercase xl:inline xl:text-base">
           {{ courseData.topic }}
         </h2>
       </div>
       <AppButton
         id="app_exit"
-        class="max-w-32 justify-self-end border-transparent bg-oxfordblue p-1 px-2 text-xs text-aliceblue md:text-sm"
+        class="bg-oxfordblue text-aliceblue max-w-32 justify-self-end border-transparent p-1 px-2 text-xs md:text-sm"
         @click="$emit('exit')">
-        <RiCloseLine class="size-6 fill-aliceblue" /> EXIT
+        <RiCloseLine class="fill-aliceblue size-6" /> EXIT
       </AppButton>
     </div>
     <slot />

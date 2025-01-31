@@ -87,7 +87,6 @@ onBeforeUnmount(() => {
           :value="response"
           img="true"
           :id="`${aID}_${index}`"
-          className="min-h-0 min-w-0 flex gap-2 w-full h-full data-[checked=true]:bg-saffron/35 data-[checked=true]:border-2 data-[checked=true]:border-saffron "
           :index
           v-for="(response, index) in questionData.responses">
           <img

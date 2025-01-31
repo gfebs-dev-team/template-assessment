@@ -17,8 +17,8 @@ onBeforeMount(() => {
   <SlideContent title="Scenario Introduction">
     <p>
       This is a <code>SlideContent</code> component. Use this with the
-      <code class="bg-[#fff] bg-opacity-30">SimulationWeb</code> component to
-      create a non-interactable introduction slide.
+      <code class="bg-[#fff]/30">SimulationWeb</code> component to create a
+      non-interactable introduction slide.
     </p>
     <SimulationWeb
       url="https://simulations.army.mil/scenario_introduction/"

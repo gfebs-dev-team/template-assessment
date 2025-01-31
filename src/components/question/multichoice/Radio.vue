@@ -21,7 +21,7 @@ const answer = inject("answer");
     <input
       :class="
         twMerge(
-          'bg-aliceblue text-saffron data-[checked=true]:after:text-oxfordblue data-[checked=false]:group-hover:border-saffron data-[checked=false]:group-hover:bg-saffron/35 relative m-0 mt-[.43rem] flex aspect-square size-[.8rem] appearance-none items-center justify-center rounded-full border-2 border-transparent text-sm data-[checked=true]:bg-transparent data-[checked=true]:after:mt-[.23rem] data-[checked=true]:after:h-max data-[checked=true]:after:w-max data-[checked=true]:after:text-[1rem] data-[checked=true]:after:content-[\'\u25C9\'] xl:mt-[.54rem]',
+          'bg-aliceblue text-saffron data-[checked=true]:after:text-oxfordblue data-[checked=false]:group-hover:border-saffron data-[checked=false]:group-hover:bg-saffron/35 accent-oxfordblue relative m-0 mt-[8px] flex aspect-square size-3 items-center justify-center rounded-full border-2 border-transparent text-sm mix-blend-darken outline-hidden data-[checked=false]:mix-blend-normal xl:mt-[.54rem]',
           img ? 'data-[checked=true]:after:text-saffron' : '',
         )
       "

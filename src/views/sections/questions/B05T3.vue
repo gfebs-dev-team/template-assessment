@@ -28,6 +28,7 @@ let questionData = {
 const answer = ref([]);
 const questions = useQuestionsStore();
 let dragItems = shuffleArray(questionData.pairs.map((x) => x.a));
+let dropItems = questionData.pairs.map((x) => x.b);
 
 let array = dragItems;
 for (let i = array.length - 1; i > 0; i--) {
@@ -74,27 +75,51 @@ onMounted(() => {
 </script>
 <template>
   <Matching aID="B05T3" :questionData :answer>
-    <!-- INDEX SHOULD MATCH THE INDEX IN QUESTIONDATA.PAIRS -->
-    <div class="grid h-1/3 grid-cols-4 justify-center gap-2">
-      <MatchingDrop
-        data-name="drop"
-        :index="index"
-        v-for="(b, index) in questionData.pairs.map((x) => x.b)"
-        @data="dropHandle($event, index)"
-        @drop="onDrop($event)"
-        className="border-2 border-coolgrey border-dashed rounded-md p-4 text-coolgrey"
-        :id="b">
-        {{ b }}
-      </MatchingDrop>
-    </div>
-    <div class="flex h-1/3 gap-4">
-      <MatchingDrag
-        data-name="drag"
-        v-for="drag in dragItems"
-        :id="drag"
-        className="h-full rounded-md w-full flex items-center justify-center bg-spacecadet p-2 font-bold text-aliceblue">
-        {{ drag }}
-      </MatchingDrag>
+    <div
+      class="grid h-full min-h-0 w-full grid-cols-[2fr_2fr_1fr] grid-rows-4 gap-4">
+      <!-- DRAG ITEMS -->
+      <div
+        class="row-span-full flex h-full flex-col justify-center gap-2"
+        style="
+          --dragHeight: 5rem;
+          --dragColor: var(--color-masblue);
+          --dragText: var(--color-aliceblue);
+        ">
+        <MatchingDrag
+          v-for="(__, index) in dragItems"
+          data-testid="drag"
+          :id="dragItems[index]"
+          className="bg-(--dragColor) p-2 rounded font-bold text-sm justify-center text-center text-(--dragText) items-center flex w-full whitespace-pre-wrap h-(--dragHeight)">
+          {{ dragItems[index] }}
+        </MatchingDrag>
+      </div>
+
+      <!-- DROP AREAS -->
+      <div class="row-span-full grid h-full grid-rows-subgrid gap-2">
+        <MatchingDrop
+          v-for="(__, index) in dragItems"
+          data-testid="drop"
+          :index="index"
+          @data="dropHandle($event, index)"
+          @drop="onDrop($event)"
+          className="w-full h-full border-dashed border border-masblue bg-masblue/10 rounded"
+          style="
+            --dragHeight: 100%;
+            --dragColor: var(--color-saffron);
+            --dragText: var(--color-oxfordblue);
+          "
+          :id="dropItems[index]">
+        </MatchingDrop>
+      </div>
+
+      <!-- DROP LABELS -->
+      <div class="row-span-full grid h-full grid-rows-subgrid gap-2">
+        <p
+          v-for="(__, index) in dragItems"
+          class="text-aliceblue flex h-full w-full items-center justify-center rounded p-2 text-center text-sm lg:block lg:overflow-auto">
+          {{ dropItems[index] }}
+        </p>
+      </div>
     </div>
   </Matching>
 </template>
